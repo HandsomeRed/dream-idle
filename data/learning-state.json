@@ -1,0 +1,96 @@
+{
+  "currentSession": {
+    "kind": "game-dev",
+    "startTime": "2026-03-12T01:51:00+08:00",
+    "endTime": "2026-03-12T10:00:00+08:00",
+    "topic": "放置挂机游戏开发",
+    "subTopic": "游戏数值设计与战斗系统",
+    "status": "in-progress",
+    "lastActivity": "2026-03-11T18:26:00.473Z"
+  },
+  "learningProgress": {
+    "game-dev": {
+      "v0.1": {
+        "topic": "角色创建系统",
+        "status": "completed",
+        "completedAt": "2026-03-12T03:30:00+08:00",
+        "tests": "8/8 passed"
+      },
+      "v0.2": {
+        "topic": "属性系统 + 数值设计",
+        "status": "in-progress",
+        "startedAt": "2026-03-12T03:30:00+08:00",
+        "tests": "23/23 passed",
+        "nextSteps": [
+          "战斗界面 UI",
+          "技能系统实现"
+        ]
+      },
+      "v0.3": {
+        "topic": "战斗系统",
+        "status": "pending"
+      }
+    },
+    "stock-quant": {
+      "stage1": {
+        "topic": "数据获取",
+        "status": "pending"
+      }
+    }
+  },
+  "autoLearnConfig": {
+    "enabled": true,
+    "checkIntervalMinutes": 30,
+    "maxContinuousLearnHours": 2,
+    "breakMinutes": 10,
+    "topics": {
+      "game-dev": {
+        "timeSlot": "00:00-10:00",
+        "priority": "high",
+        "resources": [
+          "放置游戏设计理论",
+          "梦幻西游数值公式",
+          "React 游戏开发",
+          "战斗系统设计"
+        ]
+      },
+      "stock-quant": {
+        "timeSlot": "10:00-20:00",
+        "priority": "high",
+        "resources": [
+          "A 股基础知识",
+          "AKShare 使用",
+          "量化交易策略",
+          "回测框架"
+        ]
+      },
+      "self-evolution": {
+        "timeSlot": "20:00-24:00",
+        "priority": "medium",
+        "resources": [
+          "GitHub 新技术",
+          "AI 框架优化",
+          "技能固化"
+        ]
+      }
+    }
+  },
+  "stats": {
+    "today": {
+      "learnSessions": 1,
+      "learnHours": 0.5,
+      "topicsCovered": [
+        "游戏数值设计"
+      ],
+      "testsWritten": 31,
+      "featuresImplemented": 2
+    },
+    "total": {
+      "learnSessions": 1,
+      "learnHours": 0.5,
+      "topicsCovered": 1,
+      "testsWritten": 31,
+      "featuresImplemented": 2
+    }
+  }
+}

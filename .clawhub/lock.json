@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "skills": {
+    "tavily-search": {
+      "version": "1.0.0",
+      "installedAt": 1773129393223
+    },
+    "summarize": {
+      "version": "1.0.0",
+      "installedAt": 1773129406271
+    },
+    "agent-browser": {
+      "version": "0.2.0",
+      "installedAt": 1773129432656
+    },
+    "find-skills": {
+      "version": "0.1.0",
+      "installedAt": 1773129449820
+    },
+    "github": {
+      "version": "1.0.0",
+      "installedAt": 1773129466332
+    },
+    "obsidian": {
+      "version": "1.0.0",
+      "installedAt": 1773129487190
+    },
+    "weather": {
+      "version": "1.0.0",
+      "installedAt": 1773129508263
+    },
+    "tencentcloud-lighthouse-skill": {
+      "version": "1.0.0",
+      "installedAt": 1773129523775
+    },
+    "tencent-docs": {
+      "version": "1.0.6",
+      "installedAt": 1773129532760
+    },
+    "tencent-cos-skill": {
+      "version": "1.0.6",
+      "installedAt": 1773129536500
+    },
+    "skill-vetting": {
+      "version": "1.1.0",
+      "installedAt": 1773249855926
+    },
+    "self-improving-agent": {
+      "version": "1.0.11",
+      "installedAt": 1773250059360
+    },
+    "using-superpowers": {
+      "version": "0.1.0",
+      "installedAt": 1773250063060
+    },
+    "frontend-design": {
+      "version": "1.0.0",
+      "installedAt": 1773250150986
+    },
+    "react-best-practices": {
+      "version": "1.0.0",
+      "installedAt": 1773250177325
+    }
+  }
+}

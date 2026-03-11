@@ -1,0 +1,25 @@
+{
+  "lastChecks": {
+    "heartbeat": "2026-03-11T18:26:00.473Z",
+    "memoryOrganize": null,
+    "logCleanup": null,
+    "emergencyCheck": null,
+    "autoLearn": "2026-03-11T18:26:00.473Z"
+  },
+  "dailyTasks": {
+    "memoryReview": false,
+    "decisionExtract": false,
+    "tempCleanup": false
+  },
+  "weeklyTasks": {
+    "memoryReview": false,
+    "projectUpdate": false,
+    "oldMemoryCleanup": false
+  },
+  "stats": {
+    "totalHeartbeats": 2,
+    "memoriesOrganized": 0,
+    "logsCleaned": 0,
+    "autoLearnChecks": 2
+  }
+}

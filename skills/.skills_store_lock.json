@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "skills": {
+    "skill-vetting": {
+      "name": "Skill Vetting",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=skill-vetting",
+      "source": "skillhub",
+      "version": "1.1.0"
+    },
+    "self-improving-agent": {
+      "name": "self-improving-agent",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=self-improving-agent",
+      "source": "skillhub",
+      "version": "1.0.11"
+    },
+    "using-superpowers": {
+      "name": "Using Superpowers",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=using-superpowers",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "frontend-design": {
+      "name": "Frontend Design",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=frontend-design",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "react-best-practices": {
+      "name": "React Best Practices",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=react-best-practices",
+      "source": "skillhub",
+      "version": "1.0.0"
+    }
+  }
+}
