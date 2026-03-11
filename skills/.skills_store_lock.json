@@ -66,6 +66,18 @@
       "zip_url": "http://lightmake.site/api/v1/download?slug=task-orchestra",
       "source": "skillhub",
       "version": "1.0.0"
+    },
+    "tidb-cloud-zero": {
+      "name": "TiDB Cloud Zero",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=tidb-cloud-zero",
+      "source": "skillhub",
+      "version": "1.3.0"
+    },
+    "tmux-controller": {
+      "name": "Tmux",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=tmux-controller",
+      "source": "skillhub",
+      "version": "1.0.0"
     }
   }
 }

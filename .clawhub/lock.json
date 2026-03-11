@@ -84,6 +84,14 @@
     "task-orchestra": {
       "version": "1.0.0",
       "installedAt": 1773259707932
+    },
+    "tidb-cloud-zero": {
+      "version": "1.3.0",
+      "installedAt": 1773263649386
+    },
+    "tmux-controller": {
+      "version": "1.0.0",
+      "installedAt": 1773263650504
     }
   }
 }
