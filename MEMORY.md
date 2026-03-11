@@ -164,6 +164,12 @@
 | react-best-practices | React 最佳实践 | 2026-03-12 |
 | frontend-design | 前端设计 | 2026-03-12 |
 | agent-reach | 互联网访问能力 | 2026-03-12 |
+| clawkeep | Git 版本化备份 | 2026-03-12 |
+| hk-ipo-research-assistant | 港股 IPO 研究助手 | 2026-03-12 |
+| openmm-grid-trading | 网格交易策略 | 2026-03-12 |
+| skillagi | 跨会话错误记忆 | 2026-03-12 |
+| daily-ai-news | 每日 AI 新闻 | 2026-03-12 |
+| task-orchestra | 多 Agent 协调 | 2026-03-12 |
 
 ---
 

@@ -30,6 +30,42 @@
       "zip_url": "http://lightmake.site/api/v1/download?slug=react-best-practices",
       "source": "skillhub",
       "version": "1.0.0"
+    },
+    "clawkeep": {
+      "name": "Clawkeep",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=clawkeep",
+      "source": "skillhub",
+      "version": "0.2.9"
+    },
+    "hk-ipo-research-assistant": {
+      "name": "Hk Ipo Research Assistant",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=hk-ipo-research-assistant",
+      "source": "skillhub",
+      "version": "0.1.1"
+    },
+    "openmm-grid-trading": {
+      "name": "OpenMM Grid Trading",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=openmm-grid-trading",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "skillagi": {
+      "name": "Skill AGI",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=skillagi",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "daily-ai-news": {
+      "name": "Daily Ai News",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=daily-ai-news",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "task-orchestra": {
+      "name": "Task Orchestra",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=task-orchestra",
+      "source": "skillhub",
+      "version": "1.0.0"
     }
   }
 }
