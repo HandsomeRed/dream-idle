@@ -5,10 +5,11 @@
     "endTime": "2026-03-12T10:00:00+08:00",
     "topic": "放置挂机游戏开发",
     "subTopic": "游戏数值设计与战斗系统",
-    "status": "break-recommended",
-    "lastActivity": "2026-03-11T21:00:00.000Z",
-    "continuousLearnHours": 3.15,
-    "breakReason": "连续学习超过 2 小时，建议休息 10 分钟"
+    "status": "in-progress",
+    "lastActivity": "2026-03-11T21:11:00.000Z",
+    "continuousLearnHours": 0.2,
+    "breakTaken": "2026-03-11T21:00:00.000Z",
+    "breakMinutes": 10
   },
   "learningProgress": {
     "game-dev": {
