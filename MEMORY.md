@@ -170,6 +170,8 @@
 | skillagi | 跨会话错误记忆 | 2026-03-12 |
 | daily-ai-news | 每日 AI 新闻 | 2026-03-12 |
 | task-orchestra | 多 Agent 协调 | 2026-03-12 |
+| tidb-cloud-zero | 免费 MySQL 数据库 | 2026-03-12 |
+| tmux-controller | 终端会话管理 | 2026-03-12 |
 
 ---
 
