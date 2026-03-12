@@ -1,15 +1,15 @@
 {
   "currentSession": {
-    "kind": "game-dev",
-    "startTime": "2026-03-12T01:51:00+08:00",
-    "endTime": "2026-03-12T10:00:00+08:00",
-    "topic": "放置挂机游戏开发",
-    "subTopic": "游戏数值设计与战斗系统",
-    "status": "in-progress",
-    "lastActivity": "2026-03-11T21:11:00.000Z",
-    "continuousLearnHours": 0.2,
-    "breakTaken": "2026-03-11T21:00:00.000Z",
-    "breakMinutes": 10
+    "kind": "stock-quant",
+    "startTime": "2026-03-12T10:00:00+08:00",
+    "endTime": "2026-03-12T20:00:00+08:00",
+    "topic": "A 股量化交易",
+    "subTopic": "数据获取与展示",
+    "status": "starting",
+    "lastActivity": "2026-03-12T02:00:00.000Z",
+    "continuousLearnHours": 0,
+    "breakTaken": null,
+    "breakMinutes": 0
   },
   "learningProgress": {
     "game-dev": {
@@ -21,8 +21,9 @@
       },
       "v0.2": {
         "topic": "属性系统 + 数值设计",
-        "status": "in-progress",
+        "status": "completed",
         "startedAt": "2026-03-12T03:30:00+08:00",
+        "completedAt": "2026-03-12T10:00:00+08:00",
         "tests": "23/23 passed",
         "nextSteps": [
           "战斗界面 UI",
@@ -37,7 +38,13 @@
     "stock-quant": {
       "stage1": {
         "topic": "数据获取",
-        "status": "pending"
+        "status": "starting",
+        "startedAt": "2026-03-12T10:00:00+08:00",
+        "resources": [
+          "AKShare 文档",
+          "Tushare 接口",
+          "A 股数据基础"
+        ]
       }
     }
   },
@@ -80,18 +87,19 @@
   },
   "stats": {
     "today": {
-      "learnSessions": 1,
-      "learnHours": 0.5,
+      "learnSessions": 2,
+      "learnHours": 6.5,
       "topicsCovered": [
-        "游戏数值设计"
+        "游戏数值设计",
+        "属性系统"
       ],
       "testsWritten": 31,
       "featuresImplemented": 2
     },
     "total": {
-      "learnSessions": 1,
-      "learnHours": 0.5,
-      "topicsCovered": 1,
+      "learnSessions": 2,
+      "learnHours": 6.5,
+      "topicsCovered": 2,
       "testsWritten": 31,
       "featuresImplemented": 2
     }
