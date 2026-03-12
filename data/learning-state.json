@@ -5,11 +5,11 @@
     "endTime": "2026-03-12T20:00:00+08:00",
     "topic": "A 股量化交易",
     "subTopic": "数据获取与展示",
-    "status": "break-suggested",
-    "lastActivity": "2026-03-12T04:00:00.000Z",
-    "continuousLearnHours": 2,
-    "breakTaken": null,
-    "breakMinutes": 0
+    "status": "in-progress",
+    "lastActivity": "2026-03-12T04:18:00.000Z",
+    "continuousLearnHours": 0.3,
+    "breakTaken": "2026-03-12T04:12:00.000Z",
+    "breakMinutes": 10
   },
   "learningProgress": {
     "game-dev": {
