@@ -65,6 +65,30 @@ function getNextTopic(state, timeSlot) {
 }
 
 /**
+ * 检查是否需要知识沉淀
+ * 当一个任务完成时，自动触发知识总结
+ */
+function shouldCaptureKnowledge(state, timeSlot) {
+  const progress = state.learningProgress?.[timeSlot];
+  if (!progress) return false;
+  
+  // 检查是否有刚完成的任务（completedAt 在最近 10 分钟内）
+  const now = Date.now();
+  const tenMinutesAgo = now - 10 * 60 * 1000;
+  
+  for (const [key, value] of Object.entries(progress)) {
+    if (value.status === 'completed' && value.completedAt) {
+      const completedTime = new Date(value.completedAt).getTime();
+      if (completedTime > tenMinutesAgo && !value.knowledgeCaptured) {
+        return true;
+      }
+    }
+  }
+  
+  return false;
+}
+
+/**
  * 主函数
  */
 function main() {
@@ -78,7 +102,7 @@ function main() {
   } catch (e) {
     console.log('⚠️  学习状态文件不存在，创建默认状态');
     state = {
-      autoLearnConfig: { enabled: true, maxContinuousLearnHours: 2 },
+      autoLearnConfig: { enabled: true, maxContinuousLearnHours: null },
       currentSession: null
     };
   }
@@ -86,6 +110,16 @@ function main() {
   // 获取当前时间段
   const timeSlot = getCurrentTimeSlot();
   console.log(`📅 当前时间段：${timeSlot}`);
+  
+  // 检查是否需要知识沉淀（任务完成后自动总结）
+  if (shouldCaptureKnowledge(state, timeSlot)) {
+    console.log('📝 检测到任务完成，触发知识沉淀...');
+    console.log('   → 总结知识点');
+    console.log('   → 保存到 knowledge-base/');
+    console.log('   → 更新 README.md 统计');
+    // TODO: 调用知识沉淀脚本
+    // 知识沉淀由主会话 AI 执行，这里只做标记
+  }
   
   // 检查是否应该学习
   if (!shouldContinueLearning(state, timeSlot)) {
@@ -136,12 +170,14 @@ function main() {
       memoryOrganize: null,
       logCleanup: null,
       emergencyCheck: null,
-      autoLearn: new Date().toISOString()
+      autoLearn: new Date().toISOString(),
+      knowledgeCapture: null
     },
     dailyTasks: {
       memoryReview: false,
       decisionExtract: false,
-      tempCleanup: false
+      tempCleanup: false,
+      knowledgeCapture: false
     },
     weeklyTasks: {
       memoryReview: false,
@@ -152,7 +188,8 @@ function main() {
       totalHeartbeats: (state.stats?.total?.learnSessions || 0) + 1,
       memoriesOrganized: 0,
       logsCleaned: 0,
-      autoLearnChecks: (state.stats?.total?.learnSessions || 0) + 1
+      autoLearnChecks: (state.stats?.total?.learnSessions || 0) + 1,
+      knowledgeCaptured: 0
     }
   };
   
