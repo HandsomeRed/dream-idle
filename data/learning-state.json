@@ -5,9 +5,9 @@
     "endTime": "2026-03-13T10:00:00+08:00",
     "topic": "游戏开发 - 离线收益",
     "subTopic": "v0.6 离线收益系统实现",
-    "status": "starting",
-    "lastActivity": "2026-03-12T21:15:00.000Z",
-    "continuousLearnHours": 5.35,
+    "status": "completed",
+    "lastActivity": "2026-03-12T21:35:00.000Z",
+    "continuousLearnHours": 5.6,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 2
@@ -107,6 +107,31 @@
           "离线收益",
           "装备系统",
           "好友系统"
+        ]
+      },
+      "v0.6": {
+        "topic": "离线收益系统",
+        "status": "completed",
+        "startedAt": "2026-03-13T05:30:00+08:00",
+        "completedAt": "2026-03-13T05:35:00+08:00",
+        "tests": "23/23 passed",
+        "deliverables": [
+          "offlineRewards.ts - 离线收益核心",
+          "offlineRewards.test.ts - 单元测试"
+        ],
+        "features": [
+          "基础金币/经验收益",
+          "等级加成系统",
+          VIP 加成系统",
+          "最大离线时长限制",
+          "物品掉落系统",
+          "5 种稀有度物品",
+          "收益格式化显示"
+        ],
+        "nextSteps": [
+          "装备系统",
+          "好友系统",
+          "排行榜"
         ]
       }
     },
@@ -222,22 +247,23 @@
   },
   "stats": {
     "today": {
-      "learnSessions": 3,
-      "learnHours": 5.35,
+      "learnSessions": 4,
+      "learnHours": 5.6,
       "topicsCovered": [
         "战斗系统",
         "技能系统",
-        "任务系统"
+        "任务系统",
+        "离线收益"
       ],
-      "testsWritten": 60,
-      "featuresImplemented": 26
+      "testsWritten": 83,
+      "featuresImplemented": 33
     },
     "total": {
       "learnSessions": 3,
-      "learnHours": 15.35,
-      "topicsCovered": 8,
-      "testsWritten": 118,
-      "featuresImplemented": 33
+      "learnHours": 15.6,
+      "topicsCovered": 9,
+      "testsWritten": 141,
+      "featuresImplemented": 40
     }
   }
 }
