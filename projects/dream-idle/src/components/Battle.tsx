@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { CharacterStats, calcPhysicalDamage, calcMagicalDamage, isCritHit, getTurnOrder } from '../utils/gameStats'
+import { initializeSkills, reduceSkillCooldown, canUseSkill, useSkill, calculateSkillDamage, calculateSkillHeal, SkillInstance } from '../utils/skills'
+import { SkillBar } from './SkillBar'
 
 // 战斗单位
 interface CombatUnit {
@@ -60,6 +62,7 @@ export function Battle({ playerStats, playerName, onBattleEnd, onBack }: BattleP
   const [battlePhase, setBattlePhase] = useState<'start' | 'fighting' | 'ended'>('start')
   const [selectedSkill, setSelectedSkill] = useState<'attack' | 'magic' | 'heal'>('attack')
   const [logId, setLogId] = useState(0)
+  const [playerSkills, setPlayerSkills] = useState<SkillInstance[]>([])
 
   // 添加战斗日志
   const addLog = useCallback((message: string, type: BattleLog['type'] = 'info') => {
@@ -70,6 +73,10 @@ export function Battle({ playerStats, playerName, onBattleEnd, onBack }: BattleP
   // 初始化战斗
   useEffect(() => {
     if (battlePhase === 'start') {
+      // 初始化技能
+      const skills = initializeSkills(player.stats.job)
+      setPlayerSkills(skills)
+      
       // 随机选择怪物
       const randomMonster = MONSTER_CONFIGS[Math.floor(Math.random() * MONSTER_CONFIGS.length)]
       const monsterLevel = Math.max(1, player.stats.level - 1 + Math.floor(Math.random() * 3))
@@ -292,6 +299,60 @@ export function Battle({ playerStats, playerName, onBattleEnd, onBack }: BattleP
     setIsAutoBattle(!isAutoBattle)
   }
 
+  // 使用技能
+  const handleSkillUse = useCallback((skill: SkillInstance, damage?: number, heal?: number) => {
+    if (!monster || !canUseSkill(skill, player.stats.mp)) return
+    
+    // 消耗魔法并设置冷却
+    setPlayer(prev => ({
+      ...prev,
+      stats: { ...prev.stats, mp: prev.stats.mp - skill.mpCost }
+    }))
+    
+    setPlayerSkills(prev => prev.map(s => 
+      s.id === skill.id ? useSkill(s) : s
+    ))
+    
+    // 处理技能效果
+    if (damage !== undefined) {
+      const isCrit = isCritHit(player.stats.level)
+      const finalDamage = isCrit ? damage * 2 : damage
+      
+      setMonster(prev => {
+        if (!prev) return null
+        const newHp = Math.max(0, prev.stats.hp - finalDamage)
+        return { ...prev, stats: { ...prev.stats, hp: newHp } }
+      })
+      
+      addLog(`${playerName} 使用 ${skill.icon}${skill.name}，造成 ${finalDamage} 点伤害${isCrit ? ' (暴击!)' : ''}`, 'skill')
+      
+      setTimeout(() => {
+        if (monster.stats.hp - finalDamage <= 0) {
+          handleVictory(monster)
+        } else {
+          setIsPlayerTurn(false)
+        }
+      }, 500)
+    } else if (heal !== undefined) {
+      setPlayer(prev => ({
+        ...prev,
+        stats: { ...prev.stats, hp: Math.min(prev.maxHp, prev.stats.hp + heal) }
+      }))
+      
+      addLog(`${playerName} 使用 ${skill.icon}${skill.name}，恢复 ${heal} 点气血`, 'heal')
+      setIsPlayerTurn(false)
+    } else if (skill.buffEffects) {
+      // TODO: 处理增益效果
+      addLog(`${playerName} 使用 ${skill.icon}${skill.name}！`, 'skill')
+      setIsPlayerTurn(false)
+    }
+  }, [monster, player.stats, playerName, addLog, handleVictory])
+  
+  // 回合结束时减少技能冷却
+  const endPlayerTurn = useCallback(() => {
+    setPlayerSkills(prev => prev.map(skill => reduceSkillCooldown(skill)))
+  }, [])
+
   // 渲染血条
   const renderHealthBar = (current: number, max: number, isPlayer: boolean) => {
     const percent = Math.floor((current / max) * 100)
@@ -361,34 +422,49 @@ export function Battle({ playerStats, playerName, onBattleEnd, onBack }: BattleP
 
       {/* 战斗操作 */}
       {battlePhase === 'fighting' && (
-        <div className="battle-actions">
-          <button
-            className={`action-button ${isPlayerTurn ? '' : 'disabled'}`}
-            onClick={handleAttack}
-            disabled={!isPlayerTurn}
-          >
-            ⚔️ 攻击
-          </button>
-          <button
-            className={`action-button ${isPlayerTurn ? '' : 'disabled'}`}
-            onClick={handleMagic}
-            disabled={!isPlayerTurn || player.stats.mp < 10}
-          >
-            🔮 法术 (10MP)
-          </button>
-          <button
-            className={`action-button ${isPlayerTurn ? '' : 'disabled'}`}
-            onClick={handleHeal}
-            disabled={!isPlayerTurn || player.stats.mp < 15}
-          >
-            💚 治疗 (15MP)
-          </button>
-          <button
-            className={`action-button auto-battle ${isAutoBattle ? 'active' : ''}`}
-            onClick={toggleAutoBattle}
-          >
-            {isAutoBattle ? '⏸️ 暂停' : '▶️ 自动'}
-          </button>
+        <div className="battle-ui">
+          {/* 技能栏 */}
+          {isPlayerTurn && playerSkills.length > 0 && (
+            <SkillBar
+              skills={playerSkills}
+              playerMp={player.stats.mp}
+              playerMag={player.stats.mag}
+              playerLevel={player.stats.level}
+              onSkillUse={handleSkillUse}
+              onEndTurn={endPlayerTurn}
+            />
+          )}
+          
+          {/* 基础操作按钮 */}
+          <div className="battle-actions">
+            <button
+              className={`action-button ${isPlayerTurn ? '' : 'disabled'}`}
+              onClick={handleAttack}
+              disabled={!isPlayerTurn}
+            >
+              ⚔️ 攻击
+            </button>
+            <button
+              className={`action-button ${isPlayerTurn ? '' : 'disabled'}`}
+              onClick={handleMagic}
+              disabled={!isPlayerTurn || player.stats.mp < 10}
+            >
+              🔮 法术 (10MP)
+            </button>
+            <button
+              className={`action-button ${isPlayerTurn ? '' : 'disabled'}`}
+              onClick={handleHeal}
+              disabled={!isPlayerTurn || player.stats.mp < 15}
+            >
+              💚 治疗 (15MP)
+            </button>
+            <button
+              className={`action-button auto-battle ${isAutoBattle ? 'active' : ''}`}
+              onClick={toggleAutoBattle}
+            >
+              {isAutoBattle ? '⏸️ 暂停' : '▶️ 自动'}
+            </button>
+          </div>
         </div>
       )}
 
