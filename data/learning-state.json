@@ -51,8 +51,8 @@
   "autoLearnConfig": {
     "enabled": true,
     "checkIntervalMinutes": 30,
-    "maxContinuousLearnHours": 2,
-    "breakMinutes": 10,
+    "maxContinuousLearnHours": null,
+    "breakMinutes": 0,
     "topics": {
       "game-dev": {
         "timeSlot": "00:00-10:00",
