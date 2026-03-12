@@ -38,12 +38,44 @@
     "stock-quant": {
       "stage1": {
         "topic": "数据获取",
-        "status": "starting",
+        "status": "completed",
         "startedAt": "2026-03-12T10:00:00+08:00",
+        "completedAt": "2026-03-12T18:30:00+08:00",
+        "tests": "6/7 passed",
         "resources": [
           "AKShare 文档",
           "Tushare 接口",
           "A 股数据基础"
+        ],
+        "deliverables": [
+          "fetch_stock_data.py - 数据获取模块",
+          "test_data_fetch.py - 单元测试",
+          "stock_list.csv - 5489 只股票列表",
+          "000001_history.csv - 平安银行历史数据"
+        ],
+        "nextSteps": [
+          "K 线数据计算",
+          "数据可视化展示",
+          "多股票批量获取"
+        ]
+      },
+      "stage1b": {
+        "topic": "技术指标计算",
+        "status": "completed",
+        "startedAt": "2026-03-12T18:30:00+08:00",
+        "completedAt": "2026-03-12T19:00:00+08:00",
+        "tests": "11/11 passed",
+        "deliverables": [
+          "kline_calculator.py - K 线计算器",
+          "test_kline_calculator.py - 单元测试",
+          "01_数据获取示例.ipynb - Jupyter 示例"
+        ],
+        "indicators": [
+          "MA (5/10/20/60)",
+          "EMA (12/26)",
+          "MACD",
+          "RSI",
+          "布林带"
         ]
       }
     }
@@ -88,20 +120,22 @@
   "stats": {
     "today": {
       "learnSessions": 2,
-      "learnHours": 6.5,
+      "learnHours": 9.0,
       "topicsCovered": [
         "游戏数值设计",
-        "属性系统"
+        "属性系统",
+        "AKShare 数据获取",
+        "技术指标计算"
       ],
-      "testsWritten": 31,
-      "featuresImplemented": 2
+      "testsWritten": 49,
+      "featuresImplemented": 4
     },
     "total": {
       "learnSessions": 2,
-      "learnHours": 6.5,
-      "topicsCovered": 2,
-      "testsWritten": 31,
-      "featuresImplemented": 2
+      "learnHours": 9.0,
+      "topicsCovered": 4,
+      "testsWritten": 49,
+      "featuresImplemented": 4
     }
   }
 }
