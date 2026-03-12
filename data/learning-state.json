@@ -77,6 +77,30 @@
           "RSI",
           "布林带"
         ]
+      },
+      "stage2": {
+        "topic": "策略回测引擎",
+        "status": "completed",
+        "startedAt": "2026-03-12T19:50:00+08:00",
+        "completedAt": "2026-03-12T20:00:00+08:00",
+        "tests": "9/9 passed",
+        "deliverables": [
+          "base.py - 策略基类",
+          "ma_cross.py - 均线交叉策略",
+          "backtester.py - 回测引擎",
+          "backtest_demo.py - 回测演示",
+          "test_strategy.py - 单元测试"
+        ],
+        "strategies": [
+          "MA5/20 金叉死叉",
+          "MA10/30 金叉死叉",
+          "双均线 12/26"
+        ],
+        "backtestResults": {
+          "best": "双均线 12/26",
+          "bestReturn": "36.58%",
+          "sharpeRatio": "1.25"
+        }
       }
     }
   },
@@ -120,22 +144,23 @@
   "stats": {
     "today": {
       "learnSessions": 2,
-      "learnHours": 9.0,
+      "learnHours": 10.0,
       "topicsCovered": [
         "游戏数值设计",
         "属性系统",
         "AKShare 数据获取",
-        "技术指标计算"
+        "技术指标计算",
+        "策略回测引擎"
       ],
-      "testsWritten": 49,
-      "featuresImplemented": 4
+      "testsWritten": 58,
+      "featuresImplemented": 7
     },
     "total": {
       "learnSessions": 2,
-      "learnHours": 9.0,
-      "topicsCovered": 4,
-      "testsWritten": 49,
-      "featuresImplemented": 4
+      "learnHours": 10.0,
+      "topicsCovered": 5,
+      "testsWritten": 58,
+      "featuresImplemented": 7
     }
   }
 }
