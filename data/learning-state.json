@@ -3,11 +3,11 @@
     "kind": "game-dev",
     "startTime": "2026-03-13T00:00:00+08:00",
     "endTime": "2026-03-13T10:00:00+08:00",
-    "topic": "游戏开发 - 技能系统",
-    "subTopic": "v0.4 技能系统实现",
+    "topic": "游戏开发 - 任务系统",
+    "subTopic": "v0.5 任务系统实现",
     "status": "completed",
-    "lastActivity": "2026-03-12T21:10:00.000Z",
-    "continuousLearnHours": 5.17,
+    "lastActivity": "2026-03-12T21:20:00.000Z",
+    "continuousLearnHours": 5.35,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 2
@@ -82,6 +82,31 @@
           "任务系统",
           "离线收益",
           "装备系统"
+        ]
+      },
+      "v0.5": {
+        "topic": "任务系统",
+        "status": "completed",
+        "startedAt": "2026-03-13T05:11:00+08:00",
+        "completedAt": "2026-03-13T05:20:00+08:00",
+        "tests": "24/24 passed",
+        "deliverables": [
+          "tasks.ts - 任务系统核心",
+          "tasks.test.ts - 单元测试"
+        ],
+        "features": [
+          "每日任务系统",
+          "主线任务系统",
+          "成就系统",
+          "任务进度跟踪",
+          "任务奖励领取",
+          "任务前置依赖",
+          "12 个预设任务"
+        ],
+        "nextSteps": [
+          "离线收益",
+          "装备系统",
+          "好友系统"
         ]
       }
     },
@@ -197,21 +222,22 @@
   },
   "stats": {
     "today": {
-      "learnSessions": 2,
-      "learnHours": 5.17,
+      "learnSessions": 3,
+      "learnHours": 5.35,
       "topicsCovered": [
         "战斗系统",
-        "技能系统"
+        "技能系统",
+        "任务系统"
       ],
-      "testsWritten": 36,
-      "featuresImplemented": 19
+      "testsWritten": 60,
+      "featuresImplemented": 26
     },
     "total": {
       "learnSessions": 3,
-      "learnHours": 15.17,
-      "topicsCovered": 7,
-      "testsWritten": 94,
-      "featuresImplemented": 26
+      "learnHours": 15.35,
+      "topicsCovered": 8,
+      "testsWritten": 118,
+      "featuresImplemented": 33
     }
   }
 }
