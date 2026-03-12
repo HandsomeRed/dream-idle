@@ -58,7 +58,8 @@
           "K 线数据计算",
           "数据可视化展示",
           "多股票批量获取"
-        ]
+        ],
+        "knowledgeCaptured": true
       },
       "stage1b": {
         "topic": "技术指标计算",
@@ -77,7 +78,8 @@
           "MACD",
           "RSI",
           "布林带"
-        ]
+        ],
+        "knowledgeCaptured": true
       },
       "stage2": {
         "topic": "策略回测引擎",
@@ -101,7 +103,8 @@
           "best": "双均线 12/26",
           "bestReturn": "36.58%",
           "sharpeRatio": "1.25"
-        }
+        },
+        "knowledgeCaptured": true
       }
     }
   },

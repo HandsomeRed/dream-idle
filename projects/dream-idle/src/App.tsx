@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { UpdateLog } from './components/UpdateLog'
 
 // 角色类型定义
 interface Character {
@@ -46,6 +47,7 @@ function App() {
   if (step === 'complete' && character) {
     return (
       <div className="app-container">
+        <UpdateLog />
         <h1>✨ 角色创建成功！</h1>
         <div className="character-card">
           <div className="character-avatar">
@@ -95,6 +97,7 @@ function App() {
   if (step === 'select') {
     return (
       <div className="app-container">
+        <UpdateLog />
         <h1>🎭 选择门派</h1>
         <p className="subtitle">少侠 {name}，请选择合适的门派</p>
         <div className="job-grid">
@@ -129,6 +132,7 @@ function App() {
   // 输入名字界面
   return (
     <div className="app-container">
+      <UpdateLog />
       <h1>🎮 梦幻放置</h1>
       <p className="subtitle">创建你的角色</p>
       <div className="input-card">
