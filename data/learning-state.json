@@ -1,15 +1,16 @@
 {
   "currentSession": {
-    "kind": "stock-quant",
-    "startTime": "2026-03-12T10:00:00+08:00",
-    "endTime": "2026-03-12T20:00:00+08:00",
-    "topic": "A 股量化交易",
-    "subTopic": "数据获取与展示",
-    "status": "in-progress",
-    "lastActivity": "2026-03-12T04:18:00.000Z",
-    "continuousLearnHours": 0.3,
-    "breakTaken": "2026-03-12T04:12:00.000Z",
-    "breakMinutes": 10
+    "kind": "game-dev",
+    "startTime": "2026-03-13T00:00:00+08:00",
+    "endTime": "2026-03-13T10:00:00+08:00",
+    "topic": "游戏开发 - 战斗系统",
+    "subTopic": "v0.3 战斗系统实现",
+    "status": "completed",
+    "lastActivity": "2026-03-12T20:45:00.000Z",
+    "continuousLearnHours": 4.75,
+    "breakTaken": null,
+    "breakMinutes": 0,
+    "day": 2
   },
   "learningProgress": {
     "game-dev": {
@@ -32,8 +33,30 @@
       },
       "v0.3": {
         "topic": "战斗系统",
-        "status": "starting",
-        "startedAt": "2026-03-13T00:00:00+08:00"
+        "status": "completed",
+        "startedAt": "2026-03-13T00:00:00+08:00",
+        "completedAt": "2026-03-13T04:45:00+08:00",
+        "tests": "9/9 passed",
+        "deliverables": [
+          "Battle.tsx - 战斗组件",
+          "Battle.test.tsx - 单元测试",
+          "App.tsx - 集成战斗系统",
+          "index.css - 战斗样式"
+        ],
+        "features": [
+          "回合制战斗",
+          "物理/法术伤害计算",
+          "暴击系统",
+          "自动战斗",
+          "战斗日志",
+          "经验值系统",
+          "升级系统"
+        ],
+        "nextSteps": [
+          "技能系统",
+          "任务系统",
+          "离线收益"
+        ]
       }
     },
     "stock-quant": {
@@ -148,24 +171,20 @@
   },
   "stats": {
     "today": {
-      "learnSessions": 2,
-      "learnHours": 10.0,
+      "learnSessions": 1,
+      "learnHours": 4.75,
       "topicsCovered": [
-        "游戏数值设计",
-        "属性系统",
-        "AKShare 数据获取",
-        "技术指标计算",
-        "策略回测引擎"
+        "战斗系统"
       ],
-      "testsWritten": 58,
+      "testsWritten": 9,
       "featuresImplemented": 7
     },
     "total": {
-      "learnSessions": 2,
-      "learnHours": 10.0,
-      "topicsCovered": 5,
-      "testsWritten": 58,
-      "featuresImplemented": 7
+      "learnSessions": 3,
+      "learnHours": 14.75,
+      "topicsCovered": 6,
+      "testsWritten": 67,
+      "featuresImplemented": 14
     }
   }
 }
