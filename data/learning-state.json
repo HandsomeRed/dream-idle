@@ -32,7 +32,8 @@
       },
       "v0.3": {
         "topic": "战斗系统",
-        "status": "pending"
+        "status": "starting",
+        "startedAt": "2026-03-13T00:00:00+08:00"
       }
     },
     "stock-quant": {
@@ -106,9 +107,10 @@
   },
   "autoLearnConfig": {
     "enabled": true,
-    "checkIntervalMinutes": 30,
+    "checkIntervalMinutes": 5,
     "maxContinuousLearnHours": null,
-    "breakMinutes": 0,
+    "breakMinutes": 5,
+    "mode": "task-driven",
     "topics": {
       "game-dev": {
         "timeSlot": "00:00-10:00",

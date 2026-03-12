@@ -32,25 +32,19 @@ function getCurrentTimeSlot() {
 
 /**
  * 检查是否应该继续学习
+ * 新模式：任务驱动，完成一个小任务后休息 5 分钟继续
  */
 function shouldContinueLearning(state, timeSlot) {
   const config = state.autoLearnConfig;
   if (!config || !config.enabled) return false;
   
+  // 取消连续学习时长限制，任务驱动模式
+  // 完成一个小任务 → 休息 5 分钟 → 继续下一个任务
+  
   const currentTopic = state.currentSession;
   if (!currentTopic || currentTopic.status !== 'in-progress') return true;
   
-  // 检查是否超过最大连续学习时间
-  const startTime = new Date(currentTopic.startTime).getTime();
-  const now = Date.now();
-  const hoursLearned = (now - startTime) / (1000 * 60 * 60);
-  
-  if (hoursLearned >= config.maxContinuousLearnHours) {
-    console.log(`⚠️  已连续学习${hoursLearned.toFixed(1)}小时，建议休息`);
-    return false;
-  }
-  
-  return true;
+  return true; // 始终继续学习
 }
 
 /**
