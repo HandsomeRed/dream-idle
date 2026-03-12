@@ -149,10 +149,70 @@ if page == "🎯 股票查询":
                         mime="text/csv"
                     )
                     
-                    # K 线图
-                    st.markdown("### 📈 K 线图")
-                    chart_data = df.set_index('日期')[['开盘', '收盘', '最高', '最低']]
-                    st.line_chart(chart_data)
+                    # K 线图（蜡烛图）
+                    st.markdown("### 📈 K 线图（蜡烛图）")
+                    
+                    # 准备 K 线数据（最近 60 天）
+                    kline_df = df.tail(60).reset_index(drop=True)
+                    
+                    # 使用 Plotly 绘制专业蜡烛图
+                    import plotly.graph_objects as go
+                    
+                    fig = go.Figure(data=[go.Candlestick(
+                        x=kline_df['日期'],
+                        open=kline_df['开盘'],
+                        high=kline_df['最高'],
+                        low=kline_df['最低'],
+                        close=kline_df['收盘'],
+                        increasing_line_color='red',
+                        decreasing_line_color='green',
+                        name='K 线'
+                    )])
+                    
+                    # 添加均线
+                    if 'MA5' in kline_df.columns:
+                        fig.add_trace(go.Scatter(
+                            x=kline_df['日期'],
+                            y=kline_df['MA5'],
+                            line=dict(color='orange', width=1),
+                            name='MA5'
+                        ))
+                    if 'MA10' in kline_df.columns:
+                        fig.add_trace(go.Scatter(
+                            x=kline_df['日期'],
+                            y=kline_df['MA10'],
+                            line=dict(color='blue', width=1),
+                            name='MA10'
+                        ))
+                    
+                    fig.update_layout(
+                        height=500,
+                        xaxis_title='日期',
+                        yaxis_title='价格 (元)',
+                        showlegend=True,
+                        hovermode='x unified',
+                        xaxis_rangeslider_visible=False,
+                        template='plotly_white'
+                    )
+                    
+                    st.plotly_chart(fig, use_container_width=True)
+                    
+                    # K 线图说明
+                    with st.expander("📖 K 线图说明"):
+                        st.markdown("""
+                        **蜡烛图组成：**
+                        - 🔴 红色蜡烛（阳线）：收盘价 > 开盘价（上涨）
+                        - 🟢 绿色蜡烛（阴线）：收盘价 < 开盘价（下跌）
+                        - 蜡烛实体：开盘价与收盘价之间的部分
+                        - 影线：最高价与最低价的细线
+                        
+                        **常见形态：**
+                        - 大阳线：实体很长，表示强势上涨
+                        - 大阴线：实体很长，表示强势下跌
+                        - 十字星：开盘价≈收盘价，表示多空平衡
+                        - 上影线长：上方压力大
+                        - 下影线长：下方支撑强
+                        """)
                     
                 else:
                     st.warning("⚠️ 未找到数据，请检查股票代码或日期范围")
