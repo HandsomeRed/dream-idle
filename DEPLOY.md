@@ -1,58 +1,46 @@
-# 🐳 Docker 部署指南
+# 🚀 项目部署指南
 
 **创建时间：** 2026-03-13 00:33  
-**更新时间：** 2026-03-13 00:33
+**更新时间：** 2026-03-13 00:40
 
 ---
 
 ## 📋 快速启动
 
-### 1. 构建并启动容器
+### 方式 1：一键启动脚本（推荐）
 
 ```bash
 cd /root/.openclaw/workspace
-docker-compose up -d --build
+./start-projects.sh
 ```
 
-### 2. 查看运行状态
+### 方式 2：手动启动
 
+**启动 DreamIdle:**
 ```bash
-docker-compose ps
+cd /root/.openclaw/workspace/projects/dream-idle
+nohup npm run dev -- --host 0.0.0.0 --port 3000 > /tmp/dream-idle.log 2>&1 &
 ```
 
-### 3. 查看日志
-
+**启动 StockQuant:**
 ```bash
-# 查看所有容器日志
-docker-compose logs -f
-
-# 查看单个容器日志
-docker-compose logs dream-idle
-docker-compose logs stock-quant
-```
-
-### 4. 停止服务
-
-```bash
-docker-compose down
+cd /root/.openclaw/workspace/projects/stock-quant
+source venv/bin/activate
+nohup streamlit run app.py --server.port 8501 --server.address 0.0.0.0 > /tmp/stock-quant.log 2>&1 &
 ```
 
 ---
 
-## 🌐 访问地址
+## 🌐 外网访问地址
 
-**通过云服务器外网 IP 访问：**
+**云服务器 IP:** `49.232.215.84`
 
-| 项目 | 地址 | 说明 |
+| 项目 | 外网地址 | 说明 |
 |:---|:---|:---|
-| DreamIdle | `http://<云服务器 IP>:3000` | 游戏开发学习记录 |
-| StockQuant | `http://<云服务器 IP>:8501` | 量化交易学习记录 |
+| DreamIdle | http://49.232.215.84:3000 | 游戏开发学习记录 |
+| StockQuant | http://49.232.215.84:8501 | 量化交易学习记录 |
 
-**示例：**
-```
-http://49.232.215.84:3000
-http://49.232.215.84:8501
-```
+**现在就可以访问了！** ✅
 
 ---
 
