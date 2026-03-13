@@ -44,13 +44,15 @@ if [ -f "$WORKSPACE/HEARTBEAT.md" ]; then
     CURRENT_EPOCH=$(date +%s)
     TIME_DIFF=$(( (CURRENT_EPOCH - LAST_ACTIVITY_EPOCH) / 60 ))  # 分钟
     
-    if [ "$TIME_DIFF" -ge 15 ] && [ "$CURRENT_STATUS" = "learning" ]; then
-      # 学习时间超过 15 分钟但状态还是 learning，可能学习已完成但未更新
-      echo "[$TIMESTAMP] ⚠️ 学习状态可能过期（${TIME_DIFF}分钟未更新）" >> "$LOG_FILE"
-      echo "[$TIMESTAMP] 💡 提示：下次会话时请更新学习进度" >> "$LOG_FILE"
-    elif [ "$CURRENT_STATUS" = "completed" ]; then
+    if [ "$CURRENT_STATUS" = "completed" ]; then
       # 学习已完成，准备新主题
       echo "[$TIMESTAMP] ✅ 当前学习已完成，准备新主题" >> "$LOG_FILE"
+    fi
+    
+    # 检查连续学习时长（仅记录，不限制）
+    if [ "$CURRENT_STATUS" = "learning" ]; then
+      CONTINUOUS_HOURS=$(echo "scale=2; $TIME_DIFF / 60" | bc 2>/dev/null || echo "0")
+      echo "[$TIMESTAMP] 📚 持续学习中 ${CONTINUOUS_HOURS} 小时（AI 不需要休息）" >> "$LOG_FILE"
     fi
   else
     echo "[$TIMESTAMP] ❌ learning-state.json 不存在" >> "$LOG_FILE"
