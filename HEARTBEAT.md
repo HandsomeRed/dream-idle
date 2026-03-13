@@ -125,3 +125,31 @@
 ---
 
 **状态：** 🎮 游戏开发时段完成！切换到量化交易时段 - Stage 3 数据可视化展示
+
+---
+
+## 📈 股票监控服务
+
+**服务名称：** Stock Monitor Pro  
+**状态：** 🟢 运行中  
+**监控标的：** 7 只（6 股 + 1 黄金）  
+**配置文件：** `/root/.openclaw/workspace/skills/stock-monitor-skill/config.json`  
+**日志路径：** `/root/.stock_monitor/monitor.log`
+
+### 监控列表
+- 600362 江西铜业 (成本¥57.00)
+- 601318 中国平安 (成本¥66.00)
+- 159892 恒生医疗 (成本¥0.80)
+- 513180 恒生科技 (成本¥0.72)
+- 159681 创 50ETF (成本¥1.50)
+- 516020 化工 50ETF (成本¥0.90)
+- XAU 伦敦金 (成本¥4650.0/克)
+
+### 控制命令
+```bash
+cd ~/workspace/skills/stock-monitor-skill/scripts
+./control.sh start   # 启动
+./control.sh stop    # 停止
+./control.sh status  # 状态
+./control.sh log     # 日志
+```

@@ -1,0 +1,134 @@
+{
+  "watchlist": [
+    {
+      "code": "600362",
+      "name": "江西铜业",
+      "market": "sh",
+      "type": "individual",
+      "cost": 57.00,
+      "alerts": {
+        "cost_pct_above": 15.0,
+        "cost_pct_below": -12.0,
+        "change_pct_above": 4.0,
+        "change_pct_below": -4.0,
+        "volume_surge": 2.0,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    },
+    {
+      "code": "601318",
+      "name": "中国平安",
+      "market": "sh",
+      "type": "individual",
+      "cost": 66.00,
+      "alerts": {
+        "cost_pct_above": 12.0,
+        "cost_pct_below": -10.0,
+        "change_pct_above": 3.5,
+        "change_pct_below": -3.5,
+        "volume_surge": 2.0,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    },
+    {
+      "code": "159892",
+      "name": "恒生医疗",
+      "market": "sz",
+      "type": "etf",
+      "cost": 0.80,
+      "alerts": {
+        "cost_pct_above": 15.0,
+        "cost_pct_below": -15.0,
+        "change_pct_above": 2.0,
+        "change_pct_below": -2.0,
+        "volume_surge": 1.8,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    },
+    {
+      "code": "513180",
+      "name": "恒生科技",
+      "market": "sh",
+      "type": "etf",
+      "cost": 0.72,
+      "alerts": {
+        "cost_pct_above": 15.0,
+        "cost_pct_below": -15.0,
+        "change_pct_above": 2.0,
+        "change_pct_below": -2.0,
+        "volume_surge": 1.8,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    },
+    {
+      "code": "159681",
+      "name": "创 50ETF",
+      "market": "sz",
+      "type": "etf",
+      "cost": 1.50,
+      "alerts": {
+        "cost_pct_above": 12.0,
+        "cost_pct_below": -12.0,
+        "change_pct_above": 2.0,
+        "change_pct_below": -2.0,
+        "volume_surge": 1.8,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    },
+    {
+      "code": "516020",
+      "name": "化工 50ETF",
+      "market": "sh",
+      "type": "etf",
+      "cost": 0.90,
+      "alerts": {
+        "cost_pct_above": 12.0,
+        "cost_pct_below": -12.0,
+        "change_pct_above": 2.0,
+        "change_pct_below": -2.0,
+        "volume_surge": 1.8,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    },
+    {
+      "code": "XAU",
+      "name": "伦敦金 (人民币/克)",
+      "market": "fx",
+      "type": "gold",
+      "cost": 4650.0,
+      "alerts": {
+        "cost_pct_above": 10.0,
+        "cost_pct_below": -8.0,
+        "change_pct_above": 2.5,
+        "change_pct_below": -2.5,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    }
+  ],
+  "settings": {
+    "alert_cooldown_minutes": 30,
+    "enable_feishu_notify": true,
+    "log_level": "INFO"
+  }
+}

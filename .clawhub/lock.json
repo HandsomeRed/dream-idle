@@ -92,6 +92,10 @@
     "tmux-controller": {
       "version": "1.0.0",
       "installedAt": 1773263650504
+    },
+    "stock-monitor-skill": {
+      "version": "0.1.0",
+      "installedAt": 1773377569064
     }
   }
 }
