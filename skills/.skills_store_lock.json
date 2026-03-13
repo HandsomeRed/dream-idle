@@ -96,6 +96,12 @@
       "zip_url": "https://lightmake.site/api/v1/download?slug=baidu-search-openclaw",
       "source": "skillhub",
       "version": "1.0.0"
+    },
+    "edrawmax-skills": {
+      "name": "EdrawMax Skills",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=edrawmax-skills",
+      "source": "skillhub",
+      "version": "1.0.1"
     }
   }
 }
