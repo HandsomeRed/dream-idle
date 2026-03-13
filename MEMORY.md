@@ -1,6 +1,6 @@
 # MEMORY.md - 虾虾红的长期记忆
 
-**最后更新：** 2026-03-12
+**最后更新：** 2026-03-14
 
 ---
 
@@ -172,6 +172,8 @@
 | task-orchestra | 多 Agent 协调 | 2026-03-12 |
 | tidb-cloud-zero | 免费 MySQL 数据库 | 2026-03-12 |
 | tmux-controller | 终端会话管理 | 2026-03-12 |
+| invest-analyzer | 投资分析（四流派 +FCF 估值） | 2026-03-14 |
+| baidu-search-openclaw | 百度搜索（联网数据获取） | 2026-03-14 |
 
 ---
 

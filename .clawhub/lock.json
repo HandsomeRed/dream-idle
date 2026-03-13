@@ -96,6 +96,14 @@
     "stock-monitor-skill": {
       "version": "0.1.0",
       "installedAt": 1773377569064
+    },
+    "invest-analyzer": {
+      "version": "1.0.0",
+      "installedAt": 1773432293584
+    },
+    "baidu-search-openclaw": {
+      "version": "1.0.0",
+      "installedAt": 1773432361494
     }
   }
 }

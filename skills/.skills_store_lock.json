@@ -84,6 +84,18 @@
       "zip_url": "https://lightmake.site/api/v1/download?slug=stock-monitor-skill",
       "source": "skillhub",
       "version": "0.1.0"
+    },
+    "invest-analyzer": {
+      "name": "invest-analyzer",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=invest-analyzer",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "baidu-search-openclaw": {
+      "name": "百度搜索",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=baidu-search-openclaw",
+      "source": "skillhub",
+      "version": "1.0.0"
     }
   }
 }
