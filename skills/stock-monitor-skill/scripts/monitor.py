@@ -36,7 +36,7 @@ from load_config import get_watchlist, get_settings
 WATCHLIST = get_watchlist()
 SETTINGS = get_settings()
 # 如果配置文件不存在，使用默认配置
-if not WATCHLIST:
+if WATCHLIST is None:
     WATCHLIST = [
     # ===== 个股: 波动较大，设置较宽的涨跌预警 =====
     {
@@ -160,8 +160,8 @@ class StockAlert:
     def should_run_now(self):
         """智能频率控制: 判断当前是否应该执行监控 (基于北京时间)"""
         # 服务器在纽约(EST)，中国股市用北京时间(CST = EST + 13小时)
-        from datetime import timedelta
-        now = datetime.now() + timedelta(hours=13)  # 转换成北京时间
+        # from datetime import timedelta  # 不需要时区转换
+        now = datetime.now()  # 直接使用本地时间
         hour, minute = now.hour, now.minute
         time_val = hour * 100 + minute
         weekday = now.weekday()
