@@ -6,7 +6,7 @@
     "topic": "游戏开发 v0.7",
     "subTopic": "v0.7 新功能",
     "status": "completed",
-    "lastActivity": "2026-03-13T17:24:02.653Z",
+    "lastActivity": "2026-03-13T17:38:14.672Z",
     "continuousLearnHours": 0,
     "breakTaken": null,
     "breakMinutes": 0,
@@ -14,271 +14,209 @@
     "triggeredBy": "heartbeat-cron"
   },
   "learningProgress": {
-    "game-dev": {
-      "v0.1": {
-        "topic": "角色创建系统",
-        "status": "completed",
-        "completedAt": "2026-03-12T03:30:00+08:00",
-        "tests": "8/8 passed"
-      },
-      "v0.2": {
-        "topic": "属性系统 + 数值设计",
-        "status": "completed",
-        "startedAt": "2026-03-12T03:30:00+08:00",
-        "completedAt": "2026-03-12T10:00:00+08:00",
-        "tests": "23/23 passed",
-        "nextSteps": [
-          "战斗界面 UI",
-          "技能系统实现"
-        ]
-      },
-      "v0.3": {
-        "topic": "战斗系统",
-        "status": "completed",
-        "startedAt": "2026-03-13T00:00:00+08:00",
-        "completedAt": "2026-03-13T04:45:00+08:00",
-        "tests": "9/9 passed",
-        "deliverables": [
-          "Battle.tsx - 战斗组件",
-          "Battle.test.tsx - 单元测试",
-          "App.tsx - 集成战斗系统",
-          "index.css - 战斗样式"
-        ],
-        "features": [
-          "回合制战斗",
-          "物理/法术伤害计算",
-          "暴击系统",
-          "自动战斗",
-          "战斗日志",
-          "经验值系统",
-          "升级系统"
-        ],
-        "nextSteps": [
-          "技能系统",
-          "任务系统",
-          "离线收益"
-        ]
-      },
-      "v0.4": {
-        "topic": "技能系统",
-        "status": "completed",
-        "startedAt": "2026-03-13T05:00:00+08:00",
-        "completedAt": "2026-03-13T05:10:00+08:00",
-        "tests": "27/27 passed",
-        "deliverables": [
-          "skills.ts - 技能系统核心",
-          "skills.test.ts - 单元测试",
-          "SkillBar.tsx - 技能栏组件",
-          "Battle.tsx - 集成技能战斗"
-        ],
-        "features": [
-          "4 门派专属技能",
-          "物理/法术/增益技能",
-          "魔法消耗系统",
-          "冷却系统",
-          "技能确认 UI",
-          "12 个独特技能"
-        ],
-        "nextSteps": [
-          "任务系统",
-          "离线收益",
-          "装备系统"
-        ]
-      },
-      "v0.5": {
-        "topic": "任务系统",
-        "status": "completed",
-        "startedAt": "2026-03-13T05:11:00+08:00",
-        "completedAt": "2026-03-13T05:20:00+08:00",
-        "tests": "24/24 passed",
-        "deliverables": [
-          "tasks.ts - 任务系统核心",
-          "tasks.test.ts - 单元测试"
-        ],
-        "features": [
-          "每日任务系统",
-          "主线任务系统",
-          "成就系统",
-          "任务进度跟踪",
-          "任务奖励领取",
-          "任务前置依赖",
-          "12 个预设任务"
-        ],
-        "nextSteps": [
-          "离线收益",
-          "装备系统",
-          "好友系统"
-        ]
-      },
-      "v0.6": {
-        "topic": "离线收益系统",
-        "status": "completed",
-        "startedAt": "2026-03-13T05:30:00+08:00",
-        "completedAt": "2026-03-13T05:35:00+08:00",
-        "tests": "23/23 passed",
-        "deliverables": [
-          "offlineRewards.ts - 离线收益核心",
-          "offlineRewards.test.ts - 单元测试"
-        ],
-        "features": [
-          "基础金币/经验收益",
-          "等级加成系统",
-          "VIP 加成系统",
-          "最大离线时长限制",
-          "物品掉落系统",
-          "5 种稀有度物品",
-          "收益格式化显示"
-        ],
-        "nextSteps": [
-          "装备系统",
-          "好友系统",
-          "排行榜"
-        ]
-      },
-      "v0.7": {
-        "topic": "装备系统",
-        "status": "completed",
-        "startedAt": "2026-03-13T16:50:33.223Z",
-        "completedAt": "2026-03-13T16:50:33.223Z",
-        "tests": "6/6 passed",
-        "deliverables": [
-          "equipment.ts - 装备系统核心",
-          "equipment.test.ts - 单元测试"
-        ],
-        "features": [
-          "装备稀有度系统（普通/稀有/史诗/传说）",
-          "装备属性加成",
-          "穿戴/卸下装备",
-          "装备掉落概率",
-          "装备升级系统"
-        ],
-        "nextSteps": [
-          "好友系统",
-          "排行榜",
-          "公会系统"
-        ]
-      },
-      "v0.8": {
-        "topic": "好友系统",
-        "status": "completed",
-        "startedAt": "2026-03-13T17:20:44.324Z",
-        "completedAt": "2026-03-13T17:20:44.324Z",
-        "tests": "7/7 passed",
-        "deliverables": [
-          "friends.ts - 好友系统核心",
-          "friends.test.ts - 单元测试"
-        ],
-        "features": [
-          "添加/删除好友",
-          "好友请求系统",
-          "好友度系统",
-          "赠送体力（24 小时冷却）",
-          "黑名单功能",
-          "好友列表排序",
-          "最大好友数限制（50）"
-        ],
-        "nextSteps": [
-          "排行榜系统",
-          "公会系统",
-          "聊天系统"
-        ]
-      },
-      "v0.9": {
-        "topic": "排行榜系统",
-        "status": "completed",
-        "startedAt": "2026-03-13T17:24:02.652Z",
-        "completedAt": "2026-03-13T17:24:02.652Z",
-        "tests": "8/8 passed",
-        "deliverables": [
-          "leaderboard.ts - 排行榜系统核心",
-          "leaderboard.test.ts - 单元测试"
-        ],
-        "features": [
-          "战力榜",
-          "等级榜",
-          "好友榜",
-          "实时更新（5 分钟缓存）",
-          "排名变化追踪",
-          "前 N 名查询",
-          "个人排名查询"
-        ],
-        "nextSteps": [
-          "公会系统",
-          "聊天系统",
-          "交易系统"
-        ]
-      }
+    "v0.1": {
+      "topic": "角色创建系统",
+      "status": "completed",
+      "completedAt": "2026-03-12T03:30:00+08:00",
+      "tests": "8/8 passed"
     },
-    "stock-quant": {
-      "stage1": {
-        "topic": "数据获取",
-        "status": "completed",
-        "startedAt": "2026-03-12T10:00:00+08:00",
-        "completedAt": "2026-03-12T18:30:00+08:00",
-        "tests": "6/7 passed",
-        "resources": [
-          "AKShare 文档",
-          "Tushare 接口",
-          "A 股数据基础"
-        ],
-        "deliverables": [
-          "fetch_stock_data.py - 数据获取模块",
-          "test_data_fetch.py - 单元测试",
-          "stock_list.csv - 5489 只股票列表",
-          "000001_history.csv - 平安银行历史数据"
-        ],
-        "nextSteps": [
-          "K 线数据计算",
-          "数据可视化展示",
-          "多股票批量获取"
-        ],
-        "knowledgeCaptured": true
-      },
-      "stage1b": {
-        "topic": "技术指标计算",
-        "status": "completed",
-        "startedAt": "2026-03-12T18:30:00+08:00",
-        "completedAt": "2026-03-12T19:00:00+08:00",
-        "tests": "11/11 passed",
-        "deliverables": [
-          "kline_calculator.py - K 线计算器",
-          "test_kline_calculator.py - 单元测试",
-          "01_数据获取示例.ipynb - Jupyter 示例"
-        ],
-        "indicators": [
-          "MA (5/10/20/60)",
-          "EMA (12/26)",
-          "MACD",
-          "RSI",
-          "布林带"
-        ],
-        "knowledgeCaptured": true
-      },
-      "stage2": {
-        "topic": "策略回测引擎",
-        "status": "completed",
-        "startedAt": "2026-03-12T19:50:00+08:00",
-        "completedAt": "2026-03-12T20:00:00+08:00",
-        "tests": "9/9 passed",
-        "deliverables": [
-          "base.py - 策略基类",
-          "ma_cross.py - 均线交叉策略",
-          "backtester.py - 回测引擎",
-          "backtest_demo.py - 回测演示",
-          "test_strategy.py - 单元测试"
-        ],
-        "strategies": [
-          "MA5/20 金叉死叉",
-          "MA10/30 金叉死叉",
-          "双均线 12/26"
-        ],
-        "backtestResults": {
-          "best": "双均线 12/26",
-          "bestReturn": "36.58%",
-          "sharpeRatio": "1.25"
-        },
-        "knowledgeCaptured": true
-      }
+    "v0.2": {
+      "topic": "属性系统 + 数值设计",
+      "status": "completed",
+      "startedAt": "2026-03-12T03:30:00+08:00",
+      "completedAt": "2026-03-12T10:00:00+08:00",
+      "tests": "23/23 passed",
+      "nextSteps": [
+        "战斗界面 UI",
+        "技能系统实现"
+      ]
+    },
+    "v0.3": {
+      "topic": "战斗系统",
+      "status": "completed",
+      "startedAt": "2026-03-13T00:00:00+08:00",
+      "completedAt": "2026-03-13T04:45:00+08:00",
+      "tests": "9/9 passed",
+      "deliverables": [
+        "Battle.tsx - 战斗组件",
+        "Battle.test.tsx - 单元测试",
+        "App.tsx - 集成战斗系统",
+        "index.css - 战斗样式"
+      ],
+      "features": [
+        "回合制战斗",
+        "物理/法术伤害计算",
+        "暴击系统",
+        "自动战斗",
+        "战斗日志",
+        "经验值系统",
+        "升级系统"
+      ],
+      "nextSteps": [
+        "技能系统",
+        "任务系统",
+        "离线收益"
+      ]
+    },
+    "v0.4": {
+      "topic": "技能系统",
+      "status": "completed",
+      "startedAt": "2026-03-13T05:00:00+08:00",
+      "completedAt": "2026-03-13T05:10:00+08:00",
+      "tests": "27/27 passed",
+      "deliverables": [
+        "skills.ts - 技能系统核心",
+        "skills.test.ts - 单元测试",
+        "SkillBar.tsx - 技能栏组件",
+        "Battle.tsx - 集成技能战斗"
+      ],
+      "features": [
+        "4 门派专属技能",
+        "物理/法术/增益技能",
+        "魔法消耗系统",
+        "冷却系统",
+        "技能确认 UI",
+        "12 个独特技能"
+      ],
+      "nextSteps": [
+        "任务系统",
+        "离线收益",
+        "装备系统"
+      ]
+    },
+    "v0.5": {
+      "topic": "任务系统",
+      "status": "completed",
+      "startedAt": "2026-03-13T05:11:00+08:00",
+      "completedAt": "2026-03-13T05:20:00+08:00",
+      "tests": "24/24 passed",
+      "deliverables": [
+        "tasks.ts - 任务系统核心",
+        "tasks.test.ts - 单元测试"
+      ],
+      "features": [
+        "每日任务系统",
+        "主线任务系统",
+        "成就系统",
+        "任务进度跟踪",
+        "任务奖励领取",
+        "任务前置依赖",
+        "12 个预设任务"
+      ],
+      "nextSteps": [
+        "离线收益",
+        "装备系统",
+        "好友系统"
+      ]
+    },
+    "v0.6": {
+      "topic": "离线收益系统",
+      "status": "completed",
+      "startedAt": "2026-03-13T05:30:00+08:00",
+      "completedAt": "2026-03-13T05:35:00+08:00",
+      "tests": "23/23 passed",
+      "deliverables": [
+        "offlineRewards.ts - 离线收益核心",
+        "offlineRewards.test.ts - 单元测试"
+      ],
+      "features": [
+        "基础金币/经验收益",
+        "等级加成系统",
+        "VIP 加成系统",
+        "最大离线时长限制",
+        "物品掉落系统",
+        "5 种稀有度物品",
+        "收益格式化显示"
+      ],
+      "nextSteps": [
+        "装备系统",
+        "好友系统",
+        "排行榜"
+      ]
+    },
+    "v0.7": {
+      "topic": "装备系统",
+      "status": "completed",
+      "startedAt": "2026-03-13T16:50:33.223Z",
+      "completedAt": "2026-03-13T16:50:33.223Z",
+      "tests": "6/6 passed",
+      "deliverables": [
+        "equipment.ts - 装备系统核心",
+        "equipment.test.ts - 单元测试"
+      ],
+      "features": [
+        "装备稀有度系统（普通/稀有/史诗/传说）",
+        "装备属性加成",
+        "穿戴/卸下装备",
+        "装备掉落概率",
+        "装备升级系统"
+      ],
+      "nextSteps": [
+        "好友系统",
+        "排行榜",
+        "公会系统"
+      ]
+    },
+    "v0.8": {
+      "topic": "好友系统",
+      "status": "completed",
+      "startedAt": "2026-03-13T17:20:44.324Z",
+      "completedAt": "2026-03-13T17:20:44.324Z",
+      "tests": "7/7 passed",
+      "deliverables": [
+        "friends.ts - 好友系统核心",
+        "friends.test.ts - 单元测试"
+      ],
+      "features": [
+        "添加/删除好友",
+        "好友请求系统",
+        "好友度系统",
+        "赠送体力（24 小时冷却）",
+        "黑名单功能",
+        "好友列表排序",
+        "最大好友数限制（50）"
+      ],
+      "nextSteps": [
+        "排行榜系统",
+        "公会系统",
+        "聊天系统"
+      ]
+    },
+    "v0.9": {
+      "topic": "排行榜系统",
+      "status": "completed",
+      "startedAt": "2026-03-13T17:24:02.652Z",
+      "completedAt": "2026-03-13T17:24:02.652Z",
+      "tests": "8/8 passed",
+      "deliverables": [
+        "leaderboard.ts - 排行榜系统核心",
+        "leaderboard.test.ts - 单元测试"
+      ],
+      "features": [
+        "战力榜",
+        "等级榜",
+        "好友榜",
+        "实时更新（5 分钟缓存）",
+        "排名变化追踪",
+        "前 N 名查询",
+        "个人排名查询"
+      ],
+      "nextSteps": [
+        "公会系统",
+        "聊天系统",
+        "交易系统"
+      ]
+    },
+    "v0.10": {
+      "topic": "公会系统",
+      "status": "completed",
+      "startedAt": "2026-03-13T17:38:14.671Z",
+      "completedAt": "2026-03-13T17:38:14.671Z",
+      "tests": "2/2 passed",
+      "deliverables": [
+        "guild.ts",
+        "guild.test.ts"
+      ]
     }
   },
   "autoLearnConfig": {
@@ -321,7 +259,7 @@
   },
   "stats": {
     "today": {
-      "learnSessions": 8,
+      "learnSessions": 10,
       "learnHours": 5.6,
       "topicsCovered": [
         "战斗系统",
@@ -333,7 +271,7 @@
       "featuresImplemented": 33
     },
     "total": {
-      "learnSessions": 7,
+      "learnSessions": 9,
       "learnHours": 15.6,
       "topicsCovered": 9,
       "testsWritten": 141,
