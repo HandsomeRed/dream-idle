@@ -154,3 +154,16 @@ cd ~/workspace/skills/stock-monitor-skill/scripts
 ./control.sh status  # 状态
 ./control.sh log     # 日志
 ```
+
+---
+
+## 🌐 外网访问配置
+
+**公网 IP：** 49.232.215.84  
+**防火墙：** ✅ UFW 已启用
+
+| 服务 | 端口 | 外网访问地址 |
+|------|------|-------------|
+| DreamIdle | 3000 | http://49.232.215.84:3000 |
+| StockQuant | 8501 | http://49.232.215.84:8501 |
+| SSH | 22 | 49.232.215.84:22 |
