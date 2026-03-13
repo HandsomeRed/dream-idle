@@ -4,9 +4,9 @@
     "startTime": "2026-03-14T00:00:00+08:00",
     "endTime": "2026-03-14T10:00:00+08:00",
     "topic": "游戏开发 v0.7",
-    "subTopic": "装备系统设计",
-    "status": "learning",
-    "lastActivity": "2026-03-14T00:26:32.000Z",
+    "subTopic": "v0.7 新功能",
+    "status": "completed",
+    "lastActivity": "2026-03-13T16:50:33.224Z",
     "continuousLearnHours": 0,
     "breakTaken": null,
     "breakMinutes": 0,
@@ -123,7 +123,7 @@
         "features": [
           "基础金币/经验收益",
           "等级加成系统",
-          VIP 加成系统",
+          "VIP 加成系统",
           "最大离线时长限制",
           "物品掉落系统",
           "5 种稀有度物品",
@@ -133,6 +133,29 @@
           "装备系统",
           "好友系统",
           "排行榜"
+        ]
+      },
+      "v0.7": {
+        "topic": "装备系统",
+        "status": "completed",
+        "startedAt": "2026-03-13T16:50:33.223Z",
+        "completedAt": "2026-03-13T16:50:33.223Z",
+        "tests": "6/6 passed",
+        "deliverables": [
+          "equipment.ts - 装备系统核心",
+          "equipment.test.ts - 单元测试"
+        ],
+        "features": [
+          "装备稀有度系统（普通/稀有/史诗/传说）",
+          "装备属性加成",
+          "穿戴/卸下装备",
+          "装备掉落概率",
+          "装备升级系统"
+        ],
+        "nextSteps": [
+          "好友系统",
+          "排行榜",
+          "公会系统"
         ]
       }
     },
@@ -248,7 +271,7 @@
   },
   "stats": {
     "today": {
-      "learnSessions": 4,
+      "learnSessions": 5,
       "learnHours": 5.6,
       "topicsCovered": [
         "战斗系统",
@@ -260,7 +283,7 @@
       "featuresImplemented": 33
     },
     "total": {
-      "learnSessions": 3,
+      "learnSessions": 4,
       "learnHours": 15.6,
       "topicsCovered": 9,
       "testsWritten": 141,
