@@ -161,7 +161,7 @@ export const ACHIEVEMENT_TASKS: Omit<TaskConfig, 'status' | 'objective' | 'order
  * 初始化每日任务
  */
 export function initializeDailyTasks(): TaskConfig[] {
-  const now = Date.now()
+  // const now = Date.now()
   const tomorrow = new Date()
   tomorrow.setDate(tomorrow.getDate() + 1)
   tomorrow.setHours(0, 0, 0, 0)
