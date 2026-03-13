@@ -1,16 +1,17 @@
 {
   "currentSession": {
-    "kind": "self-evolution",
-    "startTime": "2026-03-13T20:00:00+08:00",
-    "endTime": "2026-03-13T24:00:00+08:00",
-    "topic": "总结提升 - 每日进化报告",
-    "subTopic": "复盘今日项目 + 生成进化报告",
-    "status": "completed",
-    "lastActivity": "2026-03-13T22:16:00.000Z",
-    "continuousLearnHours": 2.27,
-    "breakTaken": "2026-03-13T12:00:00.000Z",
+    "kind": "game-dev",
+    "startTime": "2026-03-14T00:00:00+08:00",
+    "endTime": "2026-03-14T10:00:00+08:00",
+    "topic": "游戏开发 v0.7",
+    "subTopic": "装备系统设计",
+    "status": "learning",
+    "lastActivity": "2026-03-14T00:26:32.000Z",
+    "continuousLearnHours": 0,
+    "breakTaken": null,
     "breakMinutes": 0,
-    "day": 2
+    "day": 3,
+    "triggeredBy": "heartbeat-cron"
   },
   "learningProgress": {
     "game-dev": {
