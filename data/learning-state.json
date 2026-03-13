@@ -6,7 +6,7 @@
     "topic": "游戏开发 v0.7",
     "subTopic": "v0.7 新功能",
     "status": "completed",
-    "lastActivity": "2026-03-13T16:50:33.224Z",
+    "lastActivity": "2026-03-13T17:24:02.653Z",
     "continuousLearnHours": 0,
     "breakTaken": null,
     "breakMinutes": 0,
@@ -157,6 +157,56 @@
           "排行榜",
           "公会系统"
         ]
+      },
+      "v0.8": {
+        "topic": "好友系统",
+        "status": "completed",
+        "startedAt": "2026-03-13T17:20:44.324Z",
+        "completedAt": "2026-03-13T17:20:44.324Z",
+        "tests": "7/7 passed",
+        "deliverables": [
+          "friends.ts - 好友系统核心",
+          "friends.test.ts - 单元测试"
+        ],
+        "features": [
+          "添加/删除好友",
+          "好友请求系统",
+          "好友度系统",
+          "赠送体力（24 小时冷却）",
+          "黑名单功能",
+          "好友列表排序",
+          "最大好友数限制（50）"
+        ],
+        "nextSteps": [
+          "排行榜系统",
+          "公会系统",
+          "聊天系统"
+        ]
+      },
+      "v0.9": {
+        "topic": "排行榜系统",
+        "status": "completed",
+        "startedAt": "2026-03-13T17:24:02.652Z",
+        "completedAt": "2026-03-13T17:24:02.652Z",
+        "tests": "8/8 passed",
+        "deliverables": [
+          "leaderboard.ts - 排行榜系统核心",
+          "leaderboard.test.ts - 单元测试"
+        ],
+        "features": [
+          "战力榜",
+          "等级榜",
+          "好友榜",
+          "实时更新（5 分钟缓存）",
+          "排名变化追踪",
+          "前 N 名查询",
+          "个人排名查询"
+        ],
+        "nextSteps": [
+          "公会系统",
+          "聊天系统",
+          "交易系统"
+        ]
       }
     },
     "stock-quant": {
@@ -271,7 +321,7 @@
   },
   "stats": {
     "today": {
-      "learnSessions": 5,
+      "learnSessions": 8,
       "learnHours": 5.6,
       "topicsCovered": [
         "战斗系统",
@@ -283,7 +333,7 @@
       "featuresImplemented": 33
     },
     "total": {
-      "learnSessions": 4,
+      "learnSessions": 7,
       "learnHours": 15.6,
       "topicsCovered": 9,
       "testsWritten": 141,
