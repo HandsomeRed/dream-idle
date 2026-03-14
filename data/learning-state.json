@@ -3,11 +3,11 @@
     "kind": "game-dev",
     "startTime": "2026-03-15T00:00:00+08:00",
     "endTime": "2026-03-15T10:00:00+08:00",
-    "topic": "游戏开发 v0.13",
-    "subTopic": "v0.13 拍卖行系统",
+    "topic": "游戏开发 v0.14",
+    "subTopic": "v0.14 邮件系统",
     "status": "ready",
-    "lastActivity": "2026-03-14T20:18:43.000Z",
-    "continuousLearnHours": 4.25,
+    "lastActivity": "2026-03-14T20:23:50.000Z",
+    "continuousLearnHours": 4.5,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 4,
@@ -269,6 +269,33 @@
         "邮件系统",
         "成就系统扩展"
       ]
+    },
+    "v0.13": {
+      "topic": "拍卖行系统",
+      "status": "completed",
+      "startedAt": "2026-03-15T04:20:00+08:00",
+      "completedAt": "2026-03-14T20:23:50+08:00",
+      "tests": "39/39 passed",
+      "deliverables": [
+        "auction.ts - 拍卖行系统核心",
+        "auction.test.ts - 单元测试"
+      ],
+      "features": [
+        "创建拍卖订单",
+        "竞价系统",
+        "自动出价（代理竞价）",
+        "一口价购买",
+        "拍卖到期处理",
+        "拍卖历史记录",
+        "分类搜索功能",
+        "拍卖税系统（10%）",
+        "最后时刻出价延长"
+      ],
+      "nextSteps": [
+        "邮件系统",
+        "成就系统扩展",
+        "社交系统"
+      ]
     }
   },
   "autoLearnConfig": {
@@ -311,7 +338,7 @@
   },
   "stats": {
     "today": {
-      "learnSessions": 12,
+      "learnSessions": 13,
       "learnHours": 5.6,
       "topicsCovered": [
         "战斗系统",
@@ -319,17 +346,18 @@
         "任务系统",
         "离线收益",
         "聊天系统",
-        "交易系统"
+        "交易系统",
+        "拍卖行系统"
       ],
-      "testsWritten": 170,
-      "featuresImplemented": 49
+      "testsWritten": 209,
+      "featuresImplemented": 58
     },
     "total": {
-      "learnSessions": 11,
+      "learnSessions": 12,
       "learnHours": 15.6,
-      "topicsCovered": 11,
-      "testsWritten": 228,
-      "featuresImplemented": 56
+      "topicsCovered": 12,
+      "testsWritten": 267,
+      "featuresImplemented": 65
     }
   }
 }
