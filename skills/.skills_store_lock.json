@@ -120,6 +120,12 @@
       "zip_url": "https://lightmake.site/api/v1/download?slug=market-data-hub",
       "source": "skillhub",
       "version": "1.0.0"
+    },
+    "skill-tree": {
+      "name": "SkillTree Learning Progress Tracker",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=skill-tree",
+      "source": "skillhub",
+      "version": "1.0.0"
     }
   }
 }

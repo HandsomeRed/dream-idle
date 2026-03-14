@@ -120,6 +120,10 @@
     "market-data-hub": {
       "version": "1.0.0",
       "installedAt": 1773471872764
+    },
+    "skill-tree": {
+      "version": "1.0.0",
+      "installedAt": 1773497093165
     }
   }
 }
