@@ -116,6 +116,10 @@
     "aakshare": {
       "version": "1.0.1",
       "installedAt": 1773464713225
+    },
+    "market-data-hub": {
+      "version": "1.0.0",
+      "installedAt": 1773471872764
     }
   }
 }

@@ -114,6 +114,12 @@
       "zip_url": "https://lightmake.site/api/v1/download?slug=aakshare",
       "source": "skillhub",
       "version": "1.0.1"
+    },
+    "market-data-hub": {
+      "name": "Market Data Hub",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=market-data-hub",
+      "source": "skillhub",
+      "version": "1.0.0"
     }
   }
 }
