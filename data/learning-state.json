@@ -1,12 +1,12 @@
 {
   "currentSession": {
-    "kind": "game-dev",
-    "startTime": "2026-03-14T00:00:00+08:00",
-    "endTime": "2026-03-14T10:00:00+08:00",
-    "topic": "游戏开发 v0.11",
-    "subTopic": "v0.11 聊天系统",
+    "kind": "stock-quant",
+    "startTime": "2026-03-14T10:00:00+08:00",
+    "endTime": "2026-03-14T20:00:00+08:00",
+    "topic": "量化交易 Stage 3",
+    "subTopic": "数据可视化展示",
     "status": "active",
-    "lastActivity": "2026-03-14T09:45:00.000Z",
+    "lastActivity": "2026-03-14T10:00:00.000Z",
     "continuousLearnHours": 0,
     "breakTaken": null,
     "breakMinutes": 0,
