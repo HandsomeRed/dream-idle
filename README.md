@@ -141,7 +141,7 @@ npm run lint       # 代码检查
 
 ## 🌐 访问地址
 
-**外网访问：** http://49.232.215.84:3000  
+**本地运行：** `npm run dev` → http://localhost:3000  
 **本地访问：** http://localhost:3000
 
 ---
