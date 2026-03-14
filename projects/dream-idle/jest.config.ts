@@ -12,6 +12,7 @@ export default {
         jsx: 'react-jsx',
         esModuleInterop: true,
         types: ['jest', '@testing-library/jest-dom'],
+        lib: ['ES2020', 'DOM', 'DOM.Iterable'],
       },
     }],
   },
