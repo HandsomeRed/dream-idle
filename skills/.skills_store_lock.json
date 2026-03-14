@@ -102,6 +102,12 @@
       "zip_url": "https://lightmake.site/api/v1/download?slug=edrawmax-skills",
       "source": "skillhub",
       "version": "1.0.1"
+    },
+    "trading-devbox": {
+      "name": "Trading DevBox",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=trading-devbox",
+      "source": "skillhub",
+      "version": "0.1.0"
     }
   }
 }

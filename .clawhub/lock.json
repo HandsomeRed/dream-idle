@@ -108,6 +108,10 @@
     "edrawmax-skills": {
       "version": "1.0.1",
       "installedAt": 1773435855213
+    },
+    "trading-devbox": {
+      "version": "0.1.0",
+      "installedAt": 1773457517098
     }
   }
 }
