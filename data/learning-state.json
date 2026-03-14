@@ -1,16 +1,16 @@
 {
   "currentSession": {
-    "kind": "summary-improve",
-    "startTime": "2026-03-14T20:00:00+08:00",
-    "endTime": "2026-03-14T24:00:00+08:00",
-    "topic": "总结提升",
-    "subTopic": "每日进化报告 + 自由学习",
+    "kind": "game-dev",
+    "startTime": "2026-03-15T00:00:00+08:00",
+    "endTime": "2026-03-15T10:00:00+08:00",
+    "topic": "游戏开发 v0.11",
+    "subTopic": "v0.11 聊天系统",
     "status": "active",
-    "lastActivity": "2026-03-14T23:45:00.000Z",
+    "lastActivity": "2026-03-15T00:00:00.000Z",
     "continuousLearnHours": 0,
     "breakTaken": null,
     "breakMinutes": 0,
-    "day": 3,
+    "day": 4,
     "triggeredBy": "heartbeat-cron"
   },
   "learningProgress": {
