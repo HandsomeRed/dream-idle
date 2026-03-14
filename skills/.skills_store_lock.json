@@ -108,6 +108,12 @@
       "zip_url": "https://lightmake.site/api/v1/download?slug=trading-devbox",
       "source": "skillhub",
       "version": "0.1.0"
+    },
+    "aakshare": {
+      "name": "AKShare",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=aakshare",
+      "source": "skillhub",
+      "version": "1.0.1"
     }
   }
 }

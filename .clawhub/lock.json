@@ -112,6 +112,10 @@
     "trading-devbox": {
       "version": "0.1.0",
       "installedAt": 1773457517098
+    },
+    "aakshare": {
+      "version": "1.0.1",
+      "installedAt": 1773464713225
     }
   }
 }
