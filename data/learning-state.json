@@ -1,12 +1,12 @@
 {
   "currentSession": {
-    "kind": "stock-quant",
-    "startTime": "2026-03-15T10:00:00+08:00",
-    "endTime": "2026-03-15T20:00:00+08:00",
-    "topic": "量化交易 Stage 3",
-    "subTopic": "数据可视化展示",
+    "kind": "summary-improvement",
+    "startTime": "2026-03-15T20:00:00+08:00",
+    "endTime": "2026-03-15T24:00:00+08:00",
+    "topic": "总结提升",
+    "subTopic": "每日进化报告生成",
     "status": "ready",
-    "lastActivity": "2026-03-15T02:01:17.000Z",
+    "lastActivity": "2026-03-15T12:00:58.000Z",
     "continuousLearnHours": 0,
     "breakTaken": null,
     "breakMinutes": 0,
@@ -392,6 +392,13 @@
         "totalLinesOfCode": "~6000+",
         "continuousLearnHours": 10
       }
+    },
+    "quant-stage3": {
+      "topic": "量化交易 Stage 3 数据可视化",
+      "status": "in_progress",
+      "startedAt": "2026-03-15T10:00:00+08:00",
+      "progress": "准备中",
+      "hoursSpent": 10
     }
   },
   "autoLearnConfig": {
