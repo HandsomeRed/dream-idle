@@ -124,6 +124,10 @@
     "skill-tree": {
       "version": "1.0.0",
       "installedAt": 1773497093165
+    },
+    "game-architect": {
+      "version": "0.1.0",
+      "installedAt": 1773608668289
     }
   }
 }

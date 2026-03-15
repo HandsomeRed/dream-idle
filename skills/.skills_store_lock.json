@@ -126,6 +126,12 @@
       "zip_url": "https://lightmake.site/api/v1/download?slug=skill-tree",
       "source": "skillhub",
       "version": "1.0.0"
+    },
+    "game-architect": {
+      "name": "Game Architect",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=game-architect",
+      "source": "skillhub",
+      "version": "0.1.0"
     }
   }
 }
