@@ -2,6 +2,9 @@
 # 每日进化报告脚本 - 22:00 执行
 # 生成并播报当日学习总结
 
+# 设置 PATH（cron 环境中需要）
+export PATH="/root/.nvm/current/bin:$PATH"
+
 WORKSPACE="/root/.openclaw/workspace"
 LOG_FILE="$WORKSPACE/logs/evolution-report.log"
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
