@@ -42,6 +42,23 @@
 - [ ] 提取重要决策到 MEMORY.md
 - [ ] 清理临时信息
 
+## 📢 报告推送规则（重要！）
+
+### 22:00 每日进化报告
+- **触发：** cron 脚本生成报告后
+- **推送时机：** 22:00 后第一次心跳检查时
+- **动作：** 读取 `data/evolution-reports/YYYY-MM-DD-day-N.md` 并发送给用户
+- **检查文件：** `data/heartbeat-state.json` 中 `lastReportSent` 字段，避免重复推送
+
+### 推送逻辑
+```json
+{
+  "lastReportSent": "2026-03-16"  // 最后推送的报告日期
+}
+```
+- 如果今天日期 > lastReportSent → 读取并推送今日报告
+- 推送后更新 lastReportSent 为今天日期
+
 ## 每周维护（周日）
 
 - [ ] 回顾 MEMORY.md
