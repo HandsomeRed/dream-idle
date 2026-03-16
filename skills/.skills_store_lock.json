@@ -132,6 +132,12 @@
       "zip_url": "https://lightmake.site/api/v1/download?slug=game-architect",
       "source": "skillhub",
       "version": "0.1.0"
+    },
+    "trading-quant": {
+      "name": "Trading Quant",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=trading-quant",
+      "source": "skillhub",
+      "version": "1.0.0"
     }
   }
 }
