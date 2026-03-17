@@ -40,3 +40,234 @@
 .read-the-docs {
   color: #888;
 }
+
+/* 关卡选择界面 */
+.level-select-header {
+  margin-bottom: 20px;
+}
+
+.level-select-header h1 {
+  margin: 10px 0;
+}
+
+.progress-info {
+  color: #888;
+  font-size: 14px;
+}
+
+.chapter-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.chapter-tab {
+  padding: 8px 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.chapter-tab:hover {
+  border-color: #667eea;
+}
+
+.chapter-tab.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: transparent;
+}
+
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  padding: 20px 0;
+}
+
+.level-card {
+  position: relative;
+  padding: 16px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.level-card:hover:not(.locked) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-color: #667eea;
+}
+
+.level-card.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #f5f5f5;
+}
+
+.level-card.cleared {
+  border-color: #4ade80;
+  background: #f0fdf4;
+}
+
+.level-number {
+  font-size: 24px;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.level-name {
+  font-size: 12px;
+  color: #666;
+  margin: 4px 0;
+}
+
+.boss-tag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.level-stars {
+  color: #fbbf24;
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.cleared-tag {
+  font-size: 10px;
+  color: #4ade80;
+  margin-top: 4px;
+}
+
+/* 关卡战斗界面 */
+.battle-prep, .battle-fighting, .battle-result {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.battle-result.victory {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  padding: 40px;
+  border-radius: 16px;
+}
+
+.battle-result.defeat {
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  padding: 40px;
+  border-radius: 16px;
+}
+
+.enemy-info, .player-info {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.enemy-avatar, .unit-avatar {
+  font-size: 64px;
+  margin-bottom: 10px;
+}
+
+.battle-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.battle-field {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.battle-unit {
+  text-align: center;
+}
+
+.battle-unit.player .unit-avatar {
+  filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));
+}
+
+.vs-text {
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.hp-bar {
+  width: 120px;
+  height: 12px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 8px auto;
+}
+
+.hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4ade80, #22c55e);
+  transition: width 0.3s;
+}
+
+.hp-text {
+  color: white;
+  font-size: 12px;
+}
+
+.battle-log {
+  background: #1f2937;
+  color: #e5e7eb;
+  padding: 16px;
+  border-radius: 8px;
+  min-height: 100px;
+  max-height: 200px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.log-entry {
+  padding: 4px 0;
+  font-size: 14px;
+  border-bottom: 1px solid #374151;
+}
+
+.result-stats {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.result-stats p {
+  margin: 8px 0;
+  font-size: 16px;
+}
