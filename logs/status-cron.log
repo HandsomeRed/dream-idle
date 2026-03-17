@@ -55,3 +55,6 @@
 === 状态汇报触发 ===
 /root/.openclaw/workspace/scripts/status-report.sh: line 18: node: command not found
 === 状态汇报完成 ===
+=== 状态汇报触发 ===
+/root/.openclaw/workspace/scripts/status-report.sh: line 18: node: command not found
+=== 状态汇报完成 ===
