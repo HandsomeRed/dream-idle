@@ -271,3 +271,211 @@
   margin: 8px 0;
   font-size: 16px;
 }
+
+/* 全局颜色对比度修复 */
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+.app-container {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+h1 {
+  color: #1a202c;
+  font-weight: 800;
+}
+
+h2 {
+  color: #2d3748;
+  font-weight: 700;
+}
+
+h3 {
+  color: #4a5568;
+  font-weight: 600;
+}
+
+p {
+  color: #4a5568;
+}
+
+.subtitle {
+  color: #718096;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* 按钮颜色加深 */
+.start-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  border: none;
+}
+
+.start-button:hover {
+  background: linear-gradient(135deg, #5568d3 0%, #63408a 100%);
+}
+
+.secondary-button {
+  background: white;
+  color: #4a5568;
+  border: 2px solid #e2e8f0;
+  font-weight: 600;
+}
+
+.secondary-button:hover {
+  background: #f7fafc;
+  border-color: #cbd5e0;
+}
+
+.back-button {
+  background: #edf2f7;
+  color: #4a5568;
+  font-weight: 600;
+}
+
+.back-button:hover {
+  background: #e2e8f0;
+}
+
+/* 卡片颜色加深 */
+.character-card {
+  background: white;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.character-level {
+  color: #667eea;
+  font-weight: 700;
+}
+
+.stat-label {
+  color: #718096;
+  font-weight: 600;
+}
+
+.stat-value {
+  color: #2d3748;
+  font-weight: 700;
+}
+
+/* 菜单描述 */
+.menu-description {
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.menu-stats {
+  color: #667eea;
+  font-weight: 600;
+}
+
+/* 输入框 */
+#name-input {
+  border: 2px solid #cbd5e0;
+  color: #2d3748;
+  font-weight: 600;
+}
+
+#name-input:focus {
+  border-color: #667eea;
+}
+
+#name-input::placeholder {
+  color: #a0aec0;
+}
+
+/* 门派卡片 */
+.job-card {
+  background: white;
+  border: 2px solid #e2e8f0;
+  color: #2d3748;
+}
+
+.job-card:hover {
+  border-color: #667eea;
+}
+
+.job-card h3 {
+  color: #2d3748;
+}
+
+.job-stats span {
+  color: #4a5568;
+  font-weight: 600;
+}
+
+/* 经验条 */
+.exp-text {
+  color: #2d3748;
+  font-weight: 700;
+}
+
+/* 关卡选择 */
+.chapter-tab {
+  color: #4a5568;
+  font-weight: 600;
+}
+
+.chapter-tab.active {
+  color: white;
+}
+
+.level-number {
+  color: #667eea;
+  font-weight: 800;
+}
+
+.level-name {
+  color: #4a5568;
+  font-weight: 600;
+}
+
+.cleared-tag {
+  color: #38a169;
+  font-weight: 700;
+}
+
+/* 战斗界面 */
+.battle-header {
+  color: #2d3748;
+  font-weight: 700;
+}
+
+.unit-name {
+  color: white;
+  font-weight: 700;
+}
+
+.hp-text {
+  color: white;
+  font-weight: 700;
+}
+
+.battle-log {
+  color: #e5e7eb;
+}
+
+.log-entry {
+  color: #f3f4f6;
+  font-weight: 500;
+}
+
+/* 战斗结果 */
+.result-stats p {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+/* 进度信息 */
+.progress-info {
+  color: #4a5568;
+  font-weight: 600;
+}
