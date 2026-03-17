@@ -1,16 +1,16 @@
 {
   "currentSession": {
     "kind": "game-dev",
-    "startTime": "2026-03-16T00:00:00+08:00",
-    "endTime": "2026-03-16T10:00:00+08:00",
+    "startTime": "2026-03-18T00:00:00+08:00",
+    "endTime": "2026-03-18T10:00:00+08:00",
     "topic": "游戏开发 v0.17",
     "subTopic": "v0.17 公会战系统",
-    "status": "ready",
-    "lastActivity": "2026-03-15T16:00:21.000Z",
+    "status": "starting",
+    "lastActivity": "2026-03-18T04:30:00.000Z",
     "continuousLearnHours": 0,
     "breakTaken": null,
     "breakMinutes": 0,
-    "day": 5,
+    "day": 7,
     "triggeredBy": "heartbeat-cron"
   },
   "learningProgress": {
