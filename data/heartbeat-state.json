@@ -35,13 +35,13 @@
     "dailyEvolutionsGenerated": 1
   },
   "currentStatus": {
-    "timestamp": "2026-03-17T00:00:00+08:00",
-    "timeSlot": "00:00-10:00",
-    "topic": "游戏开发",
-    "subTopic": "v0.17 公会战系统",
+    "timestamp": "2026-03-17T16:19:00+08:00",
+    "timeSlot": "10:00-20:00",
+    "topic": "量化交易",
+    "subTopic": "Stage 4 实盘对接（券商接口抽象层）",
     "day": 6,
     "status": "✅ 正常",
-    "lastActivity": "2026-03-17T00:00:00.000Z",
+    "lastActivity": "2026-03-17T16:15:00.000Z",
     "readyToContinue": true
   }
 }
