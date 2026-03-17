@@ -1,12 +1,23 @@
 #!/bin/bash
 # 每日进化报告脚本 - 22:00 执行
-# 生成并播报当日学习总结
+# 生成并推送当日学习总结
 
 # 设置 PATH（cron 环境中需要）
-export PATH="/root/.nvm/current/bin:$PATH"
+export HOME="/root"
+export PATH="/root/.local/share/pnpm:/root/.nvm/current/bin:/root/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# 验证 openclaw 可用
+if ! command -v openclaw &> /dev/null; then
+  export OPENCLAW_BIN="/root/.local/share/pnpm/openclaw"
+  if [ ! -x "$OPENCLAW_BIN" ]; then
+    log "❌ 找不到 openclaw 命令"
+    exit 1
+  fi
+  alias openclaw="$OPENCLAW_BIN"
+fi
 
 WORKSPACE="/root/.openclaw/workspace"
-LOG_FILE="$WORKSPACE/logs/evolution-report.log"
+LOG_FILE="$WORKSPACE/logs/evolution-cron.log"
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
 log() {
@@ -16,23 +27,18 @@ log() {
 
 log "=== 生成每日进化报告 ==="
 
-# 读取学习状态
-LEARNING_STATE="$WORKSPACE/data/learning-state.json"
-
-if [ ! -f "$LEARNING_STATE" ]; then
-  log "❌ 学习状态文件不存在"
-  exit 1
-fi
-
-# 使用 Node.js 生成报告
+# 使用 Node.js 生成报告并推送
+cd "$WORKSPACE"
 node << 'NODESCRIPT'
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const workspace = '/root/.openclaw/workspace';
-const learningStatePath = path.join(workspace, 'data/learning-state.json');
 const reportsDir = path.join(workspace, 'data/evolution-reports');
-const memoryDir = path.join(workspace, 'memory');
+const learningStatePath = path.join(workspace, 'data/learning-state.json');
+const heartbeatStatePath = path.join(workspace, 'data/heartbeat-state.json');
+const memoryPath = path.join(workspace, 'MEMORY.md');
 
 // 确保目录存在
 if (!fs.existsSync(reportsDir)) {
@@ -40,31 +46,80 @@ if (!fs.existsSync(reportsDir)) {
 }
 
 // 读取学习状态
-const state = JSON.parse(fs.readFileSync(learningStatePath, 'utf-8'));
+let state = {};
+try {
+  state = JSON.parse(fs.readFileSync(learningStatePath, 'utf-8'));
+} catch (e) {
+  console.log('❌ 无法读取学习状态文件');
+  process.exit(1);
+}
+
 const progress = state.learningProgress || {};
-const gameDev = progress['game-dev'] || {};
-const quant = progress['quant'] || {};
+
+// 统计游戏开发进度（v0.x 开头）
+const gameVersions = Object.entries(progress)
+  .filter(([k, v]) => k.startsWith('v0.') && v.status === 'completed')
+  .sort((a, b) => {
+    const aNum = parseFloat(a[0].replace('v0.', ''));
+    const bNum = parseFloat(b[0].replace('v0.', ''));
+    return aNum - bNum;
+  });
+
+// 统计量化交易进度（quant-开头）
+const quantStages = Object.entries(progress)
+  .filter(([k, v]) => k.startsWith('quant-') && v.status === 'completed')
+  .sort((a, b) => a[0].localeCompare(b[0]));
+
+// 计算测试总数
+const totalGameTests = gameVersions.reduce((sum, [_, v]) => {
+  const match = v.tests?.match(/(\d+)\/(\d+)/);
+  return sum + (match ? parseInt(match[2]) : 0);
+}, 0);
+
+const totalQuantTests = quantStages.reduce((sum, [_, v]) => {
+  const match = v.tests?.match(/(\d+)\/(\d+)/);
+  return sum + (match ? parseInt(match[2]) : 0);
+}, 0);
+
+// 读取心跳状态获取天数
+let dayNum = 1;
+try {
+  const hbState = JSON.parse(fs.readFileSync(heartbeatStatePath, 'utf-8'));
+  dayNum = hbState.currentStatus?.day || 1;
+  // 如果 currentStatus.day 不存在，尝试从已生成的报告数量推断
+  if (dayNum === 1) {
+    const existingReports = fs.readdirSync(reportsDir).filter(f => f.endsWith('.md')).length;
+    dayNum = existingReports + 1;
+  }
+} catch (e) {
+  // 默认第 1 天
+}
+
+// 读取 MEMORY.md 获取累计数据
+let memoryContent = '';
+try {
+  memoryContent = fs.readFileSync(memoryPath, 'utf-8');
+} catch (e) {
+  // 忽略
+}
 
 // 生成报告
 const today = new Date().toISOString().split('T')[0];
 const report = {
   date: today,
+  day: dayNum,
   generatedAt: new Date().toISOString(),
   summary: {
     gameDev: {
-      completedVersions: Object.keys(gameDev).filter(v => gameDev[v].status === 'completed'),
-      totalTests: Object.values(gameDev).reduce((sum, v) => {
-        const match = v.tests?.match(/(\d+)\/(\d+)/);
-        return sum + (match ? parseInt(match[2]) : 0);
-      }, 0),
-      totalFeatures: Object.values(gameDev).filter(v => v.status === 'completed').length
+      completedVersions: gameVersions.map(([k]) => k),
+      totalTests: totalGameTests,
+      totalFeatures: gameVersions.length,
+      latestVersion: gameVersions[gameVersions.length - 1]?.[0] || '无'
     },
     quant: {
-      completedStages: Object.keys(quant).filter(s => quant[s].status === 'completed'),
-      totalTests: Object.values(quant).reduce((sum, s) => {
-        const match = s.tests?.match(/(\d+)\/(\d+)/);
-        return sum + (match ? parseInt(match[2]) : 0);
-      }, 0)
+      completedStages: quantStages.map(([k]) => k),
+      totalTests: totalQuantTests,
+      latestStage: quantStages[quantStages.length - 1]?.[0] || '无'
     }
   },
   newLearnings: [],
@@ -72,67 +127,63 @@ const report = {
   skillSuggestions: []
 };
 
-// 保存报告
-const reportPath = path.join(reportsDir, `${today}.json`);
-fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
+// 保存 JSON 报告
+const jsonReportPath = path.join(reportsDir, `${today}.json`);
+fs.writeFileSync(jsonReportPath, JSON.stringify(report, null, 2));
 
-console.log('报告生成完成');
-console.log(JSON.stringify(report, null, 2));
+// 生成 markdown 推送内容
+const gameList = gameVersions.length > 0 
+  ? gameVersions.map(([k, v]) => `- ✅ ${k}: ${v.topic || '功能完成'} (${v.tests || '测试通过'})`).join('\n')
+  : '- 暂无进展';
+
+const quantList = quantStages.length > 0
+  ? quantStages.map(([k, v]) => `- ✅ ${k}: ${v.topic || '阶段完成'} (${v.tests || '测试通过'})`).join('\n')
+  : '- 暂无进展';
+
+const mdReport = `# 🧬 每日进化报告 - ${today}（第${dayNum}天）
+
+## 📊 今日概览
+- **游戏开发：** ${gameVersions.length} 个版本完成，${totalGameTests} 个测试通过
+- **量化交易：** ${quantStages.length} 个阶段完成，${totalQuantTests} 个测试通过
+- **最新进展：** ${report.summary.gameDev.latestVersion} / ${report.summary.quant.latestStage}
+
+## 🎮 游戏开发进度
+${gameList}
+
+## 📈 量化交易进度
+${quantList}
+
+## 📝 学会的新东西
+${report.newLearnings.length > 0 ? report.newLearnings.map(l => `- ${l}`).join('\n') : '- 持续学习中...'}
+
+## ⚠️ 犯的错误和解决
+${report.mistakes.length > 0 ? report.mistakes.map(m => `- ${m}`).join('\n') : '- 无'}
+
+---
+**累计：** ${totalGameTests + totalQuantTests} 个测试通过 | ${gameVersions.length + quantStages.length} 个功能完成
+
+*🤖 准时推送 - 脚本自动执行*`;
+
+// 保存 markdown 版本
+const mdFilename = `${today}-day-${dayNum}.md`;
+const mdReportPath = path.join(reportsDir, mdFilename);
+fs.writeFileSync(mdReportPath, mdReport);
+console.log(`✅ 报告已保存：${mdFilename}`);
+
+// 调用 openclaw 推送消息（转义换行符和引号）
+const escapedMessage = mdReport.replace(/"/g, '\\"').replace(/\n/g, '\\n');
+const targetUser = 'ou_da9e6da7040815fb26ecbab65b3cb75d'; // 小红的用户 ID
+const openclawBin = '/root/.local/share/pnpm/openclaw'; // 使用完整路径
+
+try {
+  const cmd = `"${openclawBin}" message send --target "${targetUser}" --message "${escapedMessage}"`;
+  console.log('正在推送...');
+  const output = execSync(cmd, { stdio: 'pipe', encoding: 'utf-8' });
+  console.log('✅ 报告已推送到飞书');
+} catch (e) {
+  console.log('❌ 推送失败:', e.message);
+  if (e.stderr) console.log('stderr:', e.stderr.toString());
+}
 NODESCRIPT
 
 log "=== 进化报告完成 ==="
-
-# 生成 markdown 格式并推送
-node << 'PUSHSCRIPT'
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
-
-const workspace = '/root/.openclaw/workspace';
-const today = new Date().toISOString().split('T')[0];
-const reportsDir = path.join(workspace, 'data/evolution-reports');
-
-// 读取 JSON 报告
-const jsonReportPath = path.join(reportsDir, `${today}.json`);
-if (!fs.existsSync(jsonReportPath)) {
-  console.log('❌ JSON 报告不存在，无法推送');
-  process.exit(1);
-}
-
-const report = JSON.parse(fs.readFileSync(jsonReportPath, 'utf-8'));
-
-// 生成 markdown 推送内容
-const mdReport = `# 🧬 每日进化报告 - ${report.date}
-
-## 📊 今日概览
-- **学习时长：** ${report.summary?.gameDev?.totalFeatures || 0} 个功能 + ${report.summary?.quant?.completedStages?.length || 0} 个阶段
-- **测试通过：** ${report.summary?.gameDev?.totalTests || 0} + ${report.summary?.quant?.totalTests || 0}
-
-## 🎮 游戏开发
-${report.summary?.gameDev?.completedVersions?.slice(-3)?.join(' → ') || '无进展'}
-
-## 📈 量化交易
-${report.summary?.quant?.completedStages?.slice(-3)?.join(' → ') || '无进展'}
-
-## 📝 新学会的东西
-${report.newLearnings?.map(l => `- ${l}`).join('\n') || '- 无'}
-
-## ⚠️ 犯的错误
-${report.mistakes?.map(m => `- ${m}`).join('\n') || '- 无'}
-
----
-*准时推送 ✅*`;
-
-// 保存 markdown 版本
-const mdReportPath = path.join(reportsDir, `${today}-day-${report.day || 'N'}.md`);
-fs.writeFileSync(mdReportPath, mdReport);
-
-// 调用 openclaw 推送消息
-try {
-  const cmd = `openclaw message send --target "ou_da9e6da7040815fb26ecbab65b3cb75d" --message "${mdReport.replace(/\n/g, '\\n')}"`;
-  execSync(cmd, { stdio: 'inherit' });
-  console.log('✅ 报告已推送');
-} catch (e) {
-  console.log('❌ 推送失败:', e.message);
-}
-PUSHSCRIPT
