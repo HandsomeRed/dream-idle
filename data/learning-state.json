@@ -1,13 +1,13 @@
 {
   "currentSession": {
     "kind": "game-dev",
-    "startTime": "2026-03-19T05:30:00+08:00",
+    "startTime": "2026-03-19T05:45:00+08:00",
     "endTime": "2026-03-19T10:00:00+08:00",
-    "topic": "游戏开发 v0.24",
-    "subTopic": "v0.24 成就系统扩展",
+    "topic": "游戏开发 v0.25",
+    "subTopic": "v0.25 每日任务系统",
     "status": "completed",
-    "lastActivity": "2026-03-19T05:45:00.000Z",
-    "continuousLearnHours": 1.5,
+    "lastActivity": "2026-03-19T06:00:00.000Z",
+    "continuousLearnHours": 1.75,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 8,
@@ -251,6 +251,28 @@
         "按分类/类型筛选",
         "奖励领取管理"
       ]
+    },
+    "v0.25": {
+      "topic": "每日任务系统",
+      "status": "completed",
+      "startedAt": "2026-03-19T05:45:00+08:00",
+      "completedAt": "2026-03-19T06:00:00+08:00",
+      "tests": "31/31 passed",
+      "deliverables": [
+        "quests.ts - 每日任务系统核心逻辑",
+        "quests.test.ts - 单元测试（31 个测试）"
+      ],
+      "features": [
+        "每日任务（5 个/天，凌晨 5 点刷新）",
+        "每周任务（3 个/周，周一刷新）",
+        "5 任务类型（推图/爬塔/竞技场/宠物/好友）",
+        "3 难度等级（简单/中等/困难）",
+        "任务奖励（金币/经验/钻石）",
+        "活跃度系统（150 点满额）",
+        "7 档活跃度奖励",
+        "任务进度实时追踪",
+        "自动刷新机制"
+      ]
     }
   },
   "designDecisions": {
@@ -311,8 +333,8 @@
   },
   "stats": {
     "today": {
-      "learnSessions": 7,
-      "learnHours": 3.5,
+      "learnSessions": 8,
+      "learnHours": 3.75,
       "topicsCovered": [
         "v0.17 推图系统",
         "v0.19 宠物系统",
@@ -320,17 +342,18 @@
         "v0.21 爬塔玩法",
         "v0.22 竞技场系统",
         "v0.23 好友助战系统",
-        "v0.24 成就系统扩展"
+        "v0.24 成就系统扩展",
+        "v0.25 每日任务系统"
       ],
-      "testsWritten": 226,
-      "featuresImplemented": 59
+      "testsWritten": 257,
+      "featuresImplemented": 67
     },
     "total": {
-      "learnSessions": 14,
-      "learnHours": 20,
-      "topicsCovered": 16,
-      "testsWritten": 370,
-      "featuresImplemented": 93
+      "learnSessions": 15,
+      "learnHours": 20.25,
+      "topicsCovered": 17,
+      "testsWritten": 401,
+      "featuresImplemented": 101
     }
   }
 }
