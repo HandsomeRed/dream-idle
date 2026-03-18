@@ -5,9 +5,9 @@
     "endTime": "2026-03-19T10:00:00+08:00",
     "topic": "游戏开发 v0.26",
     "subTopic": "v0.26 签到系统",
-    "status": "starting",
-    "lastActivity": "2026-03-19T06:00:00.000Z",
-    "continuousLearnHours": 1.75,
+    "status": "completed",
+    "lastActivity": "2026-03-19T06:15:00.000Z",
+    "continuousLearnHours": 2,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 8,
@@ -273,6 +273,27 @@
         "任务进度实时追踪",
         "自动刷新机制"
       ]
+    },
+    "v0.26": {
+      "topic": "签到系统",
+      "status": "completed",
+      "startedAt": "2026-03-19T06:00:00+08:00",
+      "completedAt": "2026-03-19T06:15:00+08:00",
+      "tests": "34/34 passed",
+      "deliverables": [
+        "checkin.ts - 签到系统核心逻辑",
+        "checkin.test.ts - 单元测试（34 个测试）"
+      ],
+      "features": [
+        "每日签到（30 天月度表）",
+        "累计签到奖励（8 档：7/14/21/30/60/90/180/365 天）",
+        "特殊日奖励（第 7/14/21/28/30 天额外物品）",
+        "补签功能（10 钻石/天）",
+        "VIP 双倍奖励",
+        "连续签到追踪",
+        "签到日历展示",
+        "月度重置机制"
+      ]
     }
   },
   "designDecisions": {
@@ -333,8 +354,8 @@
   },
   "stats": {
     "today": {
-      "learnSessions": 8,
-      "learnHours": 3.75,
+      "learnSessions": 9,
+      "learnHours": 4,
       "topicsCovered": [
         "v0.17 推图系统",
         "v0.19 宠物系统",
@@ -343,17 +364,18 @@
         "v0.22 竞技场系统",
         "v0.23 好友助战系统",
         "v0.24 成就系统扩展",
-        "v0.25 每日任务系统"
+        "v0.25 每日任务系统",
+        "v0.26 签到系统"
       ],
-      "testsWritten": 257,
-      "featuresImplemented": 67
+      "testsWritten": 291,
+      "featuresImplemented": 75
     },
     "total": {
-      "learnSessions": 15,
-      "learnHours": 20.25,
-      "topicsCovered": 17,
-      "testsWritten": 401,
-      "featuresImplemented": 101
+      "learnSessions": 16,
+      "learnHours": 20.5,
+      "topicsCovered": 18,
+      "testsWritten": 435,
+      "featuresImplemented": 109
     }
   }
 }
