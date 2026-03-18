@@ -1,12 +1,12 @@
 {
   "currentSession": {
-    "kind": "stock-quant",
-    "startTime": "2026-03-18T10:00:00+08:00",
-    "endTime": "2026-03-18T20:00:00+08:00",
-    "topic": "量化交易 Stage 4",
-    "subTopic": "Stage 4 实盘对接准备",
+    "kind": "self-evolution",
+    "startTime": "2026-03-18T20:00:00+08:00",
+    "endTime": "2026-03-18T24:00:00+08:00",
+    "topic": "总结提升",
+    "subTopic": "每日进化报告生成",
     "status": "starting",
-    "lastActivity": "2026-03-18T10:00:00.000Z",
+    "lastActivity": "2026-03-18T20:00:00.000Z",
     "continuousLearnHours": 0,
     "breakTaken": null,
     "breakMinutes": 0,
