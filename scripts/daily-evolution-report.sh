@@ -170,6 +170,49 @@ const mdReportPath = path.join(reportsDir, mdFilename);
 fs.writeFileSync(mdReportPath, mdReport);
 console.log(`✅ 报告已保存：${mdFilename}`);
 
+// 🔄 同步进化报告到 MEMORY.md
+console.log('🔄 正在同步到 MEMORY.md...');
+try {
+  let memoryContent = fs.readFileSync(memoryPath, 'utf-8');
+  
+  // 更新最后更新时间
+  memoryContent = memoryContent.replace(
+    /\*\*最后更新：\*\* \d{4}-\d{2}-\d{2} .*/,
+    `**最后更新：** ${today} (${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}) - 第${dayNum}天完成`
+  );
+  
+  // 更新自我进化进度
+  const totalTests = totalGameTests + totalQuantTests;
+  const totalFeatures = gameVersions.length + quantStages.length;
+  const learningState = JSON.parse(fs.readFileSync(learningStatePath, 'utf-8'));
+  const totalHours = learningState.totalLearningHours || (dayNum * 5); // 估算
+  memoryContent = memoryContent.replace(
+    /进度：第 \d+ 天完成，累计 \d+ 测试\/\d+ 功能\/[~\d.]+小时/,
+    `进度：第${dayNum}天完成，累计${totalTests}测试/${totalFeatures}功能/${totalHours.toFixed(1)}小时`
+  );
+  
+  // 检查是否已有今日记录，避免重复
+  const todaySection = `### 第${dayNum}天（${today}）`;
+  if (!memoryContent.includes(todaySection)) {
+    // 插入到"## 📅 近期进化记录"之后
+    const newSection = `
+${todaySection}
+- **游戏开发：** ${gameVersions.length > 0 ? gameVersions[gameVersions.length-1][0] : '待开始'} ${gameVersions.length > 0 ? '✅' : '⏳'}
+- **量化交易：** ${quantStages.length > 0 ? quantStages[quantStages.length-1][0] : '待开始'} ${quantStages.length > 0 ? '✅' : '⏳'}
+- **测试通过：** ${totalTests}个 | **功能完成：** ${totalFeatures}个
+`;
+    memoryContent = memoryContent.replace(
+      '## 📅 近期进化记录\n',
+      `## 📅 近期进化记录\n${newSection}`
+    );
+  }
+  
+  fs.writeFileSync(memoryPath, memoryContent);
+  console.log('✅ MEMORY.md 已同步更新');
+} catch (e) {
+  console.log('⚠️ MEMORY.md 同步失败:', e.message);
+}
+
 // 调用 openclaw 推送消息（转义换行符和引号）
 const escapedMessage = mdReport.replace(/"/g, '\\"').replace(/\n/g, '\\n');
 const targetUser = 'ou_da9e6da7040815fb26ecbab65b3cb75d'; // 小红的用户 ID

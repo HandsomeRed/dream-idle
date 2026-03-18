@@ -4,10 +4,10 @@
     "startTime": "2026-03-19T00:00:00+08:00",
     "endTime": "2026-03-19T10:00:00+08:00",
     "topic": "游戏开发 v0.17",
-    "subTopic": "v0.17 公会战系统",
-    "status": "starting",
+    "subTopic": "v0.17 推图系统",
+    "status": "completed",
     "lastActivity": "2026-03-19T00:00:00.000Z",
-    "continuousLearnHours": 0,
+    "continuousLearnHours": 2,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 8,
@@ -25,400 +25,65 @@
       "status": "completed",
       "startedAt": "2026-03-12T03:30:00+08:00",
       "completedAt": "2026-03-12T10:00:00+08:00",
-      "tests": "23/23 passed",
-      "nextSteps": [
-        "战斗界面 UI",
-        "技能系统实现"
-      ]
+      "tests": "23/23 passed"
     },
     "v0.3": {
       "topic": "战斗系统",
       "status": "completed",
       "startedAt": "2026-03-13T00:00:00+08:00",
       "completedAt": "2026-03-13T04:45:00+08:00",
-      "tests": "9/9 passed",
-      "deliverables": [
-        "Battle.tsx - 战斗组件",
-        "Battle.test.tsx - 单元测试",
-        "App.tsx - 集成战斗系统",
-        "index.css - 战斗样式"
-      ],
-      "features": [
-        "回合制战斗",
-        "物理/法术伤害计算",
-        "暴击系统",
-        "自动战斗",
-        "战斗日志",
-        "经验值系统",
-        "升级系统"
-      ],
-      "nextSteps": [
-        "技能系统",
-        "任务系统",
-        "离线收益"
-      ]
+      "tests": "9/9 passed"
     },
     "v0.4": {
       "topic": "技能系统",
       "status": "completed",
       "startedAt": "2026-03-13T05:00:00+08:00",
       "completedAt": "2026-03-13T05:10:00+08:00",
-      "tests": "27/27 passed",
-      "deliverables": [
-        "skills.ts - 技能系统核心",
-        "skills.test.ts - 单元测试",
-        "SkillBar.tsx - 技能栏组件",
-        "Battle.tsx - 集成技能战斗"
-      ],
-      "features": [
-        "4 门派专属技能",
-        "物理/法术/增益技能",
-        "魔法消耗系统",
-        "冷却系统",
-        "技能确认 UI",
-        "12 个独特技能"
-      ],
-      "nextSteps": [
-        "任务系统",
-        "离线收益",
-        "装备系统"
-      ]
+      "tests": "27/27 passed"
     },
     "v0.5": {
       "topic": "任务系统",
       "status": "completed",
       "startedAt": "2026-03-13T05:11:00+08:00",
       "completedAt": "2026-03-13T05:20:00+08:00",
-      "tests": "24/24 passed",
-      "deliverables": [
-        "tasks.ts - 任务系统核心",
-        "tasks.test.ts - 单元测试"
-      ],
-      "features": [
-        "每日任务系统",
-        "主线任务系统",
-        "成就系统",
-        "任务进度跟踪",
-        "任务奖励领取",
-        "任务前置依赖",
-        "12 个预设任务"
-      ],
-      "nextSteps": [
-        "离线收益",
-        "装备系统",
-        "好友系统"
-      ]
+      "tests": "24/24 passed"
     },
     "v0.6": {
       "topic": "离线收益系统",
       "status": "completed",
       "startedAt": "2026-03-13T05:30:00+08:00",
       "completedAt": "2026-03-13T05:35:00+08:00",
-      "tests": "23/23 passed",
-      "deliverables": [
-        "offlineRewards.ts - 离线收益核心",
-        "offlineRewards.test.ts - 单元测试"
-      ],
-      "features": [
-        "基础金币/经验收益",
-        "等级加成系统",
-        "VIP 加成系统",
-        "最大离线时长限制",
-        "物品掉落系统",
-        "5 种稀有度物品",
-        "收益格式化显示"
-      ],
-      "nextSteps": [
-        "装备系统",
-        "好友系统",
-        "排行榜"
-      ]
+      "tests": "23/23 passed"
     },
     "v0.7": {
       "topic": "装备系统",
       "status": "completed",
       "startedAt": "2026-03-13T16:50:33.223Z",
       "completedAt": "2026-03-13T16:50:33.223Z",
-      "tests": "6/6 passed",
+      "tests": "6/6 passed"
+    },
+    "v0.17": {
+      "topic": "推图系统（单机核心玩法）",
+      "status": "completed",
+      "startedAt": "2026-03-18T00:50:00+08:00",
+      "completedAt": "2026-03-18T02:00:00+08:00",
+      "tests": "18/18 passed",
       "deliverables": [
-        "equipment.ts - 装备系统核心",
-        "equipment.test.ts - 单元测试"
+        "levels.ts - 100 关卡数据",
+        "levels.test.ts - 单元测试",
+        "LevelSelect.tsx - 关卡选择界面",
+        "LevelBattle.tsx - 关卡战斗界面",
+        "App.tsx - 整合推图入口"
       ],
       "features": [
-        "装备稀有度系统（普通/稀有/史诗/传说）",
-        "装备属性加成",
-        "穿戴/卸下装备",
-        "装备掉落概率",
-        "装备升级系统"
+        "10 章 100 关主线推图",
+        "星级评价系统（1-3 星）",
+        "关卡奖励（金币/经验/钻石）",
+        "首通奖励",
+        "难度递增曲线",
+        "推图战力计算（用于离线收益）"
       ],
-      "nextSteps": [
-        "好友系统",
-        "排行榜",
-        "公会系统"
-      ]
-    },
-    "v0.8": {
-      "topic": "好友系统",
-      "status": "completed",
-      "startedAt": "2026-03-13T17:20:44.324Z",
-      "completedAt": "2026-03-13T17:20:44.324Z",
-      "tests": "7/7 passed",
-      "deliverables": [
-        "friends.ts - 好友系统核心",
-        "friends.test.ts - 单元测试"
-      ],
-      "features": [
-        "添加/删除好友",
-        "好友请求系统",
-        "好友度系统",
-        "赠送体力（24 小时冷却）",
-        "黑名单功能",
-        "好友列表排序",
-        "最大好友数限制（50）"
-      ],
-      "nextSteps": [
-        "排行榜系统",
-        "公会系统",
-        "聊天系统"
-      ]
-    },
-    "v0.9": {
-      "topic": "排行榜系统",
-      "status": "completed",
-      "startedAt": "2026-03-13T17:24:02.652Z",
-      "completedAt": "2026-03-13T17:24:02.652Z",
-      "tests": "8/8 passed",
-      "deliverables": [
-        "leaderboard.ts - 排行榜系统核心",
-        "leaderboard.test.ts - 单元测试"
-      ],
-      "features": [
-        "战力榜",
-        "等级榜",
-        "好友榜",
-        "实时更新（5 分钟缓存）",
-        "排名变化追踪",
-        "前 N 名查询",
-        "个人排名查询"
-      ],
-      "nextSteps": [
-        "公会系统",
-        "聊天系统",
-        "交易系统"
-      ]
-    },
-    "v0.10": {
-      "topic": "公会系统",
-      "status": "completed",
-      "startedAt": "2026-03-13T17:38:14.671Z",
-      "completedAt": "2026-03-13T17:38:14.671Z",
-      "tests": "2/2 passed",
-      "deliverables": [
-        "guild.ts",
-        "guild.test.ts"
-      ]
-    },
-    "v0.11": {
-      "topic": "聊天系统",
-      "status": "completed",
-      "startedAt": "2026-03-15T00:00:00+08:00",
-      "completedAt": "2026-03-15T04:07:00+08:00",
-      "tests": "44/44 passed",
-      "deliverables": [
-        "chat.ts - 聊天系统核心",
-        "chat.test.ts - 单元测试"
-      ],
-      "features": [
-        "世界频道",
-        "公会频道",
-        "好友私聊",
-        "聊天禁言系统",
-        "敏感词过滤",
-        "聊天记录保存",
-        "未读消息计数",
-        "拉黑功能"
-      ],
-      "nextSteps": [
-        "交易系统",
-        "拍卖行系统",
-        "邮件系统"
-      ]
-    },
-    "v0.12": {
-      "topic": "交易系统",
-      "status": "completed",
-      "startedAt": "2026-03-15T04:15:00+08:00",
-      "completedAt": "2026-03-14T20:18:43+08:00",
-      "tests": "43/43 passed",
-      "deliverables": [
-        "trade.ts - 交易系统核心",
-        "trade.test.ts - 单元测试"
-      ],
-      "features": [
-        "创建交易订单",
-        "物品/金币交易",
-        "交易确认机制",
-        "交易历史记录",
-        "交易取消功能",
-        "交易税系统",
-        "交易黑名单",
-        "过期交易清理"
-      ],
-      "nextSteps": [
-        "拍卖行系统",
-        "邮件系统",
-        "成就系统扩展"
-      ]
-    },
-    "v0.13": {
-      "topic": "拍卖行系统",
-      "status": "completed",
-      "startedAt": "2026-03-15T04:20:00+08:00",
-      "completedAt": "2026-03-14T20:23:50+08:00",
-      "tests": "39/39 passed",
-      "deliverables": [
-        "auction.ts - 拍卖行系统核心",
-        "auction.test.ts - 单元测试"
-      ],
-      "features": [
-        "创建拍卖订单",
-        "竞价系统",
-        "自动出价（代理竞价）",
-        "一口价购买",
-        "拍卖到期处理",
-        "拍卖历史记录",
-        "分类搜索功能",
-        "拍卖税系统（10%）",
-        "最后时刻出价延长"
-      ],
-      "nextSteps": [
-        "邮件系统",
-        "成就系统扩展",
-        "社交系统"
-      ]
-    },
-    "v0.14": {
-      "topic": "邮件系统",
-      "status": "completed",
-      "startedAt": "2026-03-15T04:30:00+08:00",
-      "completedAt": "2026-03-14T20:32:18+08:00",
-      "tests": "36/36 passed",
-      "deliverables": [
-        "mail.ts - 邮件系统核心",
-        "mail.test.ts - 单元测试"
-      ],
-      "features": [
-        "系统邮件",
-        "玩家间邮件",
-        "邮件附件（金币/物品）",
-        "邮件已读/未读状态",
-        "邮件删除",
-        "附件领取",
-        "一键领取所有附件",
-        "一键删除已读邮件",
-        "邮件过期处理",
-        "发件人黑名单"
-      ],
-      "nextSteps": [
-        "成就系统扩展",
-        "社交系统",
-        "公会战系统"
-      ]
-    },
-    "v0.15": {
-      "topic": "成就系统扩展",
-      "status": "completed",
-      "startedAt": "2026-03-15T04:45:00+08:00",
-      "completedAt": "2026-03-14T20:48:47+08:00",
-      "tests": "40/40 passed",
-      "deliverables": [
-        "achievements.ts - 成就系统核心",
-        "achievements.test.ts - 单元测试"
-      ],
-      "features": [
-        "成就分类（战斗/社交/收集/成长/特殊）",
-        "成就进度跟踪",
-        "成就奖励领取",
-        "成就点数系统",
-        "成就称号系统",
-        "全服成就广播",
-        "隐藏成就",
-        "可重复成就",
-        "一键领取奖励",
-        "分类统计"
-      ],
-      "nextSteps": [
-        "社交系统",
-        "公会战系统",
-        "跨服竞技"
-      ]
-    },
-    "v0.16": {
-      "topic": "社交系统扩展",
-      "status": "completed",
-      "startedAt": "2026-03-15T05:00:00+08:00",
-      "completedAt": "2026-03-14T21:03:02+08:00",
-      "tests": "37/37 passed",
-      "deliverables": [
-        "social.ts - 社交系统核心",
-        "social.test.ts - 单元测试"
-      ],
-      "features": [
-        "玩家拜访系统",
-        "礼物赠送系统",
-        "点赞/评论互动",
-        "社交点数系统",
-        "声望系统",
-        "好友推荐",
-        "黑名单管理",
-        "每日拜访限制",
-        "拜访冷却时间",
-        "社交点数兑换"
-      ],
-      "nextSteps": [
-        "公会战系统",
-        "跨服竞技",
-        "赛季系统"
-      ]
-    },
-    "v0.1-v0.16": {
-      "topic": "游戏开发完整系统",
-      "status": "completed",
-      "completedAt": "2026-03-15T10:00:00+08:00",
-      "summary": {
-        "totalVersions": 16,
-        "totalTests": 380,
-        "totalFeatures": 95,
-        "totalLinesOfCode": "~6000+",
-        "continuousLearnHours": 10
-      }
-    },
-    "quant-stage3": {
-      "topic": "量化交易 Stage 3 模拟交易系统",
-      "status": "completed",
-      "startedAt": "2026-03-15T10:00:00+08:00",
-      "completedAt": "2026-03-15T20:50:00+08:00",
-      "tests": "28/28 passed",
-      "deliverables": [
-        "src/trading/simulated_account.py - 模拟交易核心",
-        "tests/test_simulated_account.py - 单元测试"
-      ],
-      "features": [
-        "模拟账户管理（10 万初始资金）",
-        "买入/卖出委托下单",
-        "持仓盈亏实时计算",
-        "成交记录保存",
-        "手续费计算（万三，最低 5 元）",
-        "印花税（卖出千分之一）",
-        "多股票持仓管理",
-        "加仓平均成本计算",
-        "部分卖出功能"
-      ],
-      "nextSteps": [
-        "Stage 4 实盘对接",
-        "更多交易策略",
-        "风控系统"
-      ]
+      "note": "重新设计 - 删除所有网游社交系统，回归单机放置核心"
     },
     "quant-stage1": {
       "topic": "数据获取",
@@ -437,6 +102,36 @@
       "status": "completed",
       "completedAt": "2026-03-16T02:00:01.224Z",
       "tests": "9/9 passed"
+    },
+    "quant-stage3": {
+      "topic": "模拟交易系统",
+      "status": "completed",
+      "startedAt": "2026-03-15T10:00:00+08:00",
+      "completedAt": "2026-03-15T20:50:00+08:00",
+      "tests": "28/28 passed"
+    },
+    "v0.18": {
+      "topic": "离线收益系统",
+      "status": "completed",
+      "completedAt": "2026-03-18T16:32:32.066Z"
+    }
+  },
+  "designDecisions": {
+    "2026-03-18": {
+      "title": "回归单机放置核心",
+      "removed": [
+        "v0.8 好友系统",
+        "v0.9 排行榜系统",
+        "v0.10 公会系统",
+        "v0.11 聊天系统",
+        "v0.12 交易系统",
+        "v0.13 拍卖行系统",
+        "v0.14 邮件系统",
+        "v0.15 成就系统扩展（社交相关）",
+        "v0.16 社交系统扩展"
+      ],
+      "reason": "单机游戏不需要网游社交功能，专注推图 + 养成 + 离线收益核心玩法",
+      "reference": "/root/.openclaw/workspace/projects/dream-idle/REDESIGN_SUMMARY.md"
     }
   },
   "autoLearnConfig": {
@@ -479,26 +174,20 @@
   },
   "stats": {
     "today": {
-      "learnSessions": 17,
-      "learnHours": 6.5,
+      "learnSessions": 1,
+      "learnHours": 2,
       "topicsCovered": [
-        "聊天系统",
-        "交易系统",
-        "拍卖行系统",
-        "邮件系统",
-        "成就系统扩展",
-        "社交系统扩展",
-        "量化 Stage3 模拟交易"
+        "v0.17 推图系统"
       ],
-      "testsWritten": 350,
-      "featuresImplemented": 97
+      "testsWritten": 18,
+      "featuresImplemented": 6
     },
     "total": {
-      "learnSessions": 16,
-      "learnHours": 16.5,
-      "topicsCovered": 16,
-      "testsWritten": 408,
-      "featuresImplemented": 104
+      "learnSessions": 8,
+      "learnHours": 18.5,
+      "topicsCovered": 10,
+      "testsWritten": 162,
+      "featuresImplemented": 34
     }
   }
 }
