@@ -1,11 +1,11 @@
 {
   "currentSession": {
     "kind": "game-dev",
-    "startTime": "2026-03-19T05:15:00+08:00",
+    "startTime": "2026-03-19T05:30:00+08:00",
     "endTime": "2026-03-19T10:00:00+08:00",
-    "topic": "游戏开发 v0.23",
-    "subTopic": "v0.23 好友助战系统",
-    "status": "completed",
+    "topic": "游戏开发 v0.24",
+    "subTopic": "v0.24 成就系统扩展",
+    "status": "starting",
     "lastActivity": "2026-03-19T05:30:00.000Z",
     "continuousLearnHours": 1.25,
     "breakTaken": null,
