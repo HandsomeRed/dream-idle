@@ -1,11 +1,11 @@
 {
   "currentSession": {
     "kind": "game-dev",
-    "startTime": "2026-03-19T05:45:00+08:00",
+    "startTime": "2026-03-19T06:00:00+08:00",
     "endTime": "2026-03-19T10:00:00+08:00",
-    "topic": "游戏开发 v0.25",
-    "subTopic": "v0.25 每日任务系统",
-    "status": "completed",
+    "topic": "游戏开发 v0.26",
+    "subTopic": "v0.26 签到系统",
+    "status": "starting",
     "lastActivity": "2026-03-19T06:00:00.000Z",
     "continuousLearnHours": 1.75,
     "breakTaken": null,
