@@ -1,13 +1,13 @@
 {
   "currentSession": {
     "kind": "game-dev",
-    "startTime": "2026-03-19T04:30:00+08:00",
+    "startTime": "2026-03-19T04:45:00+08:00",
     "endTime": "2026-03-19T10:00:00+08:00",
-    "topic": "游戏开发 v0.20",
-    "subTopic": "v0.20 阵容系统",
+    "topic": "游戏开发 v0.21",
+    "subTopic": "v0.21 爬塔玩法",
     "status": "completed",
-    "lastActivity": "2026-03-19T04:45:00.000Z",
-    "continuousLearnHours": 0.5,
+    "lastActivity": "2026-03-19T05:00:00.000Z",
+    "continuousLearnHours": 0.75,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 8,
@@ -160,6 +160,28 @@
         "阵容推荐",
         "元素多样性分析"
       ]
+    },
+    "v0.21": {
+      "topic": "爬塔玩法",
+      "status": "completed",
+      "startedAt": "2026-03-19T04:45:00+08:00",
+      "completedAt": "2026-03-19T05:00:00+08:00",
+      "tests": "36/36 passed",
+      "deliverables": [
+        "tower.ts - 爬塔系统核心逻辑",
+        "tower.test.ts - 单元测试（36 个测试）"
+      ],
+      "features": [
+        "无尽爬塔（1000 层）",
+        "每层不同敌人配置",
+        "首通奖励 + 星级奖励",
+        "6 难度等级（easy-legend）",
+        "战力成长曲线（每层 +5%）",
+        "重置挑战系统",
+        "爬塔统计",
+        "智能推荐层数",
+        "批量跳过功能"
+      ]
     }
   },
   "designDecisions": {
@@ -220,22 +242,23 @@
   },
   "stats": {
     "today": {
-      "learnSessions": 3,
-      "learnHours": 2.5,
+      "learnSessions": 4,
+      "learnHours": 2.75,
       "topicsCovered": [
         "v0.17 推图系统",
         "v0.19 宠物系统",
-        "v0.20 阵容系统"
+        "v0.20 阵容系统",
+        "v0.21 爬塔玩法"
       ],
-      "testsWritten": 93,
-      "featuresImplemented": 25
+      "testsWritten": 129,
+      "featuresImplemented": 34
     },
     "total": {
-      "learnSessions": 10,
-      "learnHours": 19,
-      "topicsCovered": 12,
-      "testsWritten": 237,
-      "featuresImplemented": 59
+      "learnSessions": 11,
+      "learnHours": 19.25,
+      "topicsCovered": 13,
+      "testsWritten": 273,
+      "featuresImplemented": 68
     }
   }
 }
