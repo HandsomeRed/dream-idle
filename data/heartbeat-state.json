@@ -27,9 +27,9 @@
   "projects": {
     "dream-idle": {
       "status": "active",
-      "version": "v0.27",
-      "nextVersion": "v0.28",
-      "nextFeature": "装备强化系统"
+      "version": "v0.28",
+      "nextVersion": "v0.29",
+      "nextFeature": "待规划"
     },
     "stock-quant": {
       "status": "pending",
