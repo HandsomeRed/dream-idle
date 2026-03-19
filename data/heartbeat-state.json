@@ -27,8 +27,8 @@
   "projects": {
     "dream-idle": {
       "status": "active",
-      "version": "v0.28",
-      "nextVersion": "v0.29",
+      "version": "v0.29",
+      "nextVersion": "v0.30",
       "nextFeature": "待规划"
     },
     "stock-quant": {
