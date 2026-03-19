@@ -40,3 +40,442 @@
 .read-the-docs {
   color: #888;
 }
+
+/* 关卡选择界面 */
+.level-select-header {
+  margin-bottom: 20px;
+}
+
+.level-select-header h1 {
+  margin: 10px 0;
+}
+
+.progress-info {
+  color: #888;
+  font-size: 14px;
+}
+
+.chapter-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.chapter-tab {
+  padding: 8px 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.chapter-tab:hover {
+  border-color: #667eea;
+}
+
+.chapter-tab.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: transparent;
+}
+
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  padding: 20px 0;
+}
+
+.level-card {
+  position: relative;
+  padding: 16px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.level-card:hover:not(.locked) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-color: #667eea;
+}
+
+.level-card.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #f5f5f5;
+}
+
+.level-card.cleared {
+  border-color: #4ade80;
+  background: #f0fdf4;
+}
+
+.level-number {
+  font-size: 24px;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.level-name {
+  font-size: 12px;
+  color: #666;
+  margin: 4px 0;
+}
+
+.boss-tag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.level-stars {
+  color: #fbbf24;
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.cleared-tag {
+  font-size: 10px;
+  color: #4ade80;
+  margin-top: 4px;
+}
+
+/* 关卡战斗界面 */
+.battle-prep, .battle-fighting, .battle-result {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.battle-result.victory {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  padding: 40px;
+  border-radius: 16px;
+}
+
+.battle-result.defeat {
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  padding: 40px;
+  border-radius: 16px;
+}
+
+.enemy-info, .player-info {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.enemy-avatar, .unit-avatar {
+  font-size: 64px;
+  margin-bottom: 10px;
+}
+
+.battle-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.battle-field {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.battle-unit {
+  text-align: center;
+}
+
+.battle-unit.player .unit-avatar {
+  filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));
+}
+
+.vs-text {
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.hp-bar {
+  width: 120px;
+  height: 12px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 8px auto;
+}
+
+.hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4ade80, #22c55e);
+  transition: width 0.3s;
+}
+
+.hp-text {
+  color: white;
+  font-size: 12px;
+}
+
+.battle-log {
+  background: #1f2937;
+  color: #e5e7eb;
+  padding: 16px;
+  border-radius: 8px;
+  min-height: 100px;
+  max-height: 200px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.log-entry {
+  padding: 4px 0;
+  font-size: 14px;
+  border-bottom: 1px solid #374151;
+}
+
+.result-stats {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.result-stats p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+/* 全局颜色对比度修复 */
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+.app-container {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+h1 {
+  color: #1a202c;
+  font-weight: 800;
+}
+
+h2 {
+  color: #2d3748;
+  font-weight: 700;
+}
+
+h3 {
+  color: #4a5568;
+  font-weight: 600;
+}
+
+p {
+  color: #4a5568;
+}
+
+.subtitle {
+  color: #718096;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* 按钮颜色加深 */
+.start-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  border: none;
+}
+
+.start-button:hover {
+  background: linear-gradient(135deg, #5568d3 0%, #63408a 100%);
+}
+
+.secondary-button {
+  background: white;
+  color: #4a5568;
+  border: 2px solid #e2e8f0;
+  font-weight: 600;
+}
+
+.secondary-button:hover {
+  background: #f7fafc;
+  border-color: #cbd5e0;
+}
+
+.back-button {
+  background: #edf2f7;
+  color: #4a5568;
+  font-weight: 600;
+}
+
+.back-button:hover {
+  background: #e2e8f0;
+}
+
+/* 卡片颜色加深 */
+.character-card {
+  background: white;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.character-level {
+  color: #667eea;
+  font-weight: 700;
+}
+
+.stat-label {
+  color: #718096;
+  font-weight: 600;
+}
+
+.stat-value {
+  color: #2d3748;
+  font-weight: 700;
+}
+
+/* 菜单描述 */
+.menu-description {
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.menu-stats {
+  color: #667eea;
+  font-weight: 600;
+}
+
+/* 输入框 */
+#name-input {
+  border: 2px solid #cbd5e0;
+  color: #2d3748;
+  font-weight: 600;
+}
+
+#name-input:focus {
+  border-color: #667eea;
+}
+
+#name-input::placeholder {
+  color: #a0aec0;
+}
+
+/* 门派卡片 */
+.job-card {
+  background: white;
+  border: 2px solid #e2e8f0;
+  color: #2d3748;
+}
+
+.job-card:hover {
+  border-color: #667eea;
+}
+
+.job-card h3 {
+  color: #2d3748;
+}
+
+.job-stats span {
+  color: #4a5568;
+  font-weight: 600;
+}
+
+/* 经验条 */
+.exp-text {
+  color: #2d3748;
+  font-weight: 700;
+}
+
+/* 关卡选择 */
+.chapter-tab {
+  color: #4a5568;
+  font-weight: 600;
+}
+
+.chapter-tab.active {
+  color: white;
+}
+
+.level-number {
+  color: #667eea;
+  font-weight: 800;
+}
+
+.level-name {
+  color: #4a5568;
+  font-weight: 600;
+}
+
+.cleared-tag {
+  color: #38a169;
+  font-weight: 700;
+}
+
+/* 战斗界面 */
+.battle-header {
+  color: #2d3748;
+  font-weight: 700;
+}
+
+.unit-name {
+  color: white;
+  font-weight: 700;
+}
+
+.hp-text {
+  color: white;
+  font-weight: 700;
+}
+
+.battle-log {
+  color: #e5e7eb;
+}
+
+.log-entry {
+  color: #f3f4f6;
+  font-weight: 500;
+}
+
+/* 战斗结果 */
+.result-stats p {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+/* 进度信息 */
+.progress-info {
+  color: #4a5568;
+  font-weight: 600;
+}

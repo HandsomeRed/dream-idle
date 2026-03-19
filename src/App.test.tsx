@@ -91,7 +91,7 @@ describe('App 角色创建流程', () => {
     
     const battleButton = screen.getByTestId('battle-btn')
     expect(battleButton).toBeInTheDocument()
-    expect(battleButton).toHaveTextContent('⚔️ 去战斗')
+    expect(battleButton).toHaveTextContent('⚔️ 快速战斗')
   })
 
   test('可以从门派选择返回名字输入', () => {

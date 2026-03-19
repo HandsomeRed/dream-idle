@@ -2,7 +2,13 @@ import { useState } from 'react'
 import './App.css'
 import { UpdateLog } from './components/UpdateLog'
 import { Battle } from './components/Battle'
+import { LevelSelect } from './components/LevelSelect'
+import { LevelBattle } from './components/LevelBattle'
+import { PetList } from './components/PetList'
+import { PetGacha } from './components/PetGacha'
 import { calculateStatsAtLevel, CharacterStats } from './utils/gameStats'
+import { LevelProgress } from './utils/levels'
+import { Pet, PetGachaResult, createPet, pullGacha } from './utils/pets'
 
 // 角色类型定义
 interface Character {
@@ -16,6 +22,7 @@ interface Character {
   job: string;
   exp: number;
   maxExp: number;
+  gold: number;
 }
 
 // 门派选项
@@ -27,10 +34,14 @@ const JOBS = [
 ]
 
 function App() {
-  const [gameState, setGameState] = useState<'menu' | 'input' | 'select' | 'complete' | 'battle'>('menu')
+  const [gameState, setGameState] = useState<'menu' | 'input' | 'select' | 'complete' | 'battle' | 'levelSelect' | 'levelBattle' | 'pets' | 'petGacha'>('menu')
   const [character, setCharacter] = useState<Character | null>(null)
   const [name, setName] = useState('')
   const [battleCount, setBattleCount] = useState(0)
+  const [selectedLevelId, setSelectedLevelId] = useState<number>(1)
+  const [levelProgress, setLevelProgress] = useState<LevelProgress[]>([])
+  const [pets, setPets] = useState<Pet[]>([])
+  const [selectedPet, setSelectedPet] = useState<Pet | null>(null)
 
   // 创建角色
   const handleCreate = (job: typeof JOBS[0]) => {
@@ -45,19 +56,52 @@ function App() {
       job: job.name,
       exp: 0,
       maxExp: 100,
+      gold: 0,
     }
     setCharacter(newCharacter)
     setGameState('complete')
   }
 
-  // 开始战斗
+  // 开始战斗（快速战斗）
   const handleStartBattle = () => {
     if (character) {
       setGameState('battle')
     }
   }
 
-  // 战斗结束处理
+  // 进入推图界面
+  const handleEnterLevelSelect = () => {
+    setGameState('levelSelect')
+  }
+
+  // 进入宠物界面
+  const handleEnterPets = () => {
+    setGameState('pets')
+  }
+
+  // 进入宠物召唤
+  const handleEnterPetGacha = () => {
+    setGameState('petGacha')
+  }
+
+  // 获得宠物
+  const handleObtainPet = (results: PetGachaResult[]) => {
+    const newPets = results.map((result) => result.pet)
+    setPets((prev) => [...prev, ...newPets])
+  }
+
+  // 选择宠物
+  const handleSelectPet = (pet: Pet) => {
+    setSelectedPet(pet)
+  }
+
+  // 选择关卡
+  const handleSelectLevel = (levelId: number) => {
+    setSelectedLevelId(levelId)
+    setGameState('levelBattle')
+  }
+
+  // 战斗结束处理（快速战斗）
   const handleBattleEnd = (victory: boolean, expGained: number) => {
     if (victory && character) {
       const newExp = character.exp + expGained
@@ -96,7 +140,156 @@ function App() {
     setGameState('complete')
   }
 
-  // 战斗界面
+  // 关卡战斗结束处理
+  const handleLevelBattleEnd = (victory: boolean, expGained: number, goldGained: number, stars: number) => {
+    if (victory && character) {
+      // 更新关卡进度
+      setLevelProgress(prev => {
+        const updated = [...prev]
+        const existing = updated.find(p => p.levelId === selectedLevelId)
+        if (existing) {
+          existing.stars = Math.max(existing.stars, stars)
+          existing.cleared = true
+        } else {
+          updated.push({
+            levelId: selectedLevelId,
+            stars,
+            cleared: true,
+            bestRound: 10,
+            clearedAt: Date.now(),
+          })
+        }
+        return updated
+      })
+
+      // 更新角色资源
+      const newExp = character.exp + expGained
+      const newGold = character.gold + goldGained
+      setCharacter({
+        ...character,
+        exp: newExp,
+        gold: newGold,
+      })
+
+      // 检查升级
+      let newLevel = character.level
+      let newMaxExp = character.maxExp
+      let levelUp = false
+      
+      while (newExp >= newMaxExp) {
+        newLevel++
+        newMaxExp = Math.floor(newMaxExp * 1.5)
+        levelUp = true
+      }
+      
+      if (levelUp) {
+        const newStats = calculateStatsAtLevel(character.job, newLevel)
+        setCharacter(prev => prev ? {
+          ...prev,
+          level: newLevel,
+          maxExp: newMaxExp,
+          hp: newStats.maxHp,
+          mp: newStats.maxMp,
+          attack: newStats.attack,
+          defense: newStats.defense,
+          speed: newStats.speed,
+        } : null)
+        alert(`🎉 升级了！当前等级：Lv.${newLevel}`)
+      }
+    }
+    setGameState('levelSelect')
+  }
+
+  // 关卡选择界面
+  if (gameState === 'levelSelect' && character) {
+    return (
+      <LevelSelect
+        progress={levelProgress}
+        onSelectLevel={handleSelectLevel}
+        onBack={() => setGameState('complete')}
+      />
+    )
+  }
+
+  // 关卡战斗界面
+  if (gameState === 'levelBattle' && character) {
+    const playerStats: CharacterStats = {
+      level: character.level,
+      exp: character.exp,
+      hp: character.hp,
+      maxHp: character.hp,
+      mp: character.mp,
+      maxMp: character.mp,
+      attack: character.attack,
+      defense: character.defense,
+      speed: character.speed,
+      mag: character.attack * 0.8,
+      res: character.defense * 0.8,
+      job: character.job
+    }
+    
+    return (
+      <LevelBattle
+        levelId={selectedLevelId}
+        playerStats={playerStats}
+        playerName={character.name}
+        progress={levelProgress}
+        onBattleEnd={handleLevelBattleEnd}
+        onBack={() => setGameState('levelSelect')}
+      />
+    )
+  }
+
+  // 宠物列表界面
+  if (gameState === 'pets') {
+    return (
+      <div className="app-container">
+        <UpdateLog />
+        <div className="flex justify-between items-center mb-4">
+          <h1>🐾 宠物系统</h1>
+          <button
+            className="start-button py-2 px-4 text-sm"
+            onClick={handleEnterPetGacha}
+          >
+            🔮 召唤宠物
+          </button>
+        </div>
+        <PetList
+          pets={pets}
+          onSelectPet={handleSelectPet}
+          selectedPetId={selectedPet?.id}
+        />
+        <button
+          className="back-button mt-4"
+          onClick={() => setGameState('complete')}
+        >
+          ← 返回
+        </button>
+      </div>
+    )
+  }
+
+  // 宠物召唤界面
+  if (gameState === 'petGacha') {
+    return (
+      <div className="app-container">
+        <UpdateLog />
+        <PetGacha
+          onObtainPet={handleObtainPet}
+          normalGachaCost={1000}
+          premiumGachaCost={10000}
+        />
+        <button
+          className="back-button mt-4"
+          onClick={() => setGameState('pets')}
+        >
+          ← 返回宠物列表
+        </button>
+      </div>
+    )
+  }
+
+  // 快速战斗界面（保留原有功能）
   if (gameState === 'battle' && character) {
     const playerStats: CharacterStats = {
       level: character.level,
@@ -178,7 +371,19 @@ function App() {
               data-testid="battle-btn"
               onClick={handleStartBattle}
             >
-              ⚔️ 去战斗
+              ⚔️ 快速战斗
+            </button>
+            <button 
+              className="start-button"
+              onClick={handleEnterLevelSelect}
+            >
+              🗺️ 主线推图
+            </button>
+            <button 
+              className="start-button"
+              onClick={handleEnterPets}
+            >
+              🐾 宠物系统
             </button>
             <button 
               className="secondary-button"
