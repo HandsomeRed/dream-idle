@@ -44,7 +44,7 @@ export default function Game({ gameId, onBack }: GameProps) {
 
   useEffect(() => {
     // 连接 WebSocket
-    const wsUrl = `ws://${window.location.hostname}:3001/ws/${gameId}`
+    const wsUrl = `ws://${window.location.hostname}:3000/ws/${gameId}`
     const ws = new WebSocket(wsUrl)
 
     ws.onopen = () => {
