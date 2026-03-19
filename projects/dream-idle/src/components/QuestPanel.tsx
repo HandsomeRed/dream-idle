@@ -34,7 +34,7 @@ export const QuestPanel: React.FC<QuestPanelProps> = ({
     const result = claimQuestReward(dailyQuests, questId, isWeekly);
     if (result.success && result.rewards) {
       onQuestsUpdate(result.quests);
-      onRewardClaimed(result.rewards);
+      onRewardClaimed({ gold: result.rewards.gold, diamond: result.rewards.diamond || 0, exp: result.rewards.exp });
     } else {
       alert(result.error);
     }
@@ -45,7 +45,7 @@ export const QuestPanel: React.FC<QuestPanelProps> = ({
     const result = claimActivityReward(dailyQuests, index);
     if (result.success && result.rewards) {
       onQuestsUpdate(result.quests);
-      onRewardClaimed(result.rewards);
+      onRewardClaimed({ gold: result.rewards.gold, diamond: result.rewards.diamond || 0, exp: result.rewards.exp });
     } else {
       alert(result.error);
     }
