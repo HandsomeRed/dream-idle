@@ -1,17 +1,14 @@
 /**
- * 装备系统 - v0.7
- * 功能：装备稀有度、属性加成、穿戴/卸下、掉落概率
+ * Equipment System - v0.7
  */
 
-// 装备稀有度
 export enum Rarity {
-  Common = 'common',      // 普通
-  Rare = 'rare',          // 稀有
-  Epic = 'epic',          // 史诗
-  Legendary = 'legendary' // 传说
+  Common = 'common',
+  Rare = 'rare',
+  Epic = 'epic',
+  Legendary = 'legendary'
 }
 
-// 装备部位
 export enum Slot {
   Weapon = 'weapon',
   Armor = 'armor',
