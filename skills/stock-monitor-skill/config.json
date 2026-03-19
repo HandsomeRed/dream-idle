@@ -1,0 +1,135 @@
+{
+  "watchlist": [
+    {
+      "code": "601318",
+      "name": "中国平安",
+      "market": "sh",
+      "type": "individual",
+      "cost": 50.0,
+      "alerts": {
+        "cost_pct_above": 15.0,
+        "cost_pct_below": -12.0,
+        "change_pct_above": 4.0,
+        "change_pct_below": -5.0,
+        "volume_surge": 2.0,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    },
+    {
+      "code": "601336",
+      "name": "新华保险",
+      "market": "sh",
+      "type": "individual",
+      "cost": 50.0,
+      "alerts": {
+        "cost_pct_above": 15.0,
+        "cost_pct_below": -12.0,
+        "change_pct_above": 4.0,
+        "change_pct_below": -5.0,
+        "volume_surge": 2.0,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    },
+    {
+      "code": "601628",
+      "name": "中国人寿",
+      "market": "sh",
+      "type": "individual",
+      "cost": 40.0,
+      "alerts": {
+        "cost_pct_above": 15.0,
+        "cost_pct_below": -12.0,
+        "change_pct_above": 4.0,
+        "change_pct_below": -5.0,
+        "volume_surge": 2.0,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    },
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "market": "sh",
+      "type": "individual",
+      "cost": 15.0,
+      "alerts": {
+        "cost_pct_above": 15.0,
+        "cost_pct_below": -12.0,
+        "change_pct_above": 4.0,
+        "change_pct_below": -5.0,
+        "volume_surge": 2.0,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    },
+    {
+      "code": "601818",
+      "name": "光大银行",
+      "market": "sh",
+      "type": "individual",
+      "cost": 3.5,
+      "alerts": {
+        "cost_pct_above": 15.0,
+        "cost_pct_below": -12.0,
+        "change_pct_above": 4.0,
+        "change_pct_below": -5.0,
+        "volume_surge": 2.0,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    },
+    {
+      "code": "600150",
+      "name": "中国船舶",
+      "market": "sh",
+      "type": "individual",
+      "cost": 35.0,
+      "alerts": {
+        "cost_pct_above": 15.0,
+        "cost_pct_below": -12.0,
+        "change_pct_above": 4.0,
+        "change_pct_below": -5.0,
+        "volume_surge": 2.0,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    },
+    {
+      "code": "601186",
+      "name": "中国铁建",
+      "market": "sh",
+      "type": "individual",
+      "cost": 9.0,
+      "alerts": {
+        "cost_pct_above": 15.0,
+        "cost_pct_below": -12.0,
+        "change_pct_above": 4.0,
+        "change_pct_below": -5.0,
+        "volume_surge": 2.0,
+        "ma_monitor": true,
+        "rsi_monitor": true,
+        "gap_monitor": true,
+        "trailing_stop": true
+      }
+    }
+  ],
+  "settings": {
+    "alert_cooldown_minutes": 30,
+    "enable_feishu_notify": true,
+    "log_level": "INFO"
+  }
+}

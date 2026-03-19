@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # DreamIdle - 游戏开发项目
+  dream-idle:
+    build:
+      context: ./projects/dream-idle
+      dockerfile: Dockerfile
+    container_name: dream-idle
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./projects/dream-idle:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+    networks:
+      - learning-network
+
+  # StockQuant - 量化交易项目
+  stock-quant:
+    build:
+      context: ./projects/stock-quant
+      dockerfile: Dockerfile
+    container_name: stock-quant
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./projects/stock-quant:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    networks:
+      - learning-network
+
+networks:
+  learning-network:
+    driver: bridge
