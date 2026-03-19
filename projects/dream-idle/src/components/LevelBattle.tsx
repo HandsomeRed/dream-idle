@@ -24,11 +24,12 @@ export function LevelBattle({
   const [round, setRound] = useState(0)
   const [battleLog, setBattleLog] = useState<string[]>([])
   const [playerHP, setPlayerHP] = useState(playerStats.hp)
-  const [enemyHP, setEnemyHP] = useState(100)
   const [casualtyCount, setCasualtyCount] = useState(0)
   const [result, setResult] = useState<BattleResult | null>(null)
 
-  const maxEnemyHP = 100 * (level?.enemyLevel || 1) * 0.5
+  // 敌人血量 = 基础 100 + 等级加成 (每级 +50)
+  const maxEnemyHP = Math.floor(100 + (level?.enemyLevel || 1) * 50)
+  const [enemyHP, setEnemyHP] = useState(maxEnemyHP)
 
   // 模拟战斗
   useEffect(() => {
