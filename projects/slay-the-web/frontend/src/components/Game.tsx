@@ -44,7 +44,7 @@ export default function Game({ gameId, onBack }: GameProps) {
 
   useEffect(() => {
     // 连接 WebSocket
-    const wsUrl = `ws://${window.location.hostname}:4000/ws/${gameId}`
+    const wsUrl = `ws://${window.location.hostname}:3001/ws/${gameId}`
     const ws = new WebSocket(wsUrl)
 
     ws.onopen = () => {
@@ -105,7 +105,14 @@ export default function Game({ gameId, onBack }: GameProps) {
   if (!gameState) {
     return (
       <div className="game-container">
-        <div className="loading">加载中...</div>
+        <div className="loading">
+          <div>加载中...</div>
+          {!isConnected && (
+            <div style={{ marginTop: '20px', color: '#e94560' }}>
+              连接服务器失败，请刷新页面重试
+            </div>
+          )}
+        </div>
       </div>
     )
   }
