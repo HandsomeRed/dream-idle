@@ -4,10 +4,10 @@
     "startTime": "2026-03-20T00:00:00+08:00",
     "endTime": "2026-03-20T10:00:00+08:00",
     "topic": "游戏开发 v0.32",
-    "subTopic": "v0.32 待规划",
-    "status": "planning",
-    "lastActivity": "2026-03-20T06:45:00.000Z",
-    "continuousLearnHours": 6.75,
+    "subTopic": "v0.32 签到系统",
+    "status": "starting",
+    "lastActivity": "2026-03-20T07:00:00.000Z",
+    "continuousLearnHours": 7,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 9,
@@ -413,6 +413,30 @@
         "自动刷新机制",
         "批量购买",
         "消费统计"
+      ]
+    },
+    "v0.32": {
+      "topic": "签到系统",
+      "status": "completed",
+      "startedAt": "2026-03-20T07:00:00+08:00",
+      "completedAt": "2026-03-20T07:30:00+08:00",
+      "tests": "28/28 passed",
+      "deliverables": [
+        "checkinV2.ts - 签到系统核心逻辑",
+        "checkinV2.test.ts - 单元测试（28 个测试）"
+      ],
+      "features": [
+        "月度签到表（30 天）",
+        "每日签到奖励",
+        "特殊日奖励（第 7/14/21/28/30 天）",
+        "累计签到奖励（8 档）",
+        "连续签到追踪",
+        "最大连续签到记录",
+        "补签功能（10 钻石/天）",
+        "漏签日期管理",
+        "月度重置机制",
+        "签到日历展示",
+        "完成度统计"
       ]
     },
     "quant-stage4": {
