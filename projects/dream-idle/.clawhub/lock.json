@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "skills": {
+    "tavily-search": {
+      "version": "1.0.0",
+      "installedAt": 1773129393223
+    },
+    "summarize": {
+      "version": "1.0.0",
+      "installedAt": 1773129406271
+    },
+    "agent-browser": {
+      "version": "0.2.0",
+      "installedAt": 1773129432656
+    },
+    "find-skills": {
+      "version": "0.1.0",
+      "installedAt": 1773129449820
+    },
+    "github": {
+      "version": "1.0.0",
+      "installedAt": 1773129466332
+    },
+    "obsidian": {
+      "version": "1.0.0",
+      "installedAt": 1773129487190
+    },
+    "weather": {
+      "version": "1.0.0",
+      "installedAt": 1773129508263
+    },
+    "tencentcloud-lighthouse-skill": {
+      "version": "1.0.0",
+      "installedAt": 1773129523775
+    },
+    "tencent-docs": {
+      "version": "1.0.6",
+      "installedAt": 1773129532760
+    },
+    "tencent-cos-skill": {
+      "version": "1.0.6",
+      "installedAt": 1773129536500
+    },
+    "skill-vetting": {
+      "version": "1.1.0",
+      "installedAt": 1773249855926
+    },
+    "self-improving-agent": {
+      "version": "1.0.11",
+      "installedAt": 1773250059360
+    },
+    "using-superpowers": {
+      "version": "0.1.0",
+      "installedAt": 1773250063060
+    },
+    "frontend-design": {
+      "version": "1.0.0",
+      "installedAt": 1773250150986
+    },
+    "react-best-practices": {
+      "version": "1.0.0",
+      "installedAt": 1773250177325
+    },
+    "clawkeep": {
+      "version": "0.2.9",
+      "installedAt": 1773259670193
+    },
+    "hk-ipo-research-assistant": {
+      "version": "0.1.1",
+      "installedAt": 1773259699357
+    },
+    "openmm-grid-trading": {
+      "version": "0.1.0",
+      "installedAt": 1773259700432
+    },
+    "skillagi": {
+      "version": "1.0.0",
+      "installedAt": 1773259701574
+    },
+    "daily-ai-news": {
+      "version": "0.1.0",
+      "installedAt": 1773259706853
+    },
+    "task-orchestra": {
+      "version": "1.0.0",
+      "installedAt": 1773259707932
+    },
+    "tidb-cloud-zero": {
+      "version": "1.3.0",
+      "installedAt": 1773263649386
+    },
+    "tmux-controller": {
+      "version": "1.0.0",
+      "installedAt": 1773263650504
+    },
+    "stock-monitor-skill": {
+      "version": "0.1.0",
+      "installedAt": 1773377569064
+    },
+    "invest-analyzer": {
+      "version": "1.0.0",
+      "installedAt": 1773432293584
+    },
+    "baidu-search-openclaw": {
+      "version": "1.0.0",
+      "installedAt": 1773432361494
+    },
+    "edrawmax-skills": {
+      "version": "1.0.1",
+      "installedAt": 1773435855213
+    },
+    "trading-devbox": {
+      "version": "0.1.0",
+      "installedAt": 1773457517098
+    },
+    "aakshare": {
+      "version": "1.0.1",
+      "installedAt": 1773464713225
+    },
+    "market-data-hub": {
+      "version": "1.0.0",
+      "installedAt": 1773471872764
+    },
+    "skill-tree": {
+      "version": "1.0.0",
+      "installedAt": 1773497093165
+    },
+    "game-architect": {
+      "version": "0.1.0",
+      "installedAt": 1773608668289
+    },
+    "trading-quant": {
+      "version": "1.0.0",
+      "installedAt": 1773626686566
+    }
+  }
+}

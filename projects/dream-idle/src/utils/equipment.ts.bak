@@ -1,0 +1,188 @@
+/**
+ * Equipment System - v0.7
+ */
+
+export enum Rarity {
+  Common = 'common',
+  Rare = 'rare',
+  Epic = 'epic',
+  Legendary = 'legendary'
+}
+
+export enum Slot {
+  Weapon = 'weapon',
+  Armor = 'armor',
+  Helmet = 'helmet',
+  Accessory = 'accessory'
+}
+
+// 装备定义
+export interface Equipment {
+  id: string;
+  name: string;
+  slot: Slot;
+  rarity: Rarity;
+  baseStats: {
+    attack?: number;
+    defense?: number;
+    hp?: number;
+    mp?: number;
+    speed?: number;
+  };
+  bonusStats: {
+    attack?: number;
+    defense?: number;
+    hp?: number;
+    mp?: number;
+    speed?: number;
+  };
+  level: number;
+  exp: number;
+}
+
+// 稀有度加成倍率
+const RARITY_MULTIPLIER: Record<Rarity, number> = {
+  [Rarity.Common]: 1.0,
+  [Rarity.Rare]: 1.5,
+  [Rarity.Epic]: 2.0,
+  [Rarity.Legendary]: 3.0
+};
+
+// 掉落概率
+const DROP_RATES: Record<Rarity, number> = {
+  [Rarity.Common]: 0.60,    // 60%
+  [Rarity.Rare]: 0.30,      // 30%
+  [Rarity.Epic]: 0.09,      // 9%
+  [Rarity.Legendary]: 0.01  // 1%
+};
+
+/**
+ * 根据稀有度生成装备属性
+ */
+export function generateEquipmentStats(rarity: Rarity, level: number) {
+  const multiplier = RARITY_MULTIPLIER[rarity];
+  const baseValue = level * 5;
+  
+  return {
+    attack: Math.floor(baseValue * multiplier * 0.3),
+    defense: Math.floor(baseValue * multiplier * 0.3),
+    hp: Math.floor(baseValue * multiplier * 10),
+    mp: Math.floor(baseValue * multiplier * 5),
+    speed: Math.floor(baseValue * multiplier * 0.1)
+  };
+}
+
+/**
+ * 随机生成装备
+ */
+export function generateRandomEquipment(slot: Slot, minLevel: number = 1, maxLevel: number = 10): Equipment {
+  // 随机稀有度
+  const rand = Math.random();
+  let rarity = Rarity.Common;
+  if (rand > 0.99) rarity = Rarity.Legendary;
+  else if (rand > 0.90) rarity = Rarity.Epic;
+  else if (rand > 0.60) rarity = Rarity.Rare;
+  
+  const level = Math.floor(Math.random() * (maxLevel - minLevel + 1)) + minLevel;
+  const baseStats = generateEquipmentStats(rarity, level);
+  
+  return {
+    id: `${rarity}_${slot}_${Date.now()}`,
+    name: `${rarity} ${slot}`,
+    slot,
+    rarity,
+    baseStats,
+    bonusStats: {},
+    level,
+    exp: 0
+  };
+}
+
+/**
+ * 计算掉落装备
+ */
+export function calculateDrop(): Equipment | null {
+  const rand = Math.random();
+  if (rand > 0.70) { // 30% 概率掉落装备
+    const slots = Object.values(Slot);
+    const randomSlot = slots[Math.floor(Math.random() * slots.length)];
+    return generateRandomEquipment(randomSlot);
+  }
+  return null;
+}
+
+/**
+ * 穿戴装备
+ */
+export function equipItem(character: any, equipment: Equipment): void {
+  if (!character.equipment) character.equipment = {};
+  
+  const slot = equipment.slot;
+  if (character.equipment[slot]) {
+    // 卸下当前装备
+    unequipItem(character, slot);
+  }
+  
+  character.equipment[slot] = equipment;
+  
+  // 应用属性加成
+  applyEquipmentBonus(character, equipment);
+}
+
+/**
+ * 卸下装备
+ */
+export function unequipItem(character: any, slot: Slot): void {
+  if (character.equipment && character.equipment[slot]) {
+    const equipment = character.equipment[slot];
+    removeEquipmentBonus(character, equipment);
+    delete character.equipment[slot];
+  }
+}
+
+/**
+ * 应用装备加成
+ */
+function applyEquipmentBonus(character: any, equipment: Equipment): void {
+  const bonus = equipment.baseStats;
+  if (bonus.attack) character.attack += bonus.attack;
+  if (bonus.defense) character.defense += bonus.defense;
+  if (bonus.hp) character.hp += bonus.hp;
+  if (bonus.mp) character.mp += bonus.mp;
+  if (bonus.speed) character.speed += bonus.speed;
+}
+
+/**
+ * 移除装备加成
+ */
+function removeEquipmentBonus(character: any, equipment: Equipment): void {
+  const bonus = equipment.baseStats;
+  if (bonus.attack) character.attack -= bonus.attack;
+  if (bonus.defense) character.defense -= bonus.defense;
+  if (bonus.hp) character.hp -= bonus.hp;
+  if (bonus.mp) character.mp -= bonus.mp;
+  if (bonus.speed) character.speed -= bonus.speed;
+}
+
+/**
+ * 装备升级
+ */
+export function upgradeEquipment(equipment: Equipment, exp: number): boolean {
+  equipment.exp += exp;
+  const expToNextLevel = equipment.level * 100;
+  
+  if (equipment.exp >= expToNextLevel) {
+    equipment.level++;
+    equipment.exp -= expToNextLevel;
+    
+    // 升级后提升属性
+    const bonus = generateEquipmentStats(equipment.rarity, 1);
+    equipment.baseStats.attack = (equipment.baseStats.attack || 0) + bonus.attack;
+    equipment.baseStats.defense = (equipment.baseStats.defense || 0) + bonus.defense;
+    equipment.baseStats.hp = (equipment.baseStats.hp || 0) + bonus.hp;
+    equipment.baseStats.mp = (equipment.baseStats.mp || 0) + bonus.mp;
+    
+    return true; // 升级成功
+  }
+  return false; // 未升级
+}
