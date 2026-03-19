@@ -1,35 +1,36 @@
 {
   "lastChecks": {
-    "heartbeat": "2026-03-20T01:24:00.000Z",
+    "heartbeat": "2026-03-20T01:28:00.000Z",
     "memoryOrganize": null,
     "logCleanup": "2026-03-18T04:07:00.000Z",
     "emergencyCheck": null,
-    "autoLearn": "2026-03-20T01:24:00.000Z",
+    "autoLearn": "2026-03-20T01:28:00.000Z",
     "smartBackup": "2026-03-19T09:09:00.000Z",
     "skillInstall": "2026-03-20T00:09:00.000Z",
     "dailyReport": "2026-03-19T09:00:00.000Z",
     "dailyReportGen": "2026-03-19T09:30:00.000Z",
     "dailyEvolution": "2026-03-18T22:00:00.000Z",
     "modelHealth": "2026-03-20T00:06:00.000Z",
-    "knowledgeCapture": "2026-03-19T06:35:00.000Z"
+    "knowledgeCapture": "2026-03-20T01:28:00.000Z"
   },
   "currentStatus": {
-    "timestamp": "2026-03-20T01:24:00+08:00",
+    "timestamp": "2026-03-20T01:28:00+08:00",
     "timeSlot": "00:00-10:00",
     "topic": "游戏开发",
-    "subTopic": "Slay the Web v0.1 - 等待用户选择端口方案",
+    "subTopic": "Slay the Web v0.1 完成并部署",
     "day": 9,
-    "status": "⏳ 服务已就绪，等待用户决定：改 3000 端口 vs 继续排查 4001",
-    "lastActivity": "2026-03-20T01:24:00.000Z",
+    "status": "✅ Slay the Web v0.1 已部署到 3000 端口，可外网访问",
+    "lastActivity": "2026-03-20T01:28:00.000Z",
     "readyToContinue": true
   },
   "lastReportSent": "2026-03-19",
   "projects": {
     "slay-the-web": {
-      "status": "pending_user_decision",
+      "status": "deployed",
       "version": "v0.1",
-      "issue": "4001 端口外网不通，安全组配置正确但可能被网络 ACL 阻止",
-      "options": ["改到 3000 端口 (推荐)", "继续排查 4001"]
+      "port": 3000,
+      "accessUrl": "http://49.232.215.84:3000",
+      "features": ["战斗系统", "8 张卡牌", "敌人 AI", "WebSocket"]
     }
   }
 }
