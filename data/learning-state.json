@@ -3,11 +3,11 @@
     "kind": "game-dev",
     "startTime": "2026-03-20T00:00:00+08:00",
     "endTime": "2026-03-20T10:00:00+08:00",
-    "topic": "游戏开发 v0.33",
-    "subTopic": "v0.33 待规划",
+    "topic": "游戏开发 v0.34",
+    "subTopic": "v0.34 待规划",
     "status": "planning",
-    "lastActivity": "2026-03-20T07:15:00.000Z",
-    "continuousLearnHours": 7.25,
+    "lastActivity": "2026-03-20T07:45:00.000Z",
+    "continuousLearnHours": 7.75,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 9,
@@ -437,6 +437,31 @@
         "月度重置机制",
         "签到日历展示",
         "完成度统计"
+      ]
+    },
+    "v0.33": {
+      "topic": "邮件系统",
+      "status": "completed",
+      "startedAt": "2026-03-20T07:30:00+08:00",
+      "completedAt": "2026-03-20T08:00:00+08:00",
+      "tests": "29/29 passed",
+      "deliverables": [
+        "mail.ts - 邮件系统核心逻辑",
+        "mail.test.ts - 单元测试（29 个测试）"
+      ],
+      "features": [
+        "4 邮件类型（系统/奖励/活动/维护）",
+        "4 优先级（普通/高/紧急/低）",
+        "邮件发送/接收",
+        "奖励领取系统",
+        "一键领取所有奖励",
+        "邮件删除管理",
+        "一键删除已读",
+        "过期邮件清理",
+        "邮件锁定保护",
+        "邮箱容量管理（100 封）",
+        "自动删除机制（30 天）",
+        "邮件统计查询"
       ]
     },
     "quant-stage4": {

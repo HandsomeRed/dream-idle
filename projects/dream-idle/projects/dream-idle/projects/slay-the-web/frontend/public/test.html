@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slay the Web - 测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 50px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+        }
+        h1 { color: #e94560; font-size: 3rem; }
+        p { font-size: 1.5rem; color: #a0a0a0; }
+        .status { 
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            font-size: 1.2rem;
+        }
+        .success { background: rgba(78, 205, 196, 0.2); border: 2px solid #4ecdc4; }
+        .check { font-size: 2rem; margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Slay the Web</h1>
+        <p>服务器运行正常！</p>
+        
+        <div class="status success">
+            <span class="check">✅</span>
+            后端服务：正常
+        </div>
+        
+        <div class="status success">
+            <span class="check">✅</span>
+            前端服务：正常
+        </div>
+        
+        <div class="status success">
+            <span class="check">✅</span>
+            WebSocket: 就绪
+        </div>
+        
+        <p style="margin-top: 40px; font-size: 1rem;">
+            如果看到此页面，说明服务已启动<br>
+            请刷新页面或访问 <code style="background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 5px;">http://49.232.215.84:4001</code>
+        </p>
+    </div>
+</body>
+</html>

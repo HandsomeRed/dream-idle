@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>WebSocket 测试</title>
+    <style>
+        body { font-family: Arial; background: #1a1a2e; color: white; padding: 40px; }
+        .status { padding: 20px; margin: 20px 0; border-radius: 10px; }
+        .success { background: rgba(78, 205, 196, 0.2); border: 2px solid #4ecdc4; }
+        .error { background: rgba(233, 69, 96, 0.2); border: 2px solid #e94560; }
+        button { padding: 15px 30px; font-size: 1.2rem; background: #e94560; color: white; border: none; border-radius: 8px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🔧 WebSocket 连接测试</h1>
+    <div id="status"></div>
+    <button onclick="testWS()">测试连接</button>
+    <button onclick="location.href='/'" style="margin-left: 20px;">返回首页</button>
+    
+    <script>
+        function testWS() {
+            const status = document.getElementById('status');
+            status.innerHTML = '<div class="status">尝试连接 WebSocket...</div>';
+            
+            const gameId = 'test_' + Date.now();
+            const wsUrl = `ws://${window.location.hostname}:3000/ws/${gameId}`;
+            console.log('连接:', wsUrl);
+            
+            const ws = new WebSocket(wsUrl);
+            
+            ws.onopen = () => {
+                status.innerHTML = '<div class="status success">✅ WebSocket 连接成功！<br>服务器响应正常，可以开始游戏了！</div>';
+                setTimeout(() => window.location.href = '/', 2000);
+            };
+            
+            ws.onerror = (e) => {
+                status.innerHTML = '<div class="status error">❌ WebSocket 连接失败<br>请检查网络连接或联系管理员</div>';
+                console.error('WS Error:', e);
+            };
+            
+            ws.onclose = () => {
+                if (ws.readyState === WebSocket.CLOSED) {
+                    console.log('连接已关闭');
+                }
+            };
+        }
+        
+        // 自动测试
+        testWS();
+    </script>
+</body>
+</html>
