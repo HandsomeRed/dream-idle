@@ -3,11 +3,11 @@
     "kind": "game-dev",
     "startTime": "2026-03-20T00:00:00+08:00",
     "endTime": "2026-03-20T10:00:00+08:00",
-    "topic": "游戏开发 v0.28",
-    "subTopic": "v0.28 邮件系统单机版",
+    "topic": "游戏开发 v0.30",
+    "subTopic": "v0.30 成就系统",
     "status": "starting",
-    "lastActivity": "2026-03-20T00:00:00.000Z",
-    "continuousLearnHours": 0,
+    "lastActivity": "2026-03-20T06:00:00.000Z",
+    "continuousLearnHours": 6,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 9,
@@ -366,6 +366,30 @@
         "15 个副本关卡",
         "掉落概率系统",
         "星级奖励加成"
+      ]
+    },
+    "v0.30": {
+      "topic": "成就系统",
+      "status": "completed",
+      "startedAt": "2026-03-20T06:00:00+08:00",
+      "completedAt": "2026-03-20T06:30:00+08:00",
+      "tests": "26/26 passed",
+      "deliverables": [
+        "achievementsV2.ts - 成就系统核心逻辑",
+        "achievementsV2.test.ts - 单元测试（26 个测试）"
+      ],
+      "features": [
+        "4 成就分类（新手/进阶/大师/传奇）",
+        "7 成就类型（等级/副本/强化/宠物/爬塔/竞技场/收集）",
+        "15+ 成就项目",
+        "成就奖励（金币/钻石/称号）",
+        "成就进度追踪",
+        "奖励领取系统",
+        "称号系统（6 个称号）",
+        "称号装备/卸下",
+        "称号效果",
+        "完成度统计",
+        "隐藏成就支持"
       ]
     },
     "quant-stage4": {
