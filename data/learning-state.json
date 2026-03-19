@@ -1,16 +1,16 @@
 {
   "currentSession": {
-    "kind": "self-evolution",
-    "startTime": "2026-03-19T20:00:00+08:00",
-    "endTime": "2026-03-19T24:00:00+08:00",
-    "topic": "总结提升",
-    "subTopic": "每日进化报告",
-    "status": "completed",
-    "lastActivity": "2026-03-19T22:00:00.000Z",
-    "continuousLearnHours": 21,
+    "kind": "game-dev",
+    "startTime": "2026-03-20T00:00:00+08:00",
+    "endTime": "2026-03-20T10:00:00+08:00",
+    "topic": "游戏开发 v0.28",
+    "subTopic": "v0.28 邮件系统单机版",
+    "status": "starting",
+    "lastActivity": "2026-03-20T00:00:00.000Z",
+    "continuousLearnHours": 0,
     "breakTaken": null,
     "breakMinutes": 0,
-    "day": 8,
+    "day": 9,
     "triggeredBy": "heartbeat-cron"
   },
   "learningProgress": {
