@@ -7,6 +7,7 @@ import { LevelBattle } from './components/LevelBattle'
 import { PetList } from './components/PetList'
 import { PetGacha } from './components/PetGacha'
 import { EquipmentEnhancePanel } from './components/EquipmentEnhancePanel'
+import { DungeonPanel } from './components/DungeonPanel'
 import { calculateStatsAtLevel, CharacterStats } from './utils/gameStats'
 import { LevelProgress } from './utils/levels'
 import { Pet, PetGachaResult, createPet, pullGacha } from './utils/pets'
@@ -22,6 +23,13 @@ import {
   installGem,
   removeGem,
 } from './utils/equipmentEnhance'
+import {
+  Dungeon,
+  DungeonState,
+  DungeonReward,
+  initializeDungeonState,
+  recoverStamina,
+} from './utils/dungeons'
 
 // 角色类型定义
 interface Character {
@@ -47,7 +55,7 @@ const JOBS = [
 ]
 
 function App() {
-  const [gameState, setGameState] = useState<'menu' | 'input' | 'select' | 'complete' | 'battle' | 'levelSelect' | 'levelBattle' | 'pets' | 'petGacha' | 'equipmentEnhance'>('menu')
+  const [gameState, setGameState] = useState<'menu' | 'input' | 'select' | 'complete' | 'battle' | 'levelSelect' | 'levelBattle' | 'pets' | 'petGacha' | 'equipmentEnhance' | 'dungeon'>('menu')
   const [character, setCharacter] = useState<Character | null>(null)
   const [name, setName] = useState('')
   const [battleCount, setBattleCount] = useState(0)
@@ -69,6 +77,9 @@ function App() {
   })
   const [gemSockets, setGemSockets] = useState<GemSocket[]>(initializeGemSockets())
   const [refinementStones, setRefinementStones] = useState(20)
+  
+  // v0.29 副本系统状态
+  const [dungeonState, setDungeonState] = useState<DungeonState>(initializeDungeonState())
 
   // 创建角色
   const handleCreate = (job: typeof JOBS[0]) => {
@@ -114,6 +125,46 @@ function App() {
   // v0.28 进入装备强化界面
   const handleEnterEquipmentEnhance = () => {
     setGameState('equipmentEnhance')
+  }
+
+  // v0.29 进入副本界面
+  const handleEnterDungeon = () => {
+    setGameState('dungeon')
+  }
+
+  // v0.29 副本挑战处理
+  const handleChallengeDungeon = (dungeon: Dungeon, result: any) => {
+    if (!character) return
+    // 更新副本状态已经在 handle 中完成
+    setDungeonState({ ...dungeonState })
+    
+    // 处理奖励
+    if (result.success && result.rewards) {
+      let newGold = character.gold
+      result.rewards.forEach((reward: DungeonReward) => {
+        if (reward.type === 'gold') {
+          newGold += reward.amount
+        }
+      })
+      setCharacter({ ...character, gold: newGold })
+    }
+  }
+
+  // v0.29 副本扫荡处理
+  const handleSweepDungeon = (dungeon: Dungeon, result: any) => {
+    if (!character) return
+    setDungeonState({ ...dungeonState })
+    
+    // 处理扫荡奖励
+    if (result.success && result.totalRewards) {
+      let newGold = character.gold
+      result.totalRewards.forEach((reward: DungeonReward) => {
+        if (reward.type === 'gold') {
+          newGold += reward.amount
+        }
+      })
+      setCharacter({ ...character, gold: newGold })
+    }
   }
 
   // 获得宠物
@@ -405,6 +456,23 @@ function App() {
     )
   }
 
+  // v0.29 副本界面
+  if (gameState === 'dungeon' && character) {
+    const playerPower = character.attack + character.defense + character.speed + (character.hp / 10)
+    return (
+      <div className="app-container">
+        <DungeonPanel
+          playerLevel={character.level}
+          playerPower={Math.floor(playerPower)}
+          dungeonState={dungeonState}
+          onChallenge={handleChallengeDungeon}
+          onSweep={handleSweepDungeon}
+          onClose={() => setGameState('complete')}
+        />
+      </div>
+    )
+  }
+
   // 快速战斗界面（保留原有功能）
   if (gameState === 'battle' && character) {
     const playerStats: CharacterStats = {
@@ -506,6 +574,12 @@ function App() {
               onClick={handleEnterEquipmentEnhance}
             >
               🔨 装备强化
+            </button>
+            <button 
+              className="start-button"
+              onClick={handleEnterDungeon}
+            >
+              🏰 副本系统
             </button>
             <button 
               className="secondary-button"
