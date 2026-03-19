@@ -1,36 +1,37 @@
 {
   "lastChecks": {
-    "heartbeat": "2026-03-20T01:28:00.000Z",
+    "heartbeat": "2026-03-20T01:40:00.000Z",
     "memoryOrganize": null,
     "logCleanup": "2026-03-18T04:07:00.000Z",
     "emergencyCheck": null,
-    "autoLearn": "2026-03-20T01:28:00.000Z",
+    "autoLearn": "2026-03-20T01:40:00.000Z",
     "smartBackup": "2026-03-19T09:09:00.000Z",
     "skillInstall": "2026-03-20T00:09:00.000Z",
     "dailyReport": "2026-03-19T09:00:00.000Z",
     "dailyReportGen": "2026-03-19T09:30:00.000Z",
     "dailyEvolution": "2026-03-18T22:00:00.000Z",
     "modelHealth": "2026-03-20T00:06:00.000Z",
-    "knowledgeCapture": "2026-03-20T01:28:00.000Z"
+    "knowledgeCapture": "2026-03-20T01:40:00.000Z"
   },
   "currentStatus": {
-    "timestamp": "2026-03-20T01:28:00+08:00",
+    "timestamp": "2026-03-20T01:40:00+08:00",
     "timeSlot": "00:00-10:00",
     "topic": "游戏开发",
-    "subTopic": "Slay the Web v0.1 完成并部署",
+    "subTopic": "Slay the Web v0.1 - WebSocket 已修复，等待用户测试",
     "day": 9,
-    "status": "✅ Slay the Web v0.1 已部署到 3000 端口，可外网访问",
-    "lastActivity": "2026-03-20T01:28:00.000Z",
+    "status": "✅ 后端已重启，WebSocket 正常，等待用户清除缓存后测试",
+    "lastActivity": "2026-03-20T01:40:00.000Z",
     "readyToContinue": true
   },
   "lastReportSent": "2026-03-19",
   "projects": {
     "slay-the-web": {
-      "status": "deployed",
+      "status": "ready_for_testing",
       "version": "v0.1",
       "port": 3000,
-      "accessUrl": "http://49.232.215.84:3000",
-      "features": ["战斗系统", "8 张卡牌", "敌人 AI", "WebSocket"]
+      "backendPort": 3001,
+      "backendPid": 3130310,
+      "fixes": ["WebSocket 端口改为 3001", "后端重启", "添加防缓存头"]
     }
   }
 }
