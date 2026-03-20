@@ -14,21 +14,21 @@
     "knowledgeCapture": "2026-03-20T02:35:00.000Z"
   },
   "currentStatus": {
-    "timestamp": "2026-03-21T04:45:00+08:00",
+    "timestamp": "2026-03-21T05:00:00+08:00",
     "timeSlot": "00:00-10:00",
     "topic": "游戏开发",
-    "subTopic": "v0.36 宠物进化",
+    "subTopic": "v0.37 月卡系统",
     "day": 10,
-    "status": "✅ v0.36 完成 (31 测试)，准备 v0.37",
-    "lastActivity": "2026-03-21T04:45:00.000Z",
+    "status": "✅ v0.37 完成 (26 测试)，准备 v0.38",
+    "lastActivity": "2026-03-21T05:00:00.000Z",
     "readyToContinue": true
   },
   "lastReportSent": "2026-03-20",
   "projects": {
     "dream-idle": {
       "status": "active",
-      "version": "v0.36",
-      "nextVersion": "v0.37",
+      "version": "v0.37",
+      "nextVersion": "v0.38",
       "nextFeature": "待规划"
     },
     "stock-quant": {

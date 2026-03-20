@@ -538,6 +538,29 @@
         "品质颜色区分"
       ]
     },
+    "v0.37": {
+      "topic": "月卡系统",
+      "status": "completed",
+      "startedAt": "2026-03-21T04:45:00+08:00",
+      "completedAt": "2026-03-21T05:00:00+08:00",
+      "tests": "26/26 passed",
+      "deliverables": [
+        "monthlyCard.ts - 月卡系统核心逻辑",
+        "monthlyCard.test.ts - 单元测试（26 个测试）"
+      ],
+      "features": [
+        "2 种月卡（普通/高级）",
+        "30 天有效期",
+        "每日奖励领取",
+        "立即奖励（购买时）",
+        "续购延长有效期",
+        "自然日刷新机制",
+        "过期清理",
+        "累计领取统计",
+        "剩余天数显示",
+        "每日总奖励计算"
+      ]
+    },
     "quant-stage4": {
       "topic": "券商接口抽象层",
       "status": "completed",
