@@ -490,6 +490,32 @@
         "进度条可视化"
       ]
     },
+    "v0.35": {
+      "topic": "VIP 系统",
+      "status": "completed",
+      "startedAt": "2026-03-21T04:15:00+08:00",
+      "completedAt": "2026-03-21T04:30:00+08:00",
+      "tests": "28/28 passed",
+      "deliverables": [
+        "vip.ts - VIP 系统核心逻辑",
+        "vip.test.ts - 单元测试（28 个测试）",
+        "VIPPanel.tsx - VIP UI 组件",
+        "App.tsx - 整合 VIP 入口"
+      ],
+      "features": [
+        "16 个 VIP 等级（0-15 级）",
+        "VIP 经验系统",
+        "离线收益加成（最高 +75%）",
+        "金币加成（最高 +30%）",
+        "经验加成（最高 +25%）",
+        "额外副本次数（最高 +5 次）",
+        "额外竞技场次数（最高 +3 次）",
+        "VIP 充值系统",
+        "日常活动获取 VIP 经验",
+        "特权详情展示",
+        "升级进度追踪"
+      ]
+    },
     "quant-stage4": {
       "topic": "券商接口抽象层",
       "status": "completed",
