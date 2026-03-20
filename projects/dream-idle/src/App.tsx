@@ -30,6 +30,7 @@ import {
   initializeDungeonState,
   recoverStamina,
 } from './utils/dungeons'
+import { GuidePanel } from './components/GuidePanel'
 
 // 角色类型定义
 interface Character {
@@ -80,6 +81,9 @@ function App() {
   
   // v0.29 副本系统状态
   const [dungeonState, setDungeonState] = useState<DungeonState>(initializeDungeonState())
+  
+  // v0.34 新手引导系统状态
+  const [showGuide, setShowGuide] = useState(false)
 
   // 创建角色
   const handleCreate = (job: typeof JOBS[0]) => {
@@ -668,29 +672,49 @@ function App() {
 
   // 主菜单
   return (
-    <div className="app-container">
-      <UpdateLog />
-      <h1>🎮 梦幻放置</h1>
-      <p className="subtitle">梦幻西游题材放置挂机游戏</p>
-      <div className="menu-card">
-        <p className="menu-description">
-          体验经典回合制战斗的放置版本<br/>
-          自动战斗、离线收益、轻松养成
-        </p>
-        <button
-          className="start-button"
-          data-testid="start-game-btn"
-          onClick={() => setGameState('input')}
-        >
-          创建角色
-        </button>
-        {battleCount > 0 && (
-          <p className="menu-stats">
-            已战斗：{battleCount} 场 | 当前等级：Lv.{character?.level || 1}
+    <>
+      <div className="app-container">
+        <UpdateLog />
+        <h1>🎮 梦幻放置</h1>
+        <p className="subtitle">梦幻西游题材放置挂机游戏</p>
+        <div className="menu-card">
+          <p className="menu-description">
+            体验经典回合制战斗的放置版本<br/>
+            自动战斗、离线收益、轻松养成
           </p>
-        )}
+          <button
+            className="start-button"
+            data-testid="start-game-btn"
+            onClick={() => setGameState('input')}
+          >
+            创建角色
+          </button>
+          {battleCount > 0 && (
+            <p className="menu-stats">
+              已战斗：{battleCount} 场 | 当前等级：Lv.{character?.level || 1}
+            </p>
+          )}
+        </div>
       </div>
-    </div>
+      
+      {/* v0.34 新手引导面板 */}
+      {showGuide && (
+        <GuidePanel
+          onComplete={(stepId, reward) => {
+            console.log(`引导步骤完成：${stepId}`, reward);
+            // 在这里可以添加奖励发放逻辑
+            if (character && (reward?.gold || reward?.diamond)) {
+              setCharacter({
+                ...character,
+                gold: character.gold + (reward.gold || 0),
+                // diamond 字段需要添加到 Character 接口
+              });
+            }
+          }}
+          onClose={() => setShowGuide(false)}
+        />
+      )}
+    </>
   )
 }
 
