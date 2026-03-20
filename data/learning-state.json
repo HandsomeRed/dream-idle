@@ -605,6 +605,27 @@
         "稀有度颜色区分"
       ]
     },
+    "v0.40": {
+      "topic": "限时活动系统",
+      "status": "completed",
+      "startedAt": "2026-03-21T05:30:00+08:00",
+      "completedAt": "2026-03-21T05:45:00+08:00",
+      "tests": "27/27 passed",
+      "deliverables": [
+        "activitySystem.ts - 活动系统核心逻辑",
+        "activitySystem.test.ts - 单元测试（27 个测试）"
+      ],
+      "features": [
+        "3 种活动类型（累计/登录/挑战）",
+        "活动时间管理",
+        "活动任务系统（登录/战斗/胜利/爬塔等）",
+        "活动奖励领取",
+        "活动货币/积分",
+        "活动商店（限购系统）",
+        "进度追踪",
+        "剩余时间显示"
+      ]
+    },
     "quant-stage4": {
       "topic": "券商接口抽象层",
       "status": "completed",
