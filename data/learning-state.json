@@ -464,6 +464,32 @@
         "邮件统计查询"
       ]
     },
+    "v0.34": {
+      "topic": "新手引导系统",
+      "status": "completed",
+      "startedAt": "2026-03-21T04:00:00+08:00",
+      "completedAt": "2026-03-21T04:15:00+08:00",
+      "tests": "27/27 passed",
+      "deliverables": [
+        "newbieGuide.ts - 新手引导核心逻辑",
+        "newbieGuide.test.ts - 单元测试（27 个测试）",
+        "GuidePanel.tsx - 引导 UI 组件",
+        "App.tsx - 整合新手引导入口"
+      ],
+      "features": [
+        "10 步新手引导流程",
+        "引导触发条件系统",
+        "引导完成条件系统",
+        "引导进度保存",
+        "引导跳过功能",
+        "引导禁用/启用",
+        "引导重置功能",
+        "完成度追踪",
+        "奖励系统（金币/钻石）",
+        "引导步骤列表 UI",
+        "进度条可视化"
+      ]
+    },
     "quant-stage4": {
       "topic": "券商接口抽象层",
       "status": "completed",
