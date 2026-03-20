@@ -648,6 +648,28 @@
         "技能书系统"
       ]
     },
+    "v0.42": {
+      "topic": "成就系统扩展",
+      "status": "completed",
+      "startedAt": "2026-03-21T06:00:00+08:00",
+      "completedAt": "2026-03-21T06:30:00+08:00",
+      "tests": "27/27 passed",
+      "deliverables": [
+        "achievementExtended.ts - 成就系统核心逻辑",
+        "achievementExtended.test.ts - 单元测试（27 个测试）"
+      ],
+      "features": [
+        "8 个成就分类（成长/战斗/宠物/装备/挑战/收集/社交/特殊）",
+        "22 个成就配置",
+        "成就进度追踪",
+        "成就奖励领取",
+        "成就点数统计",
+        "称号系统（获得/装备）",
+        "隐藏成就",
+        "分类完成度",
+        "进度百分比"
+      ]
+    },
     "quant-stage4": {
       "topic": "券商接口抽象层",
       "status": "completed",
