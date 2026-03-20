@@ -31,6 +31,8 @@ import {
   recoverStamina,
 } from './utils/dungeons'
 import { GuidePanel } from './components/GuidePanel'
+import { VIPPanel } from './components/VIPPanel'
+import { VIPState, initializeVIPState, loadVIPState, saveVIPState } from './utils/vip'
 
 // 角色类型定义
 interface Character {
@@ -84,6 +86,10 @@ function App() {
   
   // v0.34 新手引导系统状态
   const [showGuide, setShowGuide] = useState(false)
+  
+  // v0.35 VIP 系统状态
+  const [vipState, setVipState] = useState<VIPState>(() => loadVIPState())
+  const [showVIP, setShowVIP] = useState(false)
 
   // 创建角色
   const handleCreate = (job: typeof JOBS[0]) => {
@@ -586,6 +592,12 @@ function App() {
               🏰 副本系统
             </button>
             <button 
+              className="start-button"
+              onClick={() => setShowVIP(true)}
+            >
+              👑 VIP 特权
+            </button>
+            <button 
               className="secondary-button"
               onClick={() => setGameState('menu')}
             >
@@ -712,6 +724,17 @@ function App() {
             }
           }}
           onClose={() => setShowGuide(false)}
+        />
+      )}
+      
+      {/* v0.35 VIP 面板 */}
+      {showVIP && (
+        <VIPPanel
+          onClose={() => setShowVIP(false)}
+          onPurchase={(amount) => {
+            // 扣除钻石（需要添加 diamond 字段到 Character）
+            console.log(`购买 VIP 经验：${amount} 钻石`);
+          }}
         />
       )}
     </>
