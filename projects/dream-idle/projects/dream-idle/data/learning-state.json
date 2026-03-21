@@ -3,11 +3,11 @@
     "kind": "game-dev",
     "startTime": "2026-03-20T00:00:00+08:00",
     "endTime": "2026-03-20T10:00:00+08:00",
-    "topic": "游戏开发 v0.30",
-    "subTopic": "v0.30 成就系统",
-    "status": "starting",
-    "lastActivity": "2026-03-20T06:00:00.000Z",
-    "continuousLearnHours": 6,
+    "topic": "游戏开发 v0.33",
+    "subTopic": "v0.33 待规划",
+    "status": "planning",
+    "lastActivity": "2026-03-20T07:15:00.000Z",
+    "continuousLearnHours": 7.25,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 9,
@@ -390,6 +390,53 @@
         "称号效果",
         "完成度统计",
         "隐藏成就支持"
+      ]
+    },
+    "v0.31": {
+      "topic": "商城系统",
+      "status": "completed",
+      "startedAt": "2026-03-20T06:30:00+08:00",
+      "completedAt": "2026-03-20T07:00:00+08:00",
+      "tests": "29/29 passed",
+      "deliverables": [
+        "shop.ts - 商城系统核心逻辑",
+        "shop.test.ts - 单元测试（29 个测试）"
+      ],
+      "features": [
+        "双货币系统（金币/钻石）",
+        "5 商品类型（消耗品/材料/装备/宠物碎片/体力）",
+        "15+ 商城商品",
+        "限购系统（每日/每周/每月/永久）",
+        "打折商品",
+        "商品分类（推荐/消耗品/材料/宠物/限购）",
+        "购买记录追踪",
+        "自动刷新机制",
+        "批量购买",
+        "消费统计"
+      ]
+    },
+    "v0.32": {
+      "topic": "签到系统",
+      "status": "completed",
+      "startedAt": "2026-03-20T07:00:00+08:00",
+      "completedAt": "2026-03-20T07:30:00+08:00",
+      "tests": "28/28 passed",
+      "deliverables": [
+        "checkinV2.ts - 签到系统核心逻辑",
+        "checkinV2.test.ts - 单元测试（28 个测试）"
+      ],
+      "features": [
+        "月度签到表（30 天）",
+        "每日签到奖励",
+        "特殊日奖励（第 7/14/21/28/30 天）",
+        "累计签到奖励（8 档）",
+        "连续签到追踪",
+        "最大连续签到记录",
+        "补签功能（10 钻石/天）",
+        "漏签日期管理",
+        "月度重置机制",
+        "签到日历展示",
+        "完成度统计"
       ]
     },
     "quant-stage4": {
