@@ -739,6 +739,29 @@
         "数据导出/导入"
       ]
     },
+    "v0.46": {
+      "topic": "世界 BOSS 系统",
+      "status": "completed",
+      "startedAt": "2026-03-23T05:51:00+08:00",
+      "completedAt": "2026-03-23T06:00:00+08:00",
+      "tests": "37/37 passed",
+      "deliverables": [
+        "worldBoss.ts - 世界 BOSS 系统核心逻辑",
+        "worldBoss.test.ts - 单元测试（37 个测试）"
+      ],
+      "features": [
+        "5 个 BOSS 配置（5 难度：简单/普通/困难/噩梦/地狱）",
+        "多阶段战斗系统（P1-P5+ 激怒）",
+        "BOSS 技能系统（单体/AOE/Buff/Debuff/召唤）",
+        "多人挑战系统（最多 100 人）",
+        "伤害排行榜",
+        "排名奖励系统",
+        "BOSS 属性动态计算",
+        "阶段切换机制",
+        "限时挑战（5-20 分钟）",
+        "数据导出/导入"
+      ]
+    },
     "quant-stage4": {
       "topic": "券商接口抽象层",
       "status": "completed",
