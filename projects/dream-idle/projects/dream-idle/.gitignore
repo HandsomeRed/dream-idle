@@ -27,10 +27,13 @@ dist-ssr
 projects/dream-idle/projects/
 projects/stock-quant/projects/
 projects/slay-the-web/projects/
+projects/*/projects/
 
 # Python virtual environments
 **/venv/
 **/.venv/
+projects/**/venv/
+projects/**/.venv/
 
 # Backup files
 *.bak
