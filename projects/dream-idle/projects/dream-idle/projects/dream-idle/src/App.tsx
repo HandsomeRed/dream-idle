@@ -32,7 +32,14 @@ import {
 } from './utils/dungeons'
 import { GuidePanel } from './components/GuidePanel'
 import { VIPPanel } from './components/VIPPanel'
+import { HeroList } from './components/HeroList'
 import { VIPState, initializeVIPState, loadVIPState, saveVIPState } from './utils/vip'
+import {
+  HeroSystem,
+  createHeroSystem,
+  OwnedHero,
+  type SummonResult
+} from './utils/heroes'
 
 // 角色类型定义
 interface Character {
@@ -90,6 +97,11 @@ function App() {
   // v0.35 VIP 系统状态
   const [vipState, setVipState] = useState<VIPState>(() => loadVIPState())
   const [showVIP, setShowVIP] = useState(false)
+  
+  // v0.43 英雄收集系统状态
+  const [heroSystem] = useState<HeroSystem>(() => createHeroSystem())
+  const [showHeroes, setShowHeroes] = useState(false)
+  const [showHeroSummon, setShowHeroSummon] = useState(false)
 
   // 创建角色
   const handleCreate = (job: typeof JOBS[0]) => {
@@ -353,6 +365,50 @@ function App() {
     setGameState('levelSelect')
   }
 
+  // v0.43 进入英雄殿堂
+  const handleEnterHeroes = () => {
+    setShowHeroes(true)
+  }
+
+  // v0.43 进入英雄召唤
+  const handleEnterHeroSummon = () => {
+    setShowHeroSummon(true)
+  }
+
+  // v0.43 英雄升级
+  const handleHeroLevelUp = (heroId: string, exp: number) => {
+    const result = heroSystem.levelUpHero(heroId, exp)
+    if (!result.success) {
+      alert(result.leveledUp ? '升级成功！' : '升级失败')
+    }
+  }
+
+  // v0.43 英雄升星
+  const handleHeroStarUp = (heroId: string) => {
+    const result = heroSystem.starUpHero(heroId)
+    alert(result.message)
+  }
+
+  // v0.43 锁定/解锁英雄
+  const handleHeroToggleLock = (heroId: string) => {
+    heroSystem.toggleLock(heroId)
+    setShowHeroes(false)
+    setTimeout(() => setShowHeroes(true), 10)
+  }
+
+  // v0.43 收藏/取消收藏英雄
+  const handleHeroToggleFavorite = (heroId: string) => {
+    heroSystem.toggleFavorite(heroId)
+    setShowHeroes(false)
+    setTimeout(() => setShowHeroes(true), 10)
+  }
+
+  // v0.43 英雄召唤
+  const handleHeroSummon = (count: number) => {
+    const results = count === 1 ? [heroSystem.summonOne()] : heroSystem.summonTen()
+    return results
+  }
+
   // 关卡选择界面
   if (gameState === 'levelSelect' && character) {
     return (
@@ -598,6 +654,12 @@ function App() {
               👑 VIP 特权
             </button>
             <button 
+              className="start-button"
+              onClick={handleEnterHeroes}
+            >
+              🦸 英雄殿堂
+            </button>
+            <button 
               className="secondary-button"
               onClick={() => setGameState('menu')}
             >
@@ -735,6 +797,18 @@ function App() {
             // 扣除钻石（需要添加 diamond 字段到 Character）
             console.log(`购买 VIP 经验：${amount} 钻石`);
           }}
+        />
+      )}
+      
+      {/* v0.43 英雄殿堂面板 */}
+      {showHeroes && (
+        <HeroList
+          ownedHeroes={heroSystem.getOwnedHeroes()}
+          heroShards={new Map(heroSystem.getAllShards().map(s => [s.heroId, s.count]))}
+          onLevelUp={handleHeroLevelUp}
+          onStarUp={handleHeroStarUp}
+          onToggleLock={handleHeroToggleLock}
+          onToggleFavorite={handleHeroToggleFavorite}
         />
       )}
     </>
