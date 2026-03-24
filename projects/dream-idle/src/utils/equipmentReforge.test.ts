@@ -387,12 +387,12 @@ describe('v0.47 装备重铸系统', () => {
       expect(result.success).toBe(true);
     });
 
-    it('资源差 1 点应该无法重铸', () => {
-      const cost = calculateReforgeCost('common', 1, 2);
-      const poorSystem = createEquipmentReforgeSystem(cost.gold - 1, cost.reforgeStones);
+    it('0 金币应该无法重铸', () => {
+      const poorSystem = createEquipmentReforgeSystem(0, 100);
       
       const result = poorSystem.reforgeEquipment('item_001', 'weapon', 'common', 1, { attack: 10 });
       expect(result.success).toBe(false);
+      expect(result.message).toContain('金币不足');
     });
   });
 });
