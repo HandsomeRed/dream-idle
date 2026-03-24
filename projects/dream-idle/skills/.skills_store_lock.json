@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "skills": {
+    "skill-vetting": {
+      "name": "Skill Vetting",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=skill-vetting",
+      "source": "skillhub",
+      "version": "1.1.0"
+    },
+    "self-improving-agent": {
+      "name": "self-improving-agent",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=self-improving-agent",
+      "source": "skillhub",
+      "version": "1.0.11"
+    },
+    "using-superpowers": {
+      "name": "Using Superpowers",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=using-superpowers",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "frontend-design": {
+      "name": "Frontend Design",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=frontend-design",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "react-best-practices": {
+      "name": "React Best Practices",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=react-best-practices",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "clawkeep": {
+      "name": "Clawkeep",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=clawkeep",
+      "source": "skillhub",
+      "version": "0.2.9"
+    },
+    "hk-ipo-research-assistant": {
+      "name": "Hk Ipo Research Assistant",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=hk-ipo-research-assistant",
+      "source": "skillhub",
+      "version": "0.1.1"
+    },
+    "openmm-grid-trading": {
+      "name": "OpenMM Grid Trading",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=openmm-grid-trading",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "skillagi": {
+      "name": "Skill AGI",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=skillagi",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "daily-ai-news": {
+      "name": "Daily Ai News",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=daily-ai-news",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "task-orchestra": {
+      "name": "Task Orchestra",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=task-orchestra",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "tidb-cloud-zero": {
+      "name": "TiDB Cloud Zero",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=tidb-cloud-zero",
+      "source": "skillhub",
+      "version": "1.3.0"
+    },
+    "tmux-controller": {
+      "name": "Tmux",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=tmux-controller",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "stock-monitor-skill": {
+      "name": "Stock Monitor",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=stock-monitor-skill",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "invest-analyzer": {
+      "name": "invest-analyzer",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=invest-analyzer",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "baidu-search-openclaw": {
+      "name": "百度搜索",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=baidu-search-openclaw",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "edrawmax-skills": {
+      "name": "EdrawMax Skills",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=edrawmax-skills",
+      "source": "skillhub",
+      "version": "1.0.1"
+    },
+    "trading-devbox": {
+      "name": "Trading DevBox",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=trading-devbox",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "aakshare": {
+      "name": "AKShare",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=aakshare",
+      "source": "skillhub",
+      "version": "1.0.1"
+    },
+    "market-data-hub": {
+      "name": "Market Data Hub",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=market-data-hub",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "skill-tree": {
+      "name": "SkillTree Learning Progress Tracker",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=skill-tree",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "game-architect": {
+      "name": "Game Architect",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=game-architect",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "trading-quant": {
+      "name": "Trading Quant",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=trading-quant",
+      "source": "skillhub",
+      "version": "1.0.0"
+    }
+  }
+}
