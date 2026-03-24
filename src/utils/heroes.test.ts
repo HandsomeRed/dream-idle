@@ -321,9 +321,13 @@ describe('英雄收集系统 v0.43', () => {
       const heroId = heroes[0].heroId;
       const config = HERO_CONFIGS[heroId];
       
-      // 给大量经验直接满级
-      const maxExp = 1000000;
-      system.levelUpHero(heroId, maxExp);
+      // 给足够经验直接满级（根据英雄maxLevel动态计算）
+      const hugeExp = 1_000_000_000; // 10亿经验，确保任何稀有度都能满级
+      system.levelUpHero(heroId, hugeExp);
+      
+      // 确认已满级
+      const hero = heroes[0];
+      expect(hero.level).toBe(config.maxLevel);
       
       const result = system.levelUpHero(heroId, 1000);
       expect(result.success).toBe(false);

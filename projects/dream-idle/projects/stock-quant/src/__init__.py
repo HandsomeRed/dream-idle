@@ -1,1 +1,0 @@
-# StockQuant Source Package

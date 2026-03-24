@@ -97,7 +97,13 @@ describe('v0.25 每日任务系统', () => {
   describe('进度更新', () => {
     it('应该能更新任务进度', () => {
       const quests = createDailyQuests('player_001');
-      const questId = quests.dailyQuests[0].questId;
+      // 找一个 target > 1 的任务来测试部分进度
+      const quest = quests.dailyQuests.find((q) => {
+        const def = getQuest(q.questId);
+        return def && def.requirement.target > 1;
+      });
+      expect(quest).toBeDefined();
+      const questId = quest!.questId;
 
       const { quests: updated, newlyCompleted } = updateQuestProgress(quests, questId, 1);
       const progress = updated.dailyQuests.find((q) => q.questId === questId);

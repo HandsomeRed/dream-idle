@@ -6,6 +6,7 @@ export default {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  testPathIgnorePatterns: ['/node_modules/', '/tests/e2e'],
   transform: {
     '^.+\\.tsx?$': ['ts-jest', {
       tsconfig: {
