@@ -32,11 +32,11 @@
   "day13Started": true,
   "projects": {
     "dream-idle": {
-      "status": "developing_v0.53",
-      "version": "v0.52",
-      "nextVersion": "v0.53",
+      "status": "completed_v0.53",
+      "version": "v0.53",
+      "nextVersion": "v0.54",
       "nextFeature": "离线挂机增强",
-      "note": "v0.49-v0.52 完成 (世界地图/合成/天赋树/转生) 153 测试"
+      "note": "v0.49-v0.53 完成 5个版本 185测试"
     },
     "stock-quant": {
       "status": "stage4_blocked",
