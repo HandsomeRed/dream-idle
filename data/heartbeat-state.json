@@ -32,11 +32,11 @@
   "day13Started": true,
   "projects": {
     "dream-idle": {
-      "status": "developing_v0.54",
-      "version": "v0.53",
-      "nextVersion": "v0.54",
+      "status": "completed_v0.54",
+      "version": "v0.54",
+      "nextVersion": "v0.55",
       "nextFeature": "公告系统",
-      "note": "v0.49-v0.53 完成 5个版本 185测试"
+      "note": "v0.49-v0.54 完成 6个版本 209测试"
     },
     "stock-quant": {
       "status": "stage4_blocked",
