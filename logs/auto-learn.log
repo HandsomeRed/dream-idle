@@ -3840,3 +3840,8 @@ Test Suites: 1 passed, 1 total
   - 测试：worldMap.test.ts (48/48 通过)
   - 功能：6大区域/节点探索/传送系统/地图事件/资源采集
   - Git 提交：9b5ea13a
+[2026-03-25 00:45:00] ✅ v0.50 合成系统完成
+  - 实现：crafting.ts (13KB)
+  - 测试：crafting.test.ts (37/37 通过)
+  - 功能：12配方/5分类/批量合成/配方解锁/历史记录
+  - Git 提交：711651dd

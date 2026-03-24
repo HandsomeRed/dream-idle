@@ -18,9 +18,9 @@
     "timestamp": "2026-03-24T16:45:00.000Z",
     "timeSlot": "00:00-10:00",
     "topic": "游戏开发",
-    "subTopic": "v0.50 合成系统",
+    "subTopic": "v0.51 待定",
     "day": 14,
-    "status": "🔄 第 14 天 - 开发 v0.50 合成系统",
+    "status": "✅ v0.49-v0.50 完成 - 继续开发",
     "lastActivity": "2026-03-24T16:45:00.000Z",
     "readyToContinue": true
   },
@@ -32,11 +32,11 @@
   "day13Started": true,
   "projects": {
     "dream-idle": {
-      "status": "developing_v0.50",
-      "version": "v0.49",
-      "nextVersion": "v0.50",
+      "status": "completed_v0.50",
+      "version": "v0.50",
+      "nextVersion": "v0.51",
       "nextFeature": "合成系统",
-      "note": "v0.49 完成 - 开发 v0.50 合成系统"
+      "note": "v0.49 世界地图 + v0.50 合成系统完成"
     },
     "stock-quant": {
       "status": "stage4_blocked",
