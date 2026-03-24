@@ -23,8 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
-# Nested project copies (never track these)
-/projects/
+# Nested project copies
+projects/dream-idle/projects/
+projects/stock-quant/projects/
+projects/slay-the-web/projects/
+projects/*/projects/
 
 # Python virtual environments
 **/venv/
