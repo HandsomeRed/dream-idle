@@ -226,10 +226,33 @@ describe('v0.22 竞技场系统', () => {
     it('应该能刷新每日挑战次数', () => {
       const progress = createArenaProgress('player_001', '玩家 1');
       progress.dailyChallenges = 5;
-      progress.lastChallengeTime = Date.now() - 24 * 60 * 60 * 1000; // 24 小时前
+      // 使用固定的历史时间：2026-03-24 04:00 (刷新时间 5 点之前)
+      const lastChallenge = new Date('2026-03-24T04:00:00+08:00').getTime();
+      progress.lastChallengeTime = lastChallenge;
 
-      const refreshed = refreshDailyChallenges(progress);
-      expect(refreshed.dailyChallenges).toBe(0);
+      // 模拟当前时间：2026-03-25 06:00 (刷新后)
+      const mockNow = new Date('2026-03-25T06:00:00+08:00').getTime();
+      const OriginalDate = Date;
+      
+      // 完全替换 Date 构造函数
+      const MockDateClass = function(this: any, ...args: any[]) {
+        if (args.length === 0) {
+          return new OriginalDate(mockNow) as any;
+        }
+        return new (OriginalDate as any)(...args);
+      } as any;
+      MockDateClass.now = () => mockNow;
+      MockDateClass.parse = OriginalDate.parse.bind(OriginalDate);
+      MockDateClass.UTC = OriginalDate.UTC.bind(OriginalDate);
+      
+      (globalThis as any).Date = MockDateClass;
+      
+      try {
+        const refreshed = refreshDailyChallenges(progress);
+        expect(refreshed.dailyChallenges).toBe(0);
+      } finally {
+        (globalThis as any).Date = OriginalDate;
+      }
     });
 
     it('同一天内不应该刷新', () => {
