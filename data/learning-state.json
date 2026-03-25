@@ -453,6 +453,13 @@
       "completedAt": "2026-03-24T11:45:00+08:00",
       "tests": "39/39 passed"
     },
+    "v0.73": {
+      "topic": "羁绊系统（英雄/宠物缘分组合）",
+      "status": "completed",
+      "startedAt": "2026-03-26T04:30:00+08:00",
+      "completedAt": "2026-03-26T04:45:00+08:00",
+      "tests": "28/28 passed"
+    },
     "quant-stage1": {
       "topic": "数据获取",
       "status": "completed",
@@ -495,11 +502,11 @@
   "lastVerifiedAt": "2026-03-25T23:58:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2151,
-    "totalGameSuites": 63,
+    "totalGameTests": 2179,
+    "totalGameSuites": 64,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 2324,
-    "totalFeatures": 75
+    "totalTests": 2352,
+    "totalFeatures": 76
   }
 }
