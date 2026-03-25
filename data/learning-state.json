@@ -460,6 +460,13 @@
       "completedAt": "2026-03-26T04:45:00+08:00",
       "tests": "28/28 passed"
     },
+    "v0.74": {
+      "topic": "幻化系统（装备外观自定义）",
+      "status": "completed",
+      "startedAt": "2026-03-26T04:45:00+08:00",
+      "completedAt": "2026-03-26T05:00:00+08:00",
+      "tests": "29/29 passed"
+    },
     "quant-stage1": {
       "topic": "数据获取",
       "status": "completed",
@@ -502,11 +509,11 @@
   "lastVerifiedAt": "2026-03-25T23:58:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2179,
-    "totalGameSuites": 64,
+    "totalGameTests": 2208,
+    "totalGameSuites": 65,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 2352,
-    "totalFeatures": 76
+    "totalTests": 2381,
+    "totalFeatures": 77
   }
 }
