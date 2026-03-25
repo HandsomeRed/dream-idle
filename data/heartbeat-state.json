@@ -34,11 +34,11 @@
   "day15Started": true,
   "projects": {
     "dream-idle": {
-      "status": "completed_v0.72",
-      "version": "v0.72",
-      "nextVersion": "v0.73",
+      "status": "completed_v0.73",
+      "version": "v0.73",
+      "nextVersion": "v0.74",
       "nextFeature": "待设计",
-      "note": "v0.49-v0.72 完成 24 个版本 1019 测试 - 第 14 天爆发"
+      "note": "v0.73 羁绊系统完成 (28 测试) - 第 15 天"
     },
     "stock-quant": {
       "status": "stage3b_completed",
