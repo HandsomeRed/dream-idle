@@ -4,7 +4,7 @@
     "memoryOrganize": null,
     "logCleanup": "2026-03-18T04:07:00.000Z",
     "emergencyCheck": null,
-    "autoLearn": "2026-03-26T05:45:00.000Z",
+    "autoLearn": "2026-03-26T06:00:00.000Z",
     "smartBackup": "2026-03-26T05:04:00.000Z",
     "skillInstall": "2026-03-26T05:04:00.000Z",
     "dailyReport": "2026-03-25T22:00:00.000Z",
@@ -15,13 +15,13 @@
     "gitBackup": "2026-03-26T05:35:00.000Z"
   },
   "currentStatus": {
-    "timestamp": "2026-03-26T05:45:00.000Z",
+    "timestamp": "2026-03-26T06:00:00.000Z",
     "timeSlot": "00:00-10:00",
     "topic": "游戏开发",
-    "subTopic": "v0.77 完成 → 准备 v0.78",
+    "subTopic": "v0.78 完成 → 准备 v0.79",
     "day": 15,
-    "status": "✅ v0.77 符石系统完成 (38 测试) | 累计 2485 测试/80 功能",
-    "lastActivity": "2026-03-26T05:45:00.000Z",
+    "status": "✅ v0.78 帮派系统完成 (37 测试) | 累计 2522 测试/81 功能",
+    "lastActivity": "2026-03-26T06:00:00.000Z",
     "readyToContinue": true
   },
   "lastReportSent": "2026-03-25",
@@ -34,11 +34,11 @@
   "day15Started": true,
   "projects": {
     "dream-idle": {
-      "status": "completed_v0.77",
-      "version": "v0.77",
-      "nextVersion": "v0.78",
+      "status": "completed_v0.78",
+      "version": "v0.78",
+      "nextVersion": "v0.79",
       "nextFeature": "待设计",
-      "note": "v0.77 符石系统完成 (38 测试) - 第 15 天"
+      "note": "v0.78 帮派系统完成 (37 测试) - 第 15 天"
     },
     "stock-quant": {
       "status": "stage3b_completed",
