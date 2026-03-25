@@ -481,6 +481,13 @@
       "completedAt": "2026-03-26T05:30:00+08:00",
       "tests": "32/32 passed"
     },
+    "v0.77": {
+      "topic": "符石系统（装备镶嵌自定义）",
+      "status": "completed",
+      "startedAt": "2026-03-26T05:30:00+08:00",
+      "completedAt": "2026-03-26T05:45:00+08:00",
+      "tests": "38/38 passed"
+    },
     "quant-stage1": {
       "topic": "数据获取",
       "status": "completed",
@@ -523,11 +530,11 @@
   "lastVerifiedAt": "2026-03-25T23:58:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2274,
-    "totalGameSuites": 67,
+    "totalGameTests": 2312,
+    "totalGameSuites": 68,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 2447,
-    "totalFeatures": 79
+    "totalTests": 2485,
+    "totalFeatures": 80
   }
 }
