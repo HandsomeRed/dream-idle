@@ -1,371 +1,264 @@
-/**
- * Check-in System Tests - v0.32
- */
+// 签到系统 v2 测试 - v0.78
 
 import { describe, it, expect, beforeEach } from '@jest/globals';
 import {
-  CheckInRewardType,
-  CheckInState,
   MONTHLY_REWARDS,
-  CUMULATIVE_REWARDS,
-  CHECKIN_CONFIG,
-  initializeCheckInState,
-  getTodayCheckInDay,
-  canCheckIn,
-  checkIn,
-  makeUpCheckIn,
-  claimCumulativeReward,
-  updateMissedDays,
-  getClaimableCumulativeRewards,
-  getTodayReward,
-  getStreakProgress,
-  formatReward,
-  getCheckInCalendarData,
-  getCheckInCompletionRate,
+  MAKEUP_COST,
+  MAX_MAKEUP_DAYS,
+  createCheckinState,
+  canCheckin,
+  performCheckin,
+  getMakeupAvailableDays,
+  performMakeup,
+  getCheckinStats,
+  monthlyReset,
+  getRewardForDay,
+  getMakeupCost,
+  getTodayStr,
+  getCurrentMonth,
+  exportCheckinData,
+  importCheckinData,
+  type CheckinState,
 } from './checkinV2';
 
-describe('Check-in System - v0.32', () => {
-  
-  // ==================== 签到数据测试 ====================
-  
-  describe('Check-in Data', () => {
-    it('should have 30 days of monthly rewards', () => {
-      expect(MONTHLY_REWARDS).toHaveLength(30);
+describe('签到系统 v2 v0.78', () => {
+  let state: CheckinState;
+  let fixedNow: number;
+
+  beforeEach(() => {
+    fixedNow = new Date('2026-03-15T10:00:00+08:00').getTime();
+    state = createCheckinState('player_001', fixedNow);
+  });
+
+  // ==================== 配置测试 ====================
+  describe('配置', () => {
+    it('应有 31 天奖励', () => {
+      expect(MONTHLY_REWARDS).toHaveLength(31);
     });
 
-    it('should have unique day numbers', () => {
-      const days = MONTHLY_REWARDS.map(d => d.day);
-      const uniqueDays = new Set(days);
-      expect(days.length).toBe(uniqueDays.size);
+    it('每个奖励应有必要字段', () => {
+      MONTHLY_REWARDS.forEach(r => {
+        expect(r).toHaveProperty('day');
+        expect(r).toHaveProperty('rewards');
+        expect(r).toHaveProperty('isSpecial');
+      });
     });
 
-    it('should have cumulative rewards defined', () => {
-      expect(CUMULATIVE_REWARDS.length).toBeGreaterThan(0);
+    it('特殊奖励日应正确', () => {
+      const specialDays = MONTHLY_REWARDS.filter(r => r.isSpecial).map(r => r.day);
+      expect(specialDays).toContain(1);
+      expect(specialDays).toContain(7);
+      expect(specialDays).toContain(15);
+      expect(specialDays).toContain(28);
     });
 
-    it('should have valid config', () => {
-      expect(CHECKIN_CONFIG.makeUpCost).toBeGreaterThan(0);
-      expect(CHECKIN_CONFIG.maxMakeUpDays).toBeGreaterThan(0);
+    it('补签花费应递增', () => {
+      expect(getMakeupCost(1)).toBeLessThan(getMakeupCost(3));
+      expect(getMakeupCost(3)).toBeLessThan(getMakeupCost(7));
     });
   });
 
   // ==================== 初始化测试 ====================
-  
-  describe('Initialization', () => {
-    it('should initialize check-in state correctly', () => {
-      const state = initializeCheckInState();
-      
-      expect(state.totalCheckInDays).toBe(0);
-      expect(state.currentStreak).toBe(0);
-      expect(state.maxStreak).toBe(0);
-      expect(state.missedDays).toEqual([]);
-      expect(state.claimedCumulativeRewards).toEqual([]);
-      expect(state.lastCheckInDate).toBeUndefined();
+  describe('初始化', () => {
+    it('应创建初始状态', () => {
+      expect(state.playerId).toBe('player_001');
+      expect(state.checkedInDays).toBe(0);
+      expect(state.streak).toBe(0);
+    });
+
+    it('当前月份应正确', () => {
+      expect(state.currentMonth).toBe('2026-03');
     });
   });
 
-  // ==================== 签到条件检查测试 ====================
-  
-  describe('Check-in Condition Check', () => {
-    let state: CheckInState;
-
-    beforeEach(() => {
-      state = initializeCheckInState();
-    });
-
-    it('should allow check-in for new user', () => {
-      const result = canCheckIn(state);
+  // ==================== 签到资格测试 ====================
+  describe('签到资格', () => {
+    it('可以签到', () => {
+      const result = canCheckin(state, fixedNow);
       expect(result.can).toBe(true);
     });
 
-    it('should deny check-in if already checked in today', () => {
-      // 模拟今天已签到
-      const today = new Date();
-      state.lastCheckInDate = today.getTime();
-      
-      const result = canCheckIn(state);
+    it('已签到不能重复', () => {
+      const { state: s1 } = performCheckin(state, fixedNow);
+      const result = canCheckin(s1, fixedNow);
       expect(result.can).toBe(false);
       expect(result.reason).toContain('已签到');
     });
-
-    it('should allow check-in on next day', () => {
-      // 模拟昨天签到
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      state.lastCheckInDate = yesterday.getTime();
-      
-      const result = canCheckIn(state);
-      expect(result.can).toBe(true);
-    });
   });
 
-  // ==================== 签到流程测试 ====================
-  
-  describe('Check-in Flow', () => {
-    let state: CheckInState;
-
-    beforeEach(() => {
-      state = initializeCheckInState();
-    });
-
-    it('should check-in successfully', () => {
-      const result = checkIn(state, 1000);
-      
+  // ==================== 签到测试 ====================
+  describe('签到', () => {
+    it('应成功签到', () => {
+      const result = performCheckin(state, fixedNow);
       expect(result.success).toBe(true);
-      expect(state.totalCheckInDays).toBe(1);
-      expect(state.currentStreak).toBe(1);
-      expect(state.maxStreak).toBe(1);
-      expect(result.streak).toBe(1);
+      expect(result.day).toBe(15);
+      expect(result.rewards.length).toBeGreaterThan(0);
     });
 
-    it('should update streak correctly', () => {
-      // 第 1 天签到
-      checkIn(state, 1000);
-      expect(state.currentStreak).toBe(1);
-      
-      // 模拟第二天签到
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      state.lastCheckInDate = yesterday.getTime();
-      
-      checkIn(state, 1000);
-      expect(state.currentStreak).toBe(2);
-      expect(state.maxStreak).toBe(2);
+    it('签到应获得正确奖励', () => {
+      const result = performCheckin(state, fixedNow);
+      const expected = getRewardForDay(15);
+      expect(result.rewards).toEqual(expected?.rewards);
     });
 
-    it('should reset streak on missed day', () => {
-      // 第 1 天签到
-      checkIn(state, 1000);
-      
-      // 模拟多天后签到（中断）
-      const daysAgo = new Date();
-      daysAgo.setDate(daysAgo.getDate() - 5);
-      state.lastCheckInDate = daysAgo.getTime();
-      
-      checkIn(state, 1000);
-      expect(state.currentStreak).toBe(1);  // 重置为 1
-      expect(state.maxStreak).toBe(1);  // 保持最大值
+    it('特殊日应标记', () => {
+      const result = performCheckin(state, fixedNow);
+      expect(result.isSpecial).toBe(true);
+      expect(result.specialName).toBe('月中大奖');
     });
 
-    it('should return correct reward', () => {
-      const result = checkIn(state, 1000);
-      
-      expect(result.reward).toBeDefined();
-      expect(result.day).toBe(1);  // 第 1 天
+    it('签到应增加连续', () => {
+      const { state: s1 } = performCheckin(state, fixedNow);
+      expect(s1.streak).toBe(1);
+      expect(s1.maxStreak).toBe(1);
     });
 
-    it('should fail check-in if already checked in', () => {
-      checkIn(state, 1000);
-      const result = checkIn(state, 1000);
-      
+    it('连续签到应累计', () => {
+      let s = state;
+      for (let i = 0; i < 5; i++) {
+        const day = 10 + i;
+        const time = new Date(`2026-03-${String(day).padStart(2, '0')}T10:00:00+08:00`).getTime();
+        const result = performCheckin(s, time);
+        s = result.state;
+      }
+      expect(s.streak).toBe(5);
+      expect(s.maxStreak).toBe(5);
+    });
+
+    it('断签应重置连续', () => {
+      let s = state;
+      // 1 号签到
+      s = performCheckin(s, new Date('2026-03-01T10:00:00+08:00').getTime()).state;
+      // 3 号签到 (跳过 2 号)
+      const result = performCheckin(s, new Date('2026-03-03T10:00:00+08:00').getTime());
+      expect(result.streak).toBe(1); // 重置为 1
+    });
+  });
+
+  // ==================== 补签测试 ====================
+  describe('补签', () => {
+    it('获取可补签日期', () => {
+      // 先签到 1 号
+      const s1 = performCheckin(state, new Date('2026-03-01T10:00:00+08:00').getTime()).state;
+      // 现在是 15 号，2-14 号可补签
+      const available = getMakeupAvailableDays(s1, fixedNow);
+      expect(available.length).toBeGreaterThan(0);
+      expect(available).toContain(2);
+    });
+
+    it('补签应成功', () => {
+      let s = state;
+      s = performCheckin(s, new Date('2026-03-01T10:00:00+08:00').getTime()).state;
+      const result = performMakeup(s, [2, 3], 1000, fixedNow);
+      expect(result.success).toBe(true);
+      expect(result.totalRewards.length).toBeGreaterThan(0);
+    });
+
+    it('补签应花费钻石', () => {
+      let s = state;
+      s = performCheckin(s, new Date('2026-03-01T10:00:00+08:00').getTime()).state;
+      const result = performMakeup(s, [2, 3], 1000, fixedNow);
+      expect(result.diamondCost).toBe(100); // 2 天
+    });
+
+    it('钻石不足不能补签', () => {
+      let s = state;
+      s = performCheckin(s, new Date('2026-03-01T10:00:00+08:00').getTime()).state;
+      const result = performMakeup(s, [2, 3, 4, 5, 6, 7, 8], 100, fixedNow);
       expect(result.success).toBe(false);
-      expect(result.message).toContain('已签到');
+      expect(result.error).toContain('钻石不足');
+    });
+
+    it('不能超过最大补签天数', () => {
+      let s = state;
+      s = performCheckin(s, new Date('2026-03-01T10:00:00+08:00').getTime()).state;
+      const days = Array.from({ length: 10 }, (_, i) => i + 2);
+      const result = performMakeup(s, days, 10000, fixedNow);
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('最多补签');
     });
   });
 
-  // ==================== 累计奖励测试 ====================
-  
-  describe('Cumulative Rewards', () => {
-    let state: CheckInState;
-
-    beforeEach(() => {
-      state = initializeCheckInState();
+  // ==================== 统计测试 ====================
+  describe('统计', () => {
+    it('获取签到统计', () => {
+      const stats = getCheckinStats(state);
+      expect(stats.checkedInDays).toBe(0);
+      expect(stats.streak).toBe(0);
     });
 
-    it('should have claimable rewards after enough check-ins', () => {
-      // 模拟签到 7 次
-      for (let i = 0; i < 7; i++) {
-        if (i > 0) {
-          const yesterday = new Date();
-          yesterday.setDate(yesterday.getDate() - (7 - i));
-          state.lastCheckInDate = yesterday.getTime();
-        }
-        checkIn(state, 1000);
-      }
-      
-      const claimable = getClaimableCumulativeRewards(state);
-      expect(claimable.length).toBeGreaterThan(0);
-    });
-
-    it('should claim cumulative reward successfully', () => {
-      // 模拟签到 7 次
-      for (let i = 0; i < 7; i++) {
-        if (i > 0) {
-          const yesterday = new Date();
-          yesterday.setDate(yesterday.getDate() - (7 - i));
-          state.lastCheckInDate = yesterday.getTime();
-        }
-        checkIn(state, 1000);
-      }
-      
-      const results = claimCumulativeReward(state);
-      const reward7Days = results.find(r => r.success);
-      
-      expect(reward7Days).toBeDefined();
-      expect(reward7Days?.success).toBe(true);
-      expect(state.claimedCumulativeRewards).toContain(7);
-    });
-
-    it('should not claim same reward twice', () => {
-      // 签到并领取 7 天奖励
-      for (let i = 0; i < 7; i++) {
-        if (i > 0) {
-          const yesterday = new Date();
-          yesterday.setDate(yesterday.getDate() - (7 - i));
-          state.lastCheckInDate = yesterday.getTime();
-        }
-        checkIn(state, 1000);
-      }
-      
-      claimCumulativeReward(state);
-      
-      // 再次领取
-      const results = claimCumulativeReward(state);
-      const reward7Days = results.find(r => r.reward?.amount === 100);
-      
-      expect(reward7Days).toBeUndefined();  // 不会再有 7 天奖励
+    it('签到后统计更新', () => {
+      const { state: s1 } = performCheckin(state, fixedNow);
+      const stats = getCheckinStats(s1);
+      expect(stats.checkedInDays).toBe(1);
+      expect(stats.streak).toBe(1);
+      expect(stats.specialClaimed).toBe(1);
     });
   });
 
-  // ==================== 辅助函数测试 ====================
-  
-  describe('Helper Functions', () => {
-    let state: CheckInState;
-
-    beforeEach(() => {
-      state = initializeCheckInState();
+  // ==================== 月度重置测试 ====================
+  describe('月度重置', () => {
+    it('重置后月份更新', () => {
+      const { state: s1 } = performCheckin(state, fixedNow);
+      const nextMonth = new Date('2026-04-01T10:00:00+08:00').getTime();
+      const reset = monthlyReset(s1, nextMonth);
+      expect(reset.currentMonth).toBe('2026-04');
+      expect(reset.checkedInDays).toBe(0);
     });
 
-    it('should get today check-in day', () => {
-      const day = getTodayCheckInDay(state);
-      expect(day).toBe(1);
-    });
-
-    it('should get today reward', () => {
-      const reward = getTodayReward(state);
-      expect(reward.day).toBe(1);
-      expect(reward.reward).toBeDefined();
-    });
-
-    it('should get streak progress', () => {
-      const progress = getStreakProgress(state);
-      expect(progress.current).toBe(0);
-      expect(progress.next).toBeGreaterThan(0);
-    });
-
-    it('should format reward correctly', () => {
-      const goldReward = formatReward({ type: CheckInRewardType.Gold, amount: 1000 });
-      expect(goldReward).toBe('金币 ×1000');
-      
-      const diamondReward = formatReward({ type: CheckInRewardType.Diamond, amount: 50 });
-      expect(diamondReward).toBe('钻石 ×50');
-    });
-
-    it('should get check-in calendar data', () => {
-      const calendar = getCheckInCalendarData(state);
-      expect(calendar).toHaveLength(30);
-      
-      calendar.forEach(day => {
-        expect(day.day).toBeGreaterThan(0);
-        expect(day.day).toBeLessThanOrEqual(30);
-        expect(day.reward).toBeDefined();
-      });
-    });
-
-    it('should calculate completion rate', () => {
-      const rate = getCheckInCompletionRate(state);
-      expect(rate).toBeGreaterThanOrEqual(0);
-      expect(rate).toBeLessThanOrEqual(100);
+    it('重置后补签次数清零', () => {
+      let s = state;
+      s = performCheckin(s, new Date('2026-03-01T10:00:00+08:00').getTime()).state;
+      performMakeup(s, [2], 1000, fixedNow);
+      const nextMonth = new Date('2026-04-01T10:00:00+08:00').getTime();
+      const reset = monthlyReset(s, nextMonth);
+      expect(reset.makeupCount).toBe(0);
     });
   });
 
-  // ==================== 特殊奖励测试 ====================
-  
-  describe('Special Rewards', () => {
-    it('should have special reward days', () => {
-      const specialDays = MONTHLY_REWARDS.filter(d => d.isSpecial);
-      expect(specialDays.length).toBeGreaterThan(0);
+  // ==================== 工具函数测试 ====================
+  describe('工具函数', () => {
+    it('获取今日日期', () => {
+      const today = getTodayStr(fixedNow);
+      expect(today).toBe('2026-03-15');
     });
 
-    it('should mark day 7 as special', () => {
-      const day7 = MONTHLY_REWARDS.find(d => d.day === 7);
-      expect(day7?.isSpecial).toBe(true);
+    it('获取当前月份', () => {
+      const month = getCurrentMonth(fixedNow);
+      expect(month).toBe('2026-03');
     });
 
-    it('should mark day 30 as special', () => {
-      const day30 = MONTHLY_REWARDS.find(d => d.day === 30);
-      expect(day30?.isSpecial).toBe(true);
+    it('获取日期奖励', () => {
+      const reward = getRewardForDay(1);
+      expect(reward).toBeDefined();
+      expect(reward!.isSpecial).toBe(true);
+    });
+
+    it('获取补签花费', () => {
+      expect(getMakeupCost(1)).toBe(50);
+      expect(getMakeupCost(7)).toBe(500);
     });
   });
 
-  // ==================== 集成测试 ====================
-  
-  describe('Integration Tests', () => {
-    it('should complete full monthly cycle', () => {
-      const state = initializeCheckInState();
-      
-      // 第 1 天签到
-      checkIn(state, 1000);
-      
-      // 模拟 30 天连续签到
-      for (let i = 1; i < 30; i++) {
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        state.lastCheckInDate = yesterday.getTime();
-        checkIn(state, 1000);
-      }
-      
-      expect(state.totalCheckInDays).toBe(30);
-      expect(state.maxStreak).toBe(30);
-      
-      // 检查累计奖励
-      const claimable = getClaimableCumulativeRewards(state);
-      expect(claimable.length).toBeGreaterThan(0);
+  // ==================== 数据导出导入测试 ====================
+  describe('数据导出导入', () => {
+    it('导出应返回 JSON', () => {
+      const json = exportCheckinData(state);
+      expect(typeof json).toBe('string');
+      expect(JSON.parse(json).playerId).toBe('player_001');
     });
 
-    it('should handle monthly reset', () => {
-      const state = initializeCheckInState();
-      
-      // 签到几次
-      checkIn(state, 1000);
-      checkIn(state, 1000);
-      
-      // 模拟下个月
-      state.currentMonth = 12;
-      state.currentYear = 2025;
-      
-      // 获取今日签到天数应该重置
-      const day = getTodayCheckInDay(state);
-      expect(day).toBe(1);  // 新月从第 1 天开始
+    it('导入应还原数据', () => {
+      const { state: s1 } = performCheckin(state, fixedNow);
+      const json = exportCheckinData(s1);
+      const imported = importCheckinData(json);
+      expect(imported).toBeDefined();
+      expect(imported!.checkedInDays).toBe(1);
     });
 
-    it('should track max streak correctly', () => {
-      const state = initializeCheckInState();
-      
-      // 第 1 天签到
-      checkIn(state, 1000);
-      expect(state.currentStreak).toBe(1);
-      expect(state.maxStreak).toBe(1);
-      
-      // 模拟连续几天签到（每次把最后签到时间设为昨天）
-      for (let i = 1; i < 5; i++) {
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        state.lastCheckInDate = yesterday.getTime();
-        checkIn(state, 1000);
-      }
-      
-      expect(state.currentStreak).toBe(5);
-      expect(state.maxStreak).toBe(5);
-      
-      // 中断后重新签到（设为 10 天前）
-      const daysAgo = new Date();
-      daysAgo.setDate(daysAgo.getDate() - 10);
-      state.lastCheckInDate = daysAgo.getTime();
-      
-      checkIn(state, 1000);
-      expect(state.currentStreak).toBe(1);  // 重置为 1
-      expect(state.maxStreak).toBe(5);  // 保持最大值
+    it('无效数据应返回 null', () => {
+      expect(importCheckinData('nope')).toBeNull();
+      expect(importCheckinData('{}')).toBeNull();
     });
   });
 });

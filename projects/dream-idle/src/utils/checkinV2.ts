@@ -1,494 +1,421 @@
-/**
- * Check-in System - v0.32
- * 签到系统：每日签到、累计签到、补签功能
- */
-
-// ==================== 枚举和类型定义 ====================
+// 签到系统 v2 - v0.78
+// Check-in System Extended - 累计签到/补签/月度奖励/特殊日期
 
 /**
- * 签到奖励类型
+ * 奖励物品
  */
-export enum CheckInRewardType {
-  Gold = 'gold',
-  Diamond = 'diamond',
-  Stamina = 'stamina',
-  Item = 'item',
-}
-
-/**
- * 签到奖励
- */
-export interface CheckInReward {
-  type: CheckInRewardType;
+export interface RewardItem {
+  type: 'gold' | 'diamond' | 'exp' | 'stamina' | 'petFood' | 'petShard' | 'equipBox' | 'material' | 'artifact' | 'title' | 'summonTicket';
   amount: number;
-  itemId?: string;  // 当 type 为 item 时
+  name: string;
+  rarity?: 'common' | 'rare' | 'epic' | 'legendary';
 }
 
 /**
- * 签到日定义
+ * 签到奖励配置
  */
-export interface CheckInDay {
-  day: number;           // 第几天
-  reward: CheckInReward; // 奖励
-  isSpecial?: boolean;   // 是否特殊奖励
+export interface CheckinReward {
+  day: number;
+  rewards: RewardItem[];
+  isSpecial: boolean;
+  specialName?: string;
 }
 
 /**
- * 签到配置
+ * 月度签到配置
  */
-export interface CheckInConfig {
-  monthlyRewards: CheckInDay[];  // 月度签到表（30 天）
-  cumulativeRewards: CumulativeReward[];  // 累计签到奖励
-  makeUpCost: number;  // 补签消耗（钻石/天）
-  maxMakeUpDays: number;  // 最大补签天数
+export interface MonthlyCheckinConfig {
+  month: number; // 1-12
+  rewards: CheckinReward[];
+  bonusDays: number[]; // 额外奖励日期
 }
 
 /**
- * 累计签到奖励
+ * 签到记录
  */
-export interface CumulativeReward {
-  days: number;        // 累计天数
-  reward: CheckInReward;
-  isSpecial?: boolean; // 是否特殊奖励
+export interface CheckinRecord {
+  date: string; // YYYY-MM-DD
+  timestamp: number;
+  isMakeup: boolean; // 是否补签
 }
 
 /**
- * 玩家签到状态
+ * 签到系统状态
  */
-export interface CheckInState {
-  totalCheckInDays: number;      // 累计签到天数
-  currentStreak: number;         // 当前连续签到天数
-  maxStreak: number;             // 最大连续签到天数
-  lastCheckInDate?: number;      // 上次签到日期（时间戳）
-  missedDays: number[];          // 本月漏签日期
-  claimedCumulativeRewards: number[];  // 已领取的累计奖励天数
-  currentMonth: number;          // 当前月份
-  currentYear: number;           // 当前年份
+export interface CheckinState {
+  playerId: string;
+  /** 当前月份 */
+  currentMonth: string; // YYYY-MM
+  /** 本月已签到天数 */
+  checkedInDays: number;
+  /** 累计签到天数 */
+  totalCheckins: number;
+  /** 连续签到天数 */
+  streak: number;
+  /** 最大连续签到 */
+  maxStreak: number;
+  /** 签到记录 */
+  records: CheckinRecord[];
+  /** 已领取的日期 */
+  claimedDays: number[];
+  /** 补签次数 */
+  makeupCount: number;
+  /** 最大补签次数 */
+  maxMakeupCount: number;
+  /** 最后签到时间 */
+  lastCheckinTime: number;
 }
 
-/**
- * 签到结果
- */
-export interface CheckInResult {
-  success: boolean;
-  reward?: CheckInReward;
-  isSpecial?: boolean;
-  day?: number;
-  message: string;
-  streak?: number;
-}
+// ==================== 月度配置 ====================
 
-/**
- * 补签结果
- */
-export interface MakeUpResult {
-  success: boolean;
-  day?: number;
-  reward?: CheckInReward;
-  message: string;
-  cost?: number;
-}
-
-/**
- * 累计奖励领取结果
- */
-export interface CumulativeRewardResult {
-  success: boolean;
-  reward?: CheckInReward;
-  message: string;
-}
-
-// ==================== 常量配置 ====================
-
-/**
- * 月度签到奖励表（30 天）
- */
-export const MONTHLY_REWARDS: CheckInDay[] = [
-  { day: 1, reward: { type: CheckInRewardType.Gold, amount: 1000 } },
-  { day: 2, reward: { type: CheckInRewardType.Gold, amount: 1500 } },
-  { day: 3, reward: { type: CheckInRewardType.Stamina, amount: 30 }, isSpecial: true },
-  { day: 4, reward: { type: CheckInRewardType.Gold, amount: 2000 } },
-  { day: 5, reward: { type: CheckInRewardType.Gold, amount: 2500 } },
-  { day: 6, reward: { type: CheckInRewardType.Diamond, amount: 20 } },
-  { day: 7, reward: { type: CheckInRewardType.Diamond, amount: 50 }, isSpecial: true },
-  { day: 8, reward: { type: CheckInRewardType.Gold, amount: 3000 } },
-  { day: 9, reward: { type: CheckInRewardType.Gold, amount: 3500 } },
-  { day: 10, reward: { type: CheckInRewardType.Stamina, amount: 50 }, isSpecial: true },
-  { day: 11, reward: { type: CheckInRewardType.Gold, amount: 4000 } },
-  { day: 12, reward: { type: CheckInRewardType.Gold, amount: 4500 } },
-  { day: 13, reward: { type: CheckInRewardType.Diamond, amount: 30 } },
-  { day: 14, reward: { type: CheckInRewardType.Diamond, amount: 80 }, isSpecial: true },
-  { day: 15, reward: { type: CheckInRewardType.Gold, amount: 5000 } },
-  { day: 16, reward: { type: CheckInRewardType.Gold, amount: 5500 } },
-  { day: 17, reward: { type: CheckInRewardType.Stamina, amount: 50 } },
-  { day: 18, reward: { type: CheckInRewardType.Gold, amount: 6000 } },
-  { day: 19, reward: { type: CheckInRewardType.Gold, amount: 6500 } },
-  { day: 20, reward: { type: CheckInRewardType.Diamond, amount: 50 } },
-  { day: 21, reward: { type: CheckInRewardType.Diamond, amount: 100 }, isSpecial: true },
-  { day: 22, reward: { type: CheckInRewardType.Gold, amount: 7000 } },
-  { day: 23, reward: { type: CheckInRewardType.Gold, amount: 7500 } },
-  { day: 24, reward: { type: CheckInRewardType.Stamina, amount: 80 } },
-  { day: 25, reward: { type: CheckInRewardType.Gold, amount: 8000 } },
-  { day: 26, reward: { type: CheckInRewardType.Gold, amount: 8500 } },
-  { day: 27, reward: { type: CheckInRewardType.Diamond, amount: 60 } },
-  { day: 28, reward: { type: CheckInRewardType.Diamond, amount: 120 }, isSpecial: true },
-  { day: 29, reward: { type: CheckInRewardType.Gold, amount: 9000 } },
-  { day: 30, reward: { type: CheckInRewardType.Diamond, amount: 200 }, isSpecial: true },
+export const MONTHLY_REWARDS: CheckinReward[] = [
+  { day: 1, rewards: [{ type: 'diamond', amount: 50, name: '钻石' }], isSpecial: true, specialName: '月初奖励' },
+  { day: 2, rewards: [{ type: 'gold', amount: 2000, name: '金币' }], isSpecial: false },
+  { day: 3, rewards: [{ type: 'exp', amount: 500, name: '经验' }], isSpecial: false },
+  { day: 4, rewards: [{ type: 'stamina', amount: 30, name: '体力' }], isSpecial: false },
+  { day: 5, rewards: [{ type: 'gold', amount: 3000, name: '金币' }], isSpecial: false },
+  { day: 6, rewards: [{ type: 'exp', amount: 800, name: '经验' }], isSpecial: false },
+  { day: 7, rewards: [{ type: 'diamond', amount: 100, name: '钻石' }, { type: 'summonTicket', amount: 1, name: '召唤券' }], isSpecial: true, specialName: '周奖励' },
+  { day: 8, rewards: [{ type: 'gold', amount: 4000, name: '金币' }], isSpecial: false },
+  { day: 9, rewards: [{ type: 'exp', amount: 1000, name: '经验' }], isSpecial: false },
+  { day: 10, rewards: [{ type: 'stamina', amount: 50, name: '体力' }], isSpecial: false },
+  { day: 11, rewards: [{ type: 'gold', amount: 5000, name: '金币' }], isSpecial: false },
+  { day: 12, rewards: [{ type: 'exp', amount: 1200, name: '经验' }], isSpecial: false },
+  { day: 13, rewards: [{ type: 'diamond', amount: 80, name: '钻石' }], isSpecial: false },
+  { day: 14, rewards: [{ type: 'diamond', amount: 150, name: '钻石' }, { type: 'summonTicket', amount: 2, name: '召唤券' }], isSpecial: true, specialName: '双周奖励' },
+  { day: 15, rewards: [{ type: 'gold', amount: 10000, name: '金币' }], isSpecial: true, specialName: '月中大奖' },
+  { day: 16, rewards: [{ type: 'exp', amount: 1500, name: '经验' }], isSpecial: false },
+  { day: 17, rewards: [{ type: 'stamina', amount: 60, name: '体力' }], isSpecial: false },
+  { day: 18, rewards: [{ type: 'gold', amount: 8000, name: '金币' }], isSpecial: false },
+  { day: 19, rewards: [{ type: 'exp', amount: 1800, name: '经验' }], isSpecial: false },
+  { day: 20, rewards: [{ type: 'diamond', amount: 100, name: '钻石' }], isSpecial: false },
+  { day: 21, rewards: [{ type: 'diamond', amount: 200, name: '钻石' }, { type: 'summonTicket', amount: 3, name: '召唤券' }], isSpecial: true, specialName: '三周奖励' },
+  { day: 22, rewards: [{ type: 'gold', amount: 12000, name: '金币' }], isSpecial: false },
+  { day: 23, rewards: [{ type: 'exp', amount: 2000, name: '经验' }], isSpecial: false },
+  { day: 24, rewards: [{ type: 'stamina', amount: 80, name: '体力' }], isSpecial: false },
+  { day: 25, rewards: [{ type: 'gold', amount: 15000, name: '金币' }], isSpecial: false },
+  { day: 26, rewards: [{ type: 'exp', amount: 2500, name: '经验' }], isSpecial: false },
+  { day: 27, rewards: [{ type: 'diamond', amount: 150, name: '钻石' }], isSpecial: false },
+  { day: 28, rewards: [{ type: 'diamond', amount: 300, name: '钻石' }, { type: 'summonTicket', amount: 5, name: '召唤券' }], isSpecial: true, specialName: '满月奖励' },
+  { day: 29, rewards: [{ type: 'gold', amount: 20000, name: '金币' }], isSpecial: false },
+  { day: 30, rewards: [{ type: 'exp', amount: 3000, name: '经验' }], isSpecial: false },
+  { day: 31, rewards: [{ type: 'diamond', amount: 500, name: '钻石' }, { type: 'summonTicket', amount: 10, name: '召唤券' }], isSpecial: true, specialName: '月末大奖' },
 ];
 
-/**
- * 累计签到奖励
- */
-export const CUMULATIVE_REWARDS: CumulativeReward[] = [
-  { days: 7, reward: { type: CheckInRewardType.Diamond, amount: 100 } },
-  { days: 14, reward: { type: CheckInRewardType.Diamond, amount: 200 } },
-  { days: 21, reward: { type: CheckInRewardType.Diamond, amount: 300 } },
-  { days: 30, reward: { type: CheckInRewardType.Diamond, amount: 500 } },
-  { days: 60, reward: { type: CheckInRewardType.Diamond, amount: 1000 } },
-  { days: 90, reward: { type: CheckInRewardType.Diamond, amount: 1500 } },
-  { days: 180, reward: { type: CheckInRewardType.Diamond, amount: 3000 } },
-  { days: 365, reward: { type: CheckInRewardType.Diamond, amount: 10000 }, isSpecial: true },
-];
-
-/**
- * 签到配置
- */
-export const CHECKIN_CONFIG: CheckInConfig = {
-  monthlyRewards: MONTHLY_REWARDS,
-  cumulativeRewards: CUMULATIVE_REWARDS,
-  makeUpCost: 10,  // 每天补签消耗 10 钻石
-  maxMakeUpDays: 7,  // 最多补签 7 天
+export const MAKEUP_COST: Record<number, number> = {
+  1: 50,   // 补签 1 天花 50 钻石
+  2: 100,  // 补签 2 天花 100 钻石
+  3: 200,  // 补签 3 天花 200 钻石
+  7: 500,  // 补签 7 天花 500 钻石
 };
 
-// ==================== 签到状态管理 ====================
+export const MAX_MAKEUP_DAYS = 7; // 最多补签 7 天
 
-/**
- * 初始化签到状态
- */
-export function initializeCheckInState(): CheckInState {
-  const now = new Date();
-  return {
-    totalCheckInDays: 0,
-    currentStreak: 0,
-    maxStreak: 0,
-    lastCheckInDate: undefined,
-    missedDays: [],
-    claimedCumulativeRewards: [],
-    currentMonth: now.getMonth() + 1,
-    currentYear: now.getFullYear(),
-  };
+// ==================== 工具函数 ====================
+
+export function getNow(): number {
+  return Date.now();
 }
 
+export function getTodayStr(now?: number): string {
+  const d = new Date(now ?? getNow());
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+export function getCurrentMonth(now?: number): string {
+  const d = new Date(now ?? getNow());
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+}
+
+export function getDayOfMonth(now?: number): number {
+  const d = new Date(now ?? getNow());
+  return d.getDate();
+}
+
+export function getRewardForDay(day: number): CheckinReward | undefined {
+  return MONTHLY_REWARDS.find(r => r.day === day);
+}
+
+export function getMakeupCost(days: number): number {
+  if (days <= 0) return 0;
+  if (days <= 2) return MAKEUP_COST[days] || days * 50;
+  if (days <= 3) return MAKEUP_COST[3];
+  return MAKEUP_COST[7] || days * 70;
+}
+
+// ==================== 核心函数 ====================
+
 /**
- * 获取今日应签到天数
+ * 创建签到系统状态
  */
-export function getTodayCheckInDay(state: CheckInState): number {
-  // 如果是新月份，从第 1 天开始
-  const now = new Date();
-  if (state.currentMonth !== now.getMonth() + 1 || state.currentYear !== now.getFullYear()) {
-    return 1;
-  }
-  
-  // 计算今天是本月第几次签到
-  return state.totalCheckInDays % 30 + 1;
+export function createCheckinState(playerId: string, now?: number): CheckinState {
+  return {
+    playerId,
+    currentMonth: getCurrentMonth(now),
+    checkedInDays: 0,
+    totalCheckins: 0,
+    streak: 0,
+    maxStreak: 0,
+    records: [],
+    claimedDays: [],
+    makeupCount: 0,
+    maxMakeupCount: MAX_MAKEUP_DAYS,
+    lastCheckinTime: 0,
+  };
 }
 
 /**
  * 检查是否可以签到
  */
-export function canCheckIn(state: CheckInState): { can: boolean; reason?: string } {
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-  
-  // 检查月份是否更新
-  if (state.currentMonth !== now.getMonth() + 1 || state.currentYear !== now.getFullYear()) {
-    return { can: true };
+export function canCheckin(state: CheckinState, now?: number): { can: boolean; reason?: string; todayRecord?: CheckinRecord } {
+  const today = getTodayStr(now);
+  const currentMonth = getCurrentMonth(now);
+
+  // 检查月份
+  if (currentMonth !== state.currentMonth) {
+    return { can: true }; // 新月可以签到
   }
-  
-  // 检查今天是否已签到
-  if (state.lastCheckInDate) {
-    const lastCheckIn = new Date(state.lastCheckInDate);
-    const lastCheckInDay = new Date(lastCheckIn.getFullYear(), lastCheckIn.getMonth(), lastCheckIn.getDate()).getTime();
-    
-    if (lastCheckInDay >= today) {
-      return {
-        can: false,
-        reason: '今日已签到',
-      };
-    }
+
+  // 检查今日是否已签到
+  const todayRecord = state.records.find(r => r.date === today);
+  if (todayRecord) {
+    return { can: false, reason: '今日已签到', todayRecord };
   }
-  
+
   return { can: true };
 }
 
 /**
  * 执行签到
  */
-export function checkIn(state: CheckInState, diamond: number): CheckInResult {
-  // 检查是否可以签到
-  const { can, reason } = canCheckIn(state);
-  if (!can) {
-    return {
-      success: false,
-      message: reason || '无法签到',
-    };
+export function performCheckin(state: CheckinState, now?: number): {
+  state: CheckinState;
+  success: boolean;
+  day: number;
+  rewards: RewardItem[];
+  isSpecial: boolean;
+  specialName?: string;
+  streak: number;
+  error?: string;
+} {
+  const check = canCheckin(state, now);
+  if (!check.can) {
+    return { state, success: false, day: 0, rewards: [], isSpecial: false, streak: state.streak, error: check.reason };
   }
-  
-  const now = new Date();
-  const todayDay = now.getDate();
-  
-  // 检查是否是漏签补签
-  const isMakeUp = state.missedDays.includes(todayDay);
-  
-  // 获取今日奖励
-  const todayIndex = (state.totalCheckInDays % 30);
-  const todayReward = MONTHLY_REWARDS[todayIndex];
-  
-  // 更新签到状态
-  state.totalCheckInDays++;
-  
-  // 更新连续签到
-  if (state.lastCheckInDate) {
-    const lastCheckIn = new Date(state.lastCheckInDate);
-    const yesterday = new Date(now);
-    yesterday.setDate(yesterday.getDate() - 1);
-    
-    if (lastCheckIn.getDate() === yesterday.getDate() &&
-        lastCheckIn.getMonth() === yesterday.getMonth() &&
-        lastCheckIn.getFullYear() === yesterday.getFullYear()) {
-      // 连续签到
-      state.currentStreak++;
-    } else {
-      // 中断后重新签到
-      state.currentStreak = 1;
-    }
-  } else {
-    state.currentStreak = 1;
-  }
-  
-  // 更新最大连续签到
-  if (state.currentStreak > state.maxStreak) {
-    state.maxStreak = state.currentStreak;
-  }
-  
-  // 更新最后签到时间
-  state.lastCheckInDate = now.getTime();
-  
-  // 更新月份信息
-  state.currentMonth = now.getMonth() + 1;
-  state.currentYear = now.getFullYear();
-  
-  // 从漏签列表中移除今天
-  state.missedDays = state.missedDays.filter(d => d !== todayDay);
-  
-  return {
-    success: true,
-    reward: todayReward.reward,
-    isSpecial: todayReward.isSpecial,
-    day: todayReward.day,
-    message: `签到成功！获得 ${formatReward(todayReward.reward)}`,
-    streak: state.currentStreak,
-  };
-}
 
-/**
- * 补签
- */
-export function makeUpCheckIn(
-  state: CheckInState,
-  day: number,
-  diamond: number
-): MakeUpResult {
-  // 检查是否是漏签日期
-  if (!state.missedDays.includes(day)) {
-    return {
-      success: false,
-      message: '该日期无需补签',
-    };
+  const currentTime = now ?? getNow();
+  const today = getTodayStr(currentTime);
+  const currentMonth = getCurrentMonth(currentTime);
+  const day = getDayOfMonth(currentTime);
+
+  const reward = getRewardForDay(day);
+  if (!reward) {
+    return { state, success: false, day: 0, rewards: [], isSpecial: false, streak: state.streak, error: '今日无奖励配置' };
   }
-  
-  // 检查补签数量限制
-  if (state.missedDays.length > state.maxStreak) {
-    // 简化处理：检查已补签次数
+
+  // 创建新状态
+  const newState = { ...state };
+
+  // 检查连续签到
+  const yesterday = new Date(currentTime);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayStr = getTodayStr(yesterday.getTime());
+  const yesterdayRecord = state.records.find(r => r.date === yesterdayStr);
+
+  if (yesterdayRecord || state.currentMonth !== currentMonth) {
+    // 昨天签到了或者是新月，连续签到 +1
+    newState.streak = state.streak + 1;
+  } else {
+    // 昨天没签到，重置连续
+    newState.streak = 1;
   }
-  
-  // 检查钻石是否足够
-  const cost = CHECKIN_CONFIG.makeUpCost;
-  if (diamond < cost) {
-    return {
-      success: false,
-      message: `钻石不足！需要 ${cost} 钻石`,
-      cost,
-    };
+
+  // 更新最大连续
+  if (newState.streak > newState.maxStreak) {
+    newState.maxStreak = newState.streak;
   }
-  
-  // 获取该日奖励
-  const rewardDay = MONTHLY_REWARDS.find(d => d.day === day);
-  if (!rewardDay) {
-    return {
-      success: false,
-      message: '无效的签到日期',
-    };
-  }
-  
-  // 扣除钻石
-  // 实际扣除在父组件处理
-  
-  // 从漏签列表中移除
-  state.missedDays = state.missedDays.filter(d => d !== day);
-  
-  // 增加总签到天数（补签也算）
-  state.totalCheckInDays++;
-  
+
+  // 添加记录
+  const record: CheckinRecord = {
+    date: today,
+    timestamp: currentTime,
+    isMakeup: false,
+  };
+
+  newState.records = [record, ...state.records].slice(0, 365); // 保留一年记录
+  newState.checkedInDays = state.checkedInDays + 1;
+  newState.totalCheckins = state.totalCheckins + 1;
+  newState.claimedDays = [...state.claimedDays, day];
+  newState.lastCheckinTime = currentTime;
+  newState.currentMonth = currentMonth;
+
   return {
+    state: newState,
     success: true,
     day,
-    reward: rewardDay.reward,
-    message: `补签成功！获得 ${formatReward(rewardDay.reward)}`,
-    cost,
+    rewards: reward.rewards,
+    isSpecial: reward.isSpecial,
+    specialName: reward.specialName,
+    streak: newState.streak,
   };
 }
 
 /**
- * 领取累计签到奖励
+ * 获取可补签的日期
  */
-export function claimCumulativeReward(
-  state: CheckInState
-): CumulativeRewardResult[] {
-  const results: CumulativeRewardResult[] = [];
-  
-  CUMULATIVE_REWARDS.forEach(cumulative => {
-    // 检查是否已领取
-    if (state.claimedCumulativeRewards.includes(cumulative.days)) {
-      return;
-    }
-    
-    // 检查是否达到条件
-    if (state.totalCheckInDays >= cumulative.days) {
-      state.claimedCumulativeRewards.push(cumulative.days);
-      
-      results.push({
-        success: true,
-        reward: cumulative.reward,
-        message: `累计签到奖励已领取！获得 ${formatReward(cumulative.reward)}`,
-      });
-    }
-  });
-  
-  return results;
-}
-
-/**
- * 更新漏签日期（每日凌晨 5 点调用）
- */
-export function updateMissedDays(state: CheckInState): void {
-  const now = new Date();
-  const today = now.getDate();
-  
-  // 检查月份是否更新
-  if (state.currentMonth !== now.getMonth() + 1 || state.currentYear !== now.getFullYear()) {
-    // 新月，重置漏签列表
-    state.missedDays = [];
-    state.currentMonth = now.getMonth() + 1;
-    state.currentYear = now.getFullYear();
-    return;
+export function getMakeupAvailableDays(state: CheckinState, now?: number): number[] {
+  const currentMonth = getCurrentMonth(now);
+  if (currentMonth !== state.currentMonth) {
+    return []; // 只能补签当月
   }
-  
-  // 如果今天还没签到，且昨天签到了，说明今天还没到漏签时间
-  if (state.lastCheckInDate) {
-    const lastCheckIn = new Date(state.lastCheckInDate);
-    const yesterday = new Date(now);
-    yesterday.setDate(yesterday.getDate() - 1);
-    
-    // 如果最后签到是昨天之前，说明有漏签
-    if (lastCheckIn.getDate() < yesterday.getDate()) {
-      // 计算漏签的天数
-      const daysBetween = Math.floor((today - lastCheckIn.getDate() - 1));
-      for (let i = 1; i <= daysBetween; i++) {
-        const missedDay = lastCheckIn.getDate() + i;
-        if (!state.missedDays.includes(missedDay) && missedDay < today) {
-          state.missedDays.push(missedDay);
-        }
-      }
+
+  const today = getDayOfMonth(now);
+  const available: number[] = [];
+
+  for (let day = 1; day < today; day++) {
+    // 检查该日是否已签到
+    const dateStr = `${currentMonth}-${String(day).padStart(2, '0')}`;
+    const hasRecord = state.records.some(r => r.date === dateStr);
+    if (!hasRecord && !state.claimedDays.includes(day)) {
+      available.push(day);
     }
   }
+
+  return available.slice(0, MAX_MAKEUP_DAYS);
 }
 
 /**
- * 获取可领取的累计奖励
+ * 执行补签
  */
-export function getClaimableCumulativeRewards(state: CheckInState): CumulativeReward[] {
-  return CUMULATIVE_REWARDS.filter(cumulative => 
-    state.totalCheckInDays >= cumulative.days &&
-    !state.claimedCumulativeRewards.includes(cumulative.days)
-  );
-}
+export function performMakeup(
+  state: CheckinState,
+  days: number[],
+  playerDiamonds: number,
+  now?: number
+): {
+  state: CheckinState;
+  success: boolean;
+  totalRewards: RewardItem[];
+  diamondCost: number;
+  error?: string;
+} {
+  if (days.length === 0) {
+    return { state, success: false, totalRewards: [], diamondCost: 0, error: '没有可补签的日期' };
+  }
 
-/**
- * 获取今日签到奖励
- */
-export function getTodayReward(state: CheckInState): CheckInDay {
-  const todayIndex = state.totalCheckInDays % 30;
-  return MONTHLY_REWARDS[todayIndex];
-}
+  if (days.length > MAX_MAKEUP_DAYS) {
+    return { state, success: false, totalRewards: [], diamondCost: 0, error: `最多补签${MAX_MAKEUP_DAYS}天` };
+  }
 
-/**
- * 获取连续签到奖励进度
- */
-export function getStreakProgress(state: CheckInState): { current: number; next: number } {
-  const nextSpecialDay = MONTHLY_REWARDS.find(d => d.day > state.currentStreak && d.isSpecial);
+  const cost = getMakeupCost(days.length);
+  if (playerDiamonds < cost) {
+    return { state, success: false, totalRewards: [], diamondCost: cost, error: `钻石不足 (需要${cost})` };
+  }
+
+  const currentTime = now ?? getNow();
+  const currentMonth = getCurrentMonth(currentTime);
+
+  if (currentMonth !== state.currentMonth) {
+    return { state, success: false, totalRewards: [], diamondCost: 0, error: '只能补签当月' };
+  }
+
+  const newState = { ...state };
+  const totalRewards: RewardItem[] = [];
+
+  for (const day of days) {
+    const dateStr = `${currentMonth}-${String(day).padStart(2, '0')}`;
+    const reward = getRewardForDay(day);
+
+    if (!reward) continue;
+
+    const record: CheckinRecord = {
+      date: dateStr,
+      timestamp: currentTime,
+      isMakeup: true,
+    };
+
+    newState.records = [record, ...newState.records];
+    newState.claimedDays = [...newState.claimedDays, day];
+    newState.checkedInDays++;
+    newState.totalCheckins++;
+    totalRewards.push(...reward.rewards);
+  }
+
+  newState.makeupCount += days.length;
+  newState.lastCheckinTime = currentTime;
+
   return {
-    current: state.currentStreak,
-    next: nextSpecialDay?.day || 30,
+    state: newState,
+    success: true,
+    totalRewards,
+    diamondCost: cost,
   };
 }
 
-// ==================== 辅助函数 ====================
-
 /**
- * 格式化奖励显示
+ * 获取签到统计
  */
-export function formatReward(reward: CheckInReward): string {
-  const typeNames: Record<CheckInRewardType, string> = {
-    [CheckInRewardType.Gold]: '金币',
-    [CheckInRewardType.Diamond]: '钻石',
-    [CheckInRewardType.Stamina]: '体力',
-    [CheckInRewardType.Item]: '道具',
+export function getCheckinStats(state: CheckinState): {
+  checkedInDays: number;
+  totalCheckins: number;
+  streak: number;
+  maxStreak: number;
+  remainingDays: number;
+  makeupAvailable: number;
+  makeupCount: number;
+  specialClaimed: number;
+} {
+  const specialClaimed = state.claimedDays.filter(day => {
+    const reward = getRewardForDay(day);
+    return reward?.isSpecial;
+  }).length;
+
+  const currentMonthDays = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
+  const remainingDays = currentMonthDays - state.checkedInDays;
+  const makeupAvailable = getMakeupAvailableDays(state).length;
+
+  return {
+    checkedInDays: state.checkedInDays,
+    totalCheckins: state.totalCheckins,
+    streak: state.streak,
+    maxStreak: state.maxStreak,
+    remainingDays,
+    makeupAvailable,
+    makeupCount: state.makeupCount,
+    specialClaimed,
   };
-  
-  return `${typeNames[reward.type]} ×${reward.amount}`;
 }
 
 /**
- * 获取签到日历数据
+ * 月度重置
  */
-export function getCheckInCalendarData(state: CheckInState): {
-  day: number;
-  reward: CheckInReward;
-  isSpecial: boolean;
-  isToday: boolean;
-  isMissed: boolean;
-  isClaimed: boolean;
-}[] {
-  const now = new Date();
-  const today = now.getDate();
-  
-  return MONTHLY_REWARDS.map(dayData => ({
-    day: dayData.day,
-    reward: dayData.reward,
-    isSpecial: dayData.isSpecial || false,
-    isToday: dayData.day === today,
-    isMissed: state.missedDays.includes(dayData.day),
-    isClaimed: dayData.day <= today && !state.missedDays.includes(dayData.day) && dayData.day !== today,
-  }));
+export function monthlyReset(state: CheckinState, now?: number): CheckinState {
+  return {
+    ...state,
+    currentMonth: getCurrentMonth(now),
+    checkedInDays: 0,
+    claimedDays: [],
+    streak: 0, // 连续签到保留还是重置看设计，这里选择保留
+    makeupCount: 0,
+  };
 }
 
 /**
- * 计算签到完成度
+ * 导出数据
  */
-export function getCheckInCompletionRate(state: CheckInState): number {
-  const now = new Date();
-  const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-  const signedDays = daysInMonth - state.missedDays.length;
-  return Math.floor((signedDays / daysInMonth) * 100);
+export function exportCheckinData(state: CheckinState): string {
+  return JSON.stringify(state);
+}
+
+/**
+ * 导入数据
+ */
+export function importCheckinData(json: string): CheckinState | null {
+  try {
+    const data = JSON.parse(json);
+    if (!data.playerId || !data.currentMonth) return null;
+    return data as CheckinState;
+  } catch {
+    return null;
+  }
 }
