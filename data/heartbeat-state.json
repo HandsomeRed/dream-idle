@@ -4,7 +4,7 @@
     "memoryOrganize": null,
     "logCleanup": "2026-03-18T04:07:00.000Z",
     "emergencyCheck": null,
-    "autoLearn": "2026-03-26T05:15:00.000Z",
+    "autoLearn": "2026-03-26T05:30:00.000Z",
     "smartBackup": "2026-03-26T05:04:00.000Z",
     "skillInstall": "2026-03-26T05:04:00.000Z",
     "dailyReport": "2026-03-25T22:00:00.000Z",
@@ -15,13 +15,13 @@
     "gitBackup": "2026-03-26T05:04:00.000Z"
   },
   "currentStatus": {
-    "timestamp": "2026-03-26T05:15:00.000Z",
+    "timestamp": "2026-03-26T05:30:00.000Z",
     "timeSlot": "00:00-10:00",
     "topic": "游戏开发",
-    "subTopic": "v0.75 完成 → 准备 v0.76",
+    "subTopic": "v0.76 完成 → 准备 v0.77",
     "day": 15,
-    "status": "✅ v0.75 法宝系统完成 (34 测试) | 累计 2415 测试/78 功能",
-    "lastActivity": "2026-03-26T05:15:00.000Z",
+    "status": "✅ v0.76 修炼系统完成 (32 测试) | 累计 2447 测试/79 功能",
+    "lastActivity": "2026-03-26T05:30:00.000Z",
     "readyToContinue": true
   },
   "lastReportSent": "2026-03-25",
@@ -34,11 +34,11 @@
   "day15Started": true,
   "projects": {
     "dream-idle": {
-      "status": "completed_v0.75",
-      "version": "v0.75",
-      "nextVersion": "v0.76",
+      "status": "completed_v0.76",
+      "version": "v0.76",
+      "nextVersion": "v0.77",
       "nextFeature": "待设计",
-      "note": "v0.75 法宝系统完成 (34 测试) - 第 15 天"
+      "note": "v0.76 修炼系统完成 (32 测试) - 第 15 天"
     },
     "stock-quant": {
       "status": "stage3b_completed",

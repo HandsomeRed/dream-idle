@@ -474,6 +474,13 @@
       "completedAt": "2026-03-26T05:15:00+08:00",
       "tests": "34/34 passed"
     },
+    "v0.76": {
+      "topic": "修炼系统（角色属性提升）",
+      "status": "completed",
+      "startedAt": "2026-03-26T05:15:00+08:00",
+      "completedAt": "2026-03-26T05:30:00+08:00",
+      "tests": "32/32 passed"
+    },
     "quant-stage1": {
       "topic": "数据获取",
       "status": "completed",
@@ -516,11 +523,11 @@
   "lastVerifiedAt": "2026-03-25T23:58:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2242,
-    "totalGameSuites": 66,
+    "totalGameTests": 2274,
+    "totalGameSuites": 67,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 2415,
-    "totalFeatures": 78
+    "totalTests": 2447,
+    "totalFeatures": 79
   }
 }
