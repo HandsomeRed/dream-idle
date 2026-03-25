@@ -1,15 +1,25 @@
-// 好友助力系统 - v0.73
-// Friend Assist System - 异步社交互动
+// 好友助力系统 - v0.74
+// Friend Assist System - 好友间互相帮助加速进度
 
 /**
  * 助力类型
  */
-export type AssistType = 'battle' | 'resource' | 'quest' | 'gacha' | 'boss';
+export type AssistType = 'expedition' | 'battle' | 'construction' | 'research' | 'summon';
 
 /**
  * 助力请求状态
  */
-export type AssistStatus = 'pending' | 'accepted' | 'completed' | 'expired' | 'declined';
+export type AssistRequestStatus = 'pending' | 'accepted' | 'completed' | 'expired' | 'cancelled';
+
+/**
+ * 奖励物品
+ */
+export interface RewardItem {
+  type: 'gold' | 'diamond' | 'exp' | 'stamina' | 'petFood' | 'petShard' | 'equipBox' | 'material' | 'artifact';
+  amount: number;
+  name: string;
+  rarity?: 'common' | 'rare' | 'epic' | 'legendary';
+}
 
 /**
  * 助力请求
@@ -20,107 +30,104 @@ export interface AssistRequest {
   requesterName: string;
   type: AssistType;
   description: string;
-  reward: AssistReward;
-  status: AssistStatus;
+  reward: RewardItem[];
+  assistReward: RewardItem[]; // 助力者奖励
   createdAt: number;
   expiresAt: number;
-  acceptedBy?: string;
-  acceptedAt?: number;
-  completedAt?: number;
-}
-
-/**
- * 助力奖励
- */
-export interface AssistReward {
-  requester: { gold?: number; diamond?: number; exp?: number; stamina?: number; item?: string; itemAmount?: number };
-  helper: { gold?: number; diamond?: number; exp?: number; stamina?: number; item?: string; itemAmount?: number };
-}
-
-/**
- * 好友助力状态
- */
-export interface FriendAssistState {
-  playerId: string;
-  /** 我发出的请求 */
-  myRequests: AssistRequest[];
-  /** 我收到的请求 */
-  receivedRequests: AssistRequest[];
-  /** 我已接受的请求（我去帮助别人） */
-  acceptedRequests: string[]; // request IDs
-  /** 历史助力记录 */
-  history: AssistRecord[];
-  /** 今日已助力次数 */
-  todayAssists: number;
-  /** 今日已接收助力次数 */
-  todayReceived: number;
-  /** 最后重置日期 */
-  lastResetDate: string;
-  /** 助力点数（用于兑换） */
-  assistPoints: number;
+  status: AssistRequestStatus;
+  maxAssists: number;
+  currentAssists: number;
+  assisters: string[]; // 已助力者 ID 列表
 }
 
 /**
  * 助力记录
  */
 export interface AssistRecord {
+  id: string;
   requestId: string;
+  requesterId: string;
+  assisterId: string;
   type: AssistType;
-  partnerId: string;
-  partnerName: string;
-  role: 'requester' | 'helper';
-  reward: AssistReward;
   timestamp: number;
+  reward: RewardItem[];
+  assistReward: RewardItem[];
 }
 
-// ==================== 配置 ====================
+/**
+ * 好友助力系统状态
+ */
+export interface AssistState {
+  playerId: string;
+  /** 我发出的请求 */
+  myRequests: AssistRequest[];
+  /** 我可帮助的请求 */
+  availableRequests: AssistRequest[];
+  /** 我已完成的助力记录 */
+  assistHistory: AssistRecord[];
+  /** 我收到的助力记录 */
+  receivedHistory: AssistRecord[];
+  /** 今日已助力次数 */
+  todayAssists: number;
+  /** 今日已收助力次数 */
+  todayReceived: number;
+  /** 最大每日助力次数 */
+  maxDailyAssists: number;
+  /** 最后重置日期 */
+  lastResetDate: string;
+  /** 累计助力统计 */
+  totalStats: {
+    given: number;
+    received: number;
+    totalRewards: Record<string, number>;
+  };
+}
 
-export const ASSIST_CONFIG = {
-  maxActiveRequests: 5, // 最大活跃请求数
-  maxReceivedRequests: 20, // 最大接收请求数
-  requestExpiryHours: 24, // 请求过期时间
-  dailyAssistLimit: 10, // 每日助力次数限制
-  dailyReceiveLimit: 10, // 每日接收助力次数限制
-  basePoints: 10, // 每次助力获得点数
-};
+// ==================== 助力配置 ====================
 
-export const ASSIST_TEMPLATES: Record<AssistType, { description: string; reward: AssistReward }> = {
+export const ASSIST_CONFIGS: Record<AssistType, { name: string; baseReward: RewardItem[]; assistReward: RewardItem[]; duration: number }> = {
+  expedition: {
+    name: '探险加速',
+    baseReward: [{ type: 'gold', amount: 500, name: '金币' }, { type: 'stamina', amount: 10, name: '体力' }],
+    assistReward: [{ type: 'gold', amount: 100, name: '助力金币' }, { type: 'exp', amount: 50, name: '助力经验' }],
+    duration: 30 * 60 * 1000, // 30 分钟
+  },
   battle: {
-    description: '请求好友助战 BOSS',
-    reward: {
-      requester: { gold: 5000, exp: 1000 },
-      helper: { gold: 3000, exp: 500, diamond: 5 },
-    },
+    name: '战斗支援',
+    baseReward: [{ type: 'exp', amount: 200, name: '经验' }, { type: 'gold', amount: 300, name: '金币' }],
+    assistReward: [{ type: 'exp', amount: 30, name: '战斗经验' }],
+    duration: 15 * 60 * 1000,
   },
-  resource: {
-    description: '请求好友赠送体力',
-    reward: {
-      requester: { stamina: 30 },
-      helper: { gold: 1000 },
-    },
+  construction: {
+    name: '建造协助',
+    baseReward: [{ type: 'gold', amount: 1000, name: '金币' }, { type: 'material', amount: 5, name: '建材' }],
+    assistReward: [{ type: 'gold', amount: 200, name: '协助金币' }],
+    duration: 60 * 60 * 1000,
   },
-  quest: {
-    description: '请求好友帮助完成任务',
-    reward: {
-      requester: { gold: 3000, exp: 500 },
-      helper: { gold: 2000, exp: 300 },
-    },
+  research: {
+    name: '研究帮助',
+    baseReward: [{ type: 'exp', amount: 500, name: '研究经验' }],
+    assistReward: [{ type: 'exp', amount: 100, name: '学术经验' }],
+    duration: 45 * 60 * 1000,
   },
-  gacha: {
-    description: '请求好友见证召唤（获得额外奖励）',
-    reward: {
-      requester: { diamond: 10 },
-      helper: { diamond: 5 },
-    },
-  },
-  boss: {
-    description: '请求好友协助挑战世界 BOSS',
-    reward: {
-      requester: { gold: 10000, exp: 2000 },
-      helper: { gold: 5000, exp: 1000, diamond: 10 },
-    },
+  summon: {
+    name: '召唤祝福',
+    baseReward: [{ type: 'diamond', amount: 20, name: '钻石' }],
+    assistReward: [{ type: 'diamond', amount: 5, name: '祝福钻石' }],
+    duration: 10 * 60 * 1000,
   },
 };
+
+export const ASSIST_TYPE_NAMES: Record<AssistType, string> = {
+  expedition: '探险加速',
+  battle: '战斗支援',
+  construction: '建造协助',
+  research: '研究帮助',
+  summon: '召唤祝福',
+};
+
+export const MAX_DAILY_ASSISTS = 10;
+export const REQUEST_EXPIRY_HOURS = 24;
 
 // ==================== 工具函数 ====================
 
@@ -129,33 +136,42 @@ export function getTodayStr(now?: number): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-export function generateRequestId(): string {
-  return `assist_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
+export function getNow(): number {
+  return Date.now();
+}
+
+export function getAssistTypeName(type: AssistType): string {
+  return ASSIST_TYPE_NAMES[type];
 }
 
 // ==================== 核心函数 ====================
 
 /**
- * 创建好友助力状态
+ * 创建助力系统状态
  */
-export function createFriendAssistState(playerId: string, now?: number): FriendAssistState {
+export function createAssistState(playerId: string, now?: number): AssistState {
   return {
     playerId,
     myRequests: [],
-    receivedRequests: [],
-    acceptedRequests: [],
-    history: [],
+    availableRequests: [],
+    assistHistory: [],
+    receivedHistory: [],
     todayAssists: 0,
     todayReceived: 0,
+    maxDailyAssists: MAX_DAILY_ASSISTS,
     lastResetDate: getTodayStr(now),
-    assistPoints: 0,
+    totalStats: {
+      given: 0,
+      received: 0,
+      totalRewards: {},
+    },
   };
 }
 
 /**
  * 检查并重置每日计数
  */
-export function checkDailyReset(state: FriendAssistState, now?: number): FriendAssistState {
+export function checkDailyReset(state: AssistState, now?: number): AssistState {
   const today = getTodayStr(now);
   if (today !== state.lastResetDate) {
     return {
@@ -163,45 +179,65 @@ export function checkDailyReset(state: FriendAssistState, now?: number): FriendA
       todayAssists: 0,
       todayReceived: 0,
       lastResetDate: today,
-      // 清理过期请求
-      myRequests: state.myRequests.filter(r => r.expiresAt > Date.now()),
-      receivedRequests: state.receivedRequests.filter(r => r.expiresAt > Date.now()),
     };
   }
   return state;
 }
 
 /**
+ * 检查是否可以发出请求
+ */
+export function canCreateRequest(state: AssistState, type: AssistType): { can: boolean; reason?: string } {
+  // 检查是否有同类型未完成请求
+  const existing = state.myRequests.find(r => r.type === type && r.status === 'pending');
+  if (existing) {
+    return { can: false, reason: `已有未完成的${getAssistTypeName(type)}请求` };
+  }
+
+  // 检查请求数量限制
+  const pendingCount = state.myRequests.filter(r => r.status === 'pending').length;
+  if (pendingCount >= 5) {
+    return { can: false, reason: '最多同时存在 5 个未完成的请求' };
+  }
+
+  return { can: true };
+}
+
+/**
  * 创建助力请求
  */
 export function createAssistRequest(
-  state: FriendAssistState,
+  state: AssistState,
   type: AssistType,
-  playerName: string,
+  description: string,
+  maxAssists: number = 3,
   now?: number
-): { state: FriendAssistState; request?: AssistRequest; error?: string } {
-  state = checkDailyReset(state, now);
-  
-  const currentTime = now ?? Date.now();
-  
-  // 检查限制
-  if (state.myRequests.filter(r => r.status === 'pending').length >= ASSIST_CONFIG.maxActiveRequests) {
-    return { state, error: '已达到最大活跃请求数' };
+): { state: AssistState; request?: AssistRequest; error?: string } {
+  const check = canCreateRequest(state, type);
+  if (!check.can) {
+    return { state, error: check.reason };
   }
-  
-  const template = ASSIST_TEMPLATES[type];
+
+  const config = ASSIST_CONFIGS[type];
+  const currentTime = now ?? getNow();
+  const expiresAt = currentTime + REQUEST_EXPIRY_HOURS * 60 * 60 * 1000;
+
   const request: AssistRequest = {
-    id: generateRequestId(),
+    id: `assist_${Date.now()}_${type}`,
     requesterId: state.playerId,
-    requesterName: playerName,
+    requesterName: '玩家', // 实际应从玩家信息获取
     type,
-    description: template.description,
-    reward: template.reward,
-    status: 'pending',
+    description,
+    reward: config.baseReward,
+    assistReward: config.assistReward,
     createdAt: currentTime,
-    expiresAt: currentTime + ASSIST_CONFIG.requestExpiryHours * 60 * 60 * 1000,
+    expiresAt,
+    status: 'pending',
+    maxAssists,
+    currentAssists: 0,
+    assisters: [],
   };
-  
+
   return {
     state: {
       ...state,
@@ -212,283 +248,296 @@ export function createAssistRequest(
 }
 
 /**
- * 接受助力请求
+ * 检查是否可以助力
  */
-export function acceptAssistRequest(
-  state: FriendAssistState,
-  requestId: string,
-  helperName: string,
-  now?: number
-): { state: FriendAssistState; success: boolean; error?: string } {
-  state = checkDailyReset(state, now);
-  
-  // 检查助力次数限制
-  if (state.todayAssists >= ASSIST_CONFIG.dailyAssistLimit) {
-    return { state, success: false, error: '今日助力次数已达上限' };
+export function canAssist(state: AssistState, request: AssistRequest): { can: boolean; reason?: string } {
+  // 检查是否是自己的请求
+  if (request.requesterId === state.playerId) {
+    return { can: false, reason: '不能帮助自己' };
   }
-  
-  const request = state.receivedRequests.find(r => r.id === requestId);
-  if (!request) {
-    return { state, success: false, error: '请求不存在' };
+
+  // 检查是否已助力过
+  if (request.assisters.includes(state.playerId)) {
+    return { can: false, reason: '已助力过该请求' };
   }
+
+  // 检查请求状态
   if (request.status !== 'pending') {
-    return { state, success: false, error: '请求已被处理' };
+    return { can: false, reason: '请求已完成或过期' };
   }
-  if (state.acceptedRequests.includes(requestId)) {
-    return { state, success: false, error: '已接受过该请求' };
+
+  // 检查是否已满
+  if (request.currentAssists >= request.maxAssists) {
+    return { can: false, reason: '助力人数已满' };
   }
-  
-  const currentTime = now ?? Date.now();
-  
-  // 更新请求状态
-  const updatedRequests = state.receivedRequests.map(r =>
-    r.id === requestId
-      ? { ...r, status: 'accepted' as AssistStatus, acceptedBy: helperName, acceptedAt: currentTime }
-      : r
-  );
-  
-  return {
-    state: {
-      ...state,
-      receivedRequests: updatedRequests,
-      acceptedRequests: [...state.acceptedRequests, requestId],
-    },
-    success: true,
-  };
+
+  // 检查每日限制
+  if (state.todayAssists >= state.maxDailyAssists) {
+    return { can: false, reason: '今日助力次数已用完' };
+  }
+
+  // 检查是否过期
+  if (getNow() > request.expiresAt) {
+    return { can: false, reason: '请求已过期' };
+  }
+
+  return { can: true };
 }
 
 /**
- * 完成助力
+ * 执行助力
  */
-export function completeAssist(
-  state: FriendAssistState,
+export function performAssist(
+  state: AssistState,
   requestId: string,
   now?: number
-): { state: FriendAssistState; success: boolean; reward?: AssistReward; error?: string } {
-  state = checkDailyReset(state, now);
-  
-  const request = state.receivedRequests.find(r => r.id === requestId);
-  if (!request) {
+): { state: AssistState; success: boolean; reward?: RewardItem[]; error?: string } {
+  const requestIndex = state.availableRequests.findIndex(r => r.id === requestId);
+  if (requestIndex === -1) {
     return { state, success: false, error: '请求不存在' };
   }
-  if (request.status !== 'accepted') {
-    return { state, success: false, error: '请求未处于进行中状态' };
+
+  const request = state.availableRequests[requestIndex];
+  const check = canAssist(state, request);
+  if (!check.can) {
+    return { state, success: false, error: check.reason };
   }
-  
-  const currentTime = now ?? Date.now();
-  
-  // 更新请求状态
-  const updatedRequests = state.receivedRequests.map(r =>
-    r.id === requestId
-      ? { ...r, status: 'completed' as AssistStatus, completedAt: currentTime }
-      : r
-  );
-  
-  // 添加历史记录
+
+  const currentTime = now ?? getNow();
+
+  // 创建助力记录
   const record: AssistRecord = {
-    requestId,
+    id: `record_${Date.now()}`,
+    requestId: request.id,
+    requesterId: request.requesterId,
+    assisterId: state.playerId,
     type: request.type,
-    partnerId: request.requesterId,
-    partnerName: request.requesterName,
-    role: 'helper',
-    reward: request.reward,
     timestamp: currentTime,
+    reward: request.assistReward,
+    assistReward: request.assistReward,
   };
-  
-  // 增加助力点数
-  const newPoints = state.assistPoints + ASSIST_CONFIG.basePoints;
-  
+
+  // 更新请求状态
+  const updatedRequest: AssistRequest = {
+    ...request,
+    currentAssists: request.currentAssists + 1,
+    assisters: [...request.assisters, state.playerId],
+    status: request.currentAssists + 1 >= request.maxAssists ? 'completed' : 'pending',
+  };
+
+  // 更新助力者统计
+  const newTotalRewards = { ...state.totalStats.totalRewards };
+  request.assistReward.forEach(r => {
+    const key = `${r.type}_${r.name}`;
+    newTotalRewards[key] = (newTotalRewards[key] || 0) + r.amount;
+  });
+
   return {
     state: {
       ...state,
-      receivedRequests: updatedRequests,
-      acceptedRequests: state.acceptedRequests.filter(id => id !== requestId),
-      history: [record, ...state.history].slice(0, 100),
+      availableRequests: [
+        ...state.availableRequests.slice(0, requestIndex),
+        updatedRequest,
+        ...state.availableRequests.slice(requestIndex + 1),
+      ],
+      assistHistory: [record, ...state.assistHistory].slice(0, 100),
       todayAssists: state.todayAssists + 1,
-      assistPoints: newPoints,
+      totalStats: {
+        ...state.totalStats,
+        given: state.totalStats.given + 1,
+        totalRewards: newTotalRewards,
+      },
     },
     success: true,
-    reward: request.reward,
+    reward: request.assistReward,
   };
 }
 
 /**
- * 接收助力（请求者获得帮助）
+ * 领取助力奖励（请求者）
  */
-export function receiveAssist(
-  state: FriendAssistState,
+export function claimAssistRewards(
+  state: AssistState,
   requestId: string,
   now?: number
-): { state: FriendAssistState; success: boolean; reward?: AssistReward; error?: string } {
-  state = checkDailyReset(state, now);
-  
-  const request = state.myRequests.find(r => r.id === requestId);
-  if (!request) {
+): { state: AssistState; success: boolean; rewards?: RewardItem[]; error?: string } {
+  const requestIndex = state.myRequests.findIndex(r => r.id === requestId);
+  if (requestIndex === -1) {
     return { state, success: false, error: '请求不存在' };
   }
-  if (request.status !== 'completed') {
-    return { state, success: false, error: '助力未完成' };
+
+  const request = state.myRequests[requestIndex];
+
+  // 检查是否有足够的助力
+  if (request.currentAssists < request.maxAssists) {
+    return { state, success: false, error: '助力人数不足' };
   }
-  
-  // 检查是否已领取奖励
-  const alreadyClaimed = state.history.some(h => h.requestId === requestId && h.role === 'requester');
-  if (alreadyClaimed) {
-    return { state, success: false, error: '奖励已领取' };
+
+  // 检查是否已领取
+  if (request.status === 'completed' && request.currentAssists >= request.maxAssists) {
+    // 计算总奖励（基础奖励 + 助力加成）
+    const totalRewards = [...request.reward];
+
+    // 每个助力者提供额外 10% 奖励
+    const bonusMultiplier = 1 + (request.currentAssists * 0.1);
+    totalRewards.forEach(r => {
+      r.amount = Math.round(r.amount * bonusMultiplier);
+    });
+
+    // 更新请求状态为已完成领取
+    const updatedRequest: AssistRequest = {
+      ...request,
+      status: 'completed',
+    };
+
+    // 更新收到记录
+    const record: AssistRecord = {
+      id: `received_${Date.now()}`,
+      requestId: request.id,
+      requesterId: state.playerId,
+      assisterId: 'system',
+      type: request.type,
+      timestamp: now ?? getNow(),
+      reward: totalRewards,
+      assistReward: [],
+    };
+
+    // 更新统计
+    const newTotalRewards = { ...state.totalStats.totalRewards };
+    totalRewards.forEach(r => {
+      const key = `${r.type}_${r.name}`;
+      newTotalRewards[key] = (newTotalRewards[key] || 0) + r.amount;
+    });
+
+    return {
+      state: {
+        ...state,
+        myRequests: [
+          ...state.myRequests.slice(0, requestIndex),
+          updatedRequest,
+          ...state.myRequests.slice(requestIndex + 1),
+        ],
+        receivedHistory: [record, ...state.receivedHistory].slice(0, 100),
+        todayReceived: state.todayReceived + 1,
+        totalStats: {
+          ...state.totalStats,
+          received: state.totalStats.received + 1,
+          totalRewards: newTotalRewards,
+        },
+      },
+      success: true,
+      rewards: totalRewards,
+    };
   }
-  
-  const currentTime = now ?? Date.now();
-  
-  // 更新请求状态
-  const updatedRequests = state.myRequests.map(r =>
-    r.id === requestId ? { ...r, status: 'expired' as AssistStatus } : r
-  );
-  
-  // 添加历史记录
-  const record: AssistRecord = {
-    requestId,
-    type: request.type,
-    partnerId: request.acceptedBy || 'unknown',
-    partnerName: request.acceptedBy || 'unknown',
-    role: 'requester',
-    reward: request.reward,
-    timestamp: currentTime,
-  };
-  
-  return {
-    state: {
-      ...state,
-      myRequests: updatedRequests,
-      history: [record, ...state.history].slice(0, 100),
-      todayReceived: state.todayReceived + 1,
-    },
-    success: true,
-    reward: request.reward,
-  };
+
+  return { state, success: false, error: '请求尚未完成' };
 }
 
 /**
  * 取消请求
  */
-export function cancelRequest(state: FriendAssistState, requestId: string): { state: FriendAssistState; success: boolean; error?: string } {
-  const request = state.myRequests.find(r => r.id === requestId);
-  if (!request) {
+export function cancelRequest(state: AssistState, requestId: string): { state: AssistState; success: boolean; error?: string } {
+  const requestIndex = state.myRequests.findIndex(r => r.id === requestId);
+  if (requestIndex === -1) {
     return { state, success: false, error: '请求不存在' };
   }
-  if (request.status !== 'pending') {
-    return { state, success: false, error: '请求已被处理，无法取消' };
+
+  const request = state.myRequests[requestIndex];
+
+  // 已有助力的请求不能取消
+  if (request.currentAssists > 0) {
+    return { state, success: false, error: '已有好友助力，无法取消' };
   }
-  
+
   return {
     state: {
       ...state,
-      myRequests: state.myRequests.filter(r => r.id !== requestId),
+      myRequests: [
+        ...state.myRequests.slice(0, requestIndex),
+        { ...request, status: 'cancelled' },
+        ...state.myRequests.slice(requestIndex + 1),
+      ],
     },
     success: true,
   };
 }
 
 /**
- * 拒绝请求
+ * 获取可助力的请求列表
  */
-export function declineRequest(state: FriendAssistState, requestId: string): { state: FriendAssistState; success: boolean; error?: string } {
-  const request = state.receivedRequests.find(r => r.id === requestId);
-  if (!request) {
-    return { state, success: false, error: '请求不存在' };
-  }
-  if (request.status !== 'pending') {
-    return { state, success: false, error: '请求已被处理' };
-  }
-  
-  return {
-    state: {
-      ...state,
-      receivedRequests: state.receivedRequests.map(r =>
-        r.id === requestId ? { ...r, status: 'declined' as AssistStatus } : r
-      ),
-    },
-    success: true,
-  };
-}
-
-/**
- * 获取可接受的请求
- */
-export function getAvailableRequests(state: FriendAssistState): AssistRequest[] {
-  const now = Date.now();
-  return state.receivedRequests.filter(
-    r => r.status === 'pending' && r.expiresAt > now && !state.acceptedRequests.includes(r.id)
+export function getAvailableRequests(state: AssistState, now?: number): AssistRequest[] {
+  const currentTime = now ?? getNow();
+  return state.availableRequests.filter(r =>
+    r.status === 'pending' &&
+    r.currentAssists < r.maxAssists &&
+    r.expiresAt > currentTime &&
+    r.requesterId !== state.playerId
   );
 }
 
 /**
- * 获取我的活跃请求
+ * 获取可领取的请求
  */
-export function getMyActiveRequests(state: FriendAssistState): AssistRequest[] {
-  const now = Date.now();
-  return state.myRequests.filter(r => ['pending', 'accepted'].includes(r.status) && r.expiresAt > now);
+export function getClaimableRequests(state: AssistState): AssistRequest[] {
+  return state.myRequests.filter(r =>
+    r.status === 'pending' &&
+    r.currentAssists >= r.maxAssists
+  );
 }
 
 /**
  * 获取助力统计
  */
-export function getAssistStats(state: FriendAssistState): {
-  totalAssists: number;
-  totalReceived: number;
+export function getAssistStats(state: AssistState): {
+  pendingRequests: number;
+  availableToAssist: number;
   todayAssists: number;
   todayReceived: number;
-  assistPoints: number;
-  remainingAssists: number;
-  remainingReceived: number;
-  activeRequests: number;
+  maxDaily: number;
+  totalGiven: number;
+  totalReceived: number;
+  assistRate: number;
 } {
+  const pendingRequests = state.myRequests.filter(r => r.status === 'pending').length;
+  const availableToAssist = getAvailableRequests(state).length;
+  const assistRate = state.totalStats.given + state.totalStats.received > 0
+    ? Math.round((state.totalStats.given / (state.totalStats.given + state.totalStats.received)) * 100)
+    : 0;
+
   return {
-    totalAssists: state.history.filter(h => h.role === 'helper').length,
-    totalReceived: state.history.filter(h => h.role === 'requester').length,
+    pendingRequests,
+    availableToAssist,
     todayAssists: state.todayAssists,
     todayReceived: state.todayReceived,
-    assistPoints: state.assistPoints,
-    remainingAssists: ASSIST_CONFIG.dailyAssistLimit - state.todayAssists,
-    remainingReceived: ASSIST_CONFIG.dailyReceiveLimit - state.todayReceived,
-    activeRequests: getMyActiveRequests(state).length,
+    maxDaily: state.maxDailyAssists,
+    totalGiven: state.totalStats.given,
+    totalReceived: state.totalStats.received,
+    assistRate,
   };
 }
 
 /**
- * 使用助力点数兑换
+ * 设置最大每日助力次数
  */
-export function redeemAssistPoints(
-  state: FriendAssistState,
-  cost: number,
-  reward: { gold?: number; diamond?: number; exp?: number; item?: string; itemAmount?: number }
-): { state: FriendAssistState; success: boolean; error?: string } {
-  if (state.assistPoints < cost) {
-    return { state, success: false, error: '助力点数不足' };
-  }
-  
-  return {
-    state: {
-      ...state,
-      assistPoints: state.assistPoints - cost,
-    },
-    success: true,
-  };
+export function setMaxDailyAssists(state: AssistState, max: number): AssistState {
+  return { ...state, maxDailyAssists: Math.max(1, Math.min(50, max)) };
 }
 
 /**
  * 导出数据
  */
-export function exportAssistData(state: FriendAssistState): string {
+export function exportAssistData(state: AssistState): string {
   return JSON.stringify(state);
 }
 
 /**
  * 导入数据
  */
-export function importAssistData(json: string): FriendAssistState | null {
+export function importAssistData(json: string): AssistState | null {
   try {
     const data = JSON.parse(json);
-    if (!data.playerId || !Array.isArray(data.myRequests)) return null;
-    return data as FriendAssistState;
+    if (!data.playerId || typeof data.todayAssists !== 'number') return null;
+    return data as AssistState;
   } catch {
     return null;
   }
