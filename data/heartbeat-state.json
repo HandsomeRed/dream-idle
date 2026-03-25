@@ -24,7 +24,7 @@
     "lastActivity": "2026-03-24T22:10:00.000Z",
     "readyToContinue": true
   },
-  "lastReportSent": "2026-03-24",
+  "lastReportSent": "2026-03-25",
   "lastReportGenerated": "2026-03-24T22:00:00+08:00",
   "day10Completed": true,
   "day11Completed": true,
@@ -74,7 +74,7 @@
   },
   "dailyReportCheck": {
     "timestamp": "2026-03-24T13:03:00.000Z",
-    "lastReportSent": "2026-03-24",
+    "lastReportSent": "2026-03-25",
     "lastReportGenerated": "2026-03-24T22:00:00+08:00",
     "nextReportDue": "2026-03-24T22:00:00+08:00",
     "status": "scheduled",
