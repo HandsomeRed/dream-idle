@@ -502,6 +502,13 @@
       "completedAt": "2026-03-27T04:10:00+08:00",
       "tests": "35/35 passed"
     },
+    "v0.80": {
+      "topic": "师徒系统（拜师/师德值/师徒任务/出师）",
+      "status": "completed",
+      "startedAt": "2026-03-27T04:45:00+08:00",
+      "completedAt": "2026-03-27T04:50:00+08:00",
+      "tests": "34/34 passed"
+    },
     "quant-stage1": {
       "topic": "数据获取",
       "status": "completed",
@@ -544,11 +551,11 @@
   "lastVerifiedAt": "2026-03-25T23:58:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2384,
-    "totalGameSuites": 70,
+    "totalGameTests": 2418,
+    "totalGameSuites": 71,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 2557,
-    "totalFeatures": 82
+    "totalTests": 2591,
+    "totalFeatures": 83
   }
 }
