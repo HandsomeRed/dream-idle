@@ -509,6 +509,13 @@
       "completedAt": "2026-03-27T04:50:00+08:00",
       "tests": "34/34 passed"
     },
+    "v0.81": {
+      "topic": "坐骑系统（坐骑获取/培养/技能/进阶）",
+      "status": "completed",
+      "startedAt": "2026-03-27T05:15:00+08:00",
+      "completedAt": "2026-03-27T05:35:00+08:00",
+      "tests": "28/28 passed"
+    },
     "quant-stage1": {
       "topic": "数据获取",
       "status": "completed",
@@ -551,11 +558,11 @@
   "lastVerifiedAt": "2026-03-25T23:58:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2418,
-    "totalGameSuites": 71,
+    "totalGameTests": 2446,
+    "totalGameSuites": 72,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 2591,
-    "totalFeatures": 83
+    "totalTests": 2619,
+    "totalFeatures": 84
   }
 }
