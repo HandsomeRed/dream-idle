@@ -4,32 +4,32 @@
     "startTime": "2026-03-28T00:00:00+08:00",
     "endTime": "2026-03-28T10:00:00+08:00",
     "topic": "游戏开发",
-    "subTopic": "v0.82 家园系统",
+    "subTopic": "v0.83 变身卡系统",
     "status": "completed",
-    "lastActivity": "2026-03-28T04:30:00.000Z",
-    "continuousLearnHours": 4.5,
+    "lastActivity": "2026-03-28T05:00:00.000Z",
+    "continuousLearnHours": 5.0,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 17,
     "triggeredBy": "heartbeat"
   },
   "learningProgress": {
-    "v0.82": {
-      "topic": "家园系统（家园建造/装饰/等级/资源产出/访客互动）",
+    "v0.83": {
+      "topic": "变身卡系统（击败怪物获得变身卡/变身后获得特殊能力）",
       "status": "completed",
-      "startedAt": "2026-03-28T04:00:00+08:00",
-      "completedAt": "2026-03-28T04:30:00+08:00",
-      "tests": "33/33 passed"
+      "startedAt": "2026-03-28T04:45:00+08:00",
+      "completedAt": "2026-03-28T05:00:00+08:00",
+      "tests": "38/38 passed"
     }
   },
-  "lastVerifiedAt": "2026-03-28T04:30:00+08:00",
+  "lastVerifiedAt": "2026-03-28T05:00:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2479,
-    "totalGameSuites": 73,
+    "totalGameTests": 2517,
+    "totalGameSuites": 74,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 2652,
-    "totalFeatures": 85
+    "totalTests": 2690,
+    "totalFeatures": 86
   }
 }
