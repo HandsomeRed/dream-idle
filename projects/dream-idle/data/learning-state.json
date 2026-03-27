@@ -4,32 +4,32 @@
     "startTime": "2026-03-28T00:00:00+08:00",
     "endTime": "2026-03-28T10:00:00+08:00",
     "topic": "游戏开发",
-    "subTopic": "v0.88 经脉系统",
+    "subTopic": "v0.89 帮派系统",
     "status": "completed",
-    "lastActivity": "2026-03-28T07:15:00.000Z",
-    "continuousLearnHours": 7.25,
+    "lastActivity": "2026-03-28T07:45:00.000Z",
+    "continuousLearnHours": 7.75,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 17,
     "triggeredBy": "heartbeat"
   },
   "learningProgress": {
-    "v0.88": {
-      "topic": "经脉系统（打通经脉/修炼心法/属性加成）",
+    "v0.89": {
+      "topic": "帮派系统（创建帮派/帮派任务/帮派技能/帮派战）",
       "status": "completed",
-      "startedAt": "2026-03-28T07:12:00+08:00",
-      "completedAt": "2026-03-28T07:15:00+08:00",
-      "tests": "34/34 passed"
+      "startedAt": "2026-03-28T07:42:00+08:00",
+      "completedAt": "2026-03-28T07:45:00+08:00",
+      "tests": "31/31 passed"
     }
   },
-  "lastVerifiedAt": "2026-03-28T07:15:00+08:00",
+  "lastVerifiedAt": "2026-03-28T07:45:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2707,
-    "totalGameSuites": 79,
+    "totalGameTests": 2738,
+    "totalGameSuites": 80,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 2880,
-    "totalFeatures": 91
+    "totalTests": 2911,
+    "totalFeatures": 92
   }
 }
