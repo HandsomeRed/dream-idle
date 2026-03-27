@@ -57,11 +57,16 @@ describe('v0.84 师门任务系统', () => {
     });
 
     it('每日任务应该有额外奖励', () => {
-      const dailyMission = createSectMission(true);
-      const nonDailyMission = createSectMission(false);
+      // 创建多个任务对比，确保统计上每日任务奖励更高
+      let dailyTotal = 0;
+      let nonDailyTotal = 0;
       
-      // 创建相同难度的任务进行比较
-      expect(dailyMission.reward.exp).toBeGreaterThanOrEqual(nonDailyMission.reward.exp);
+      for (let i = 0; i < 20; i++) {
+        dailyTotal += createSectMission(true).reward.exp;
+        nonDailyTotal += createSectMission(false).reward.exp;
+      }
+      
+      expect(dailyTotal).toBeGreaterThan(nonDailyTotal);
     });
   });
 

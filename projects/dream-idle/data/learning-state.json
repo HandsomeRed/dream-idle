@@ -4,32 +4,32 @@
     "startTime": "2026-03-28T00:00:00+08:00",
     "endTime": "2026-03-28T10:00:00+08:00",
     "topic": "游戏开发",
-    "subTopic": "v0.84 师门任务系统",
+    "subTopic": "v0.85 押镖系统",
     "status": "completed",
-    "lastActivity": "2026-03-28T05:15:00.000Z",
-    "continuousLearnHours": 5.25,
+    "lastActivity": "2026-03-28T05:45:00.000Z",
+    "continuousLearnHours": 5.75,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 17,
     "triggeredBy": "heartbeat"
   },
   "learningProgress": {
-    "v0.84": {
-      "topic": "师门任务系统（每日师门任务/门派贡献/多难度任务）",
+    "v0.85": {
+      "topic": "押镖系统（每日押镖任务/劫镖玩法/帮派贡献）",
       "status": "completed",
-      "startedAt": "2026-03-28T05:12:00+08:00",
-      "completedAt": "2026-03-28T05:15:00+08:00",
-      "tests": "46/46 passed"
+      "startedAt": "2026-03-28T05:42:00+08:00",
+      "completedAt": "2026-03-28T05:45:00+08:00",
+      "tests": "42/42 passed"
     }
   },
-  "lastVerifiedAt": "2026-03-28T05:15:00+08:00",
+  "lastVerifiedAt": "2026-03-28T05:45:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2563,
-    "totalGameSuites": 75,
+    "totalGameTests": 2605,
+    "totalGameSuites": 76,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 2736,
-    "totalFeatures": 87
+    "totalTests": 2778,
+    "totalFeatures": 88
   }
 }
