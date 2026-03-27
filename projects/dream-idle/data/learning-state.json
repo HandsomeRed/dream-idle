@@ -4,32 +4,32 @@
     "startTime": "2026-03-28T00:00:00+08:00",
     "endTime": "2026-03-28T10:00:00+08:00",
     "topic": "游戏开发",
-    "subTopic": "v0.86 科举考试系统",
+    "subTopic": "v0.87 奇门遁甲系统",
     "status": "completed",
-    "lastActivity": "2026-03-28T06:15:00.000Z",
-    "continuousLearnHours": 6.25,
+    "lastActivity": "2026-03-28T06:45:00.000Z",
+    "continuousLearnHours": 6.75,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 17,
     "triggeredBy": "heartbeat"
   },
   "learningProgress": {
-    "v0.86": {
-      "topic": "科举考试系统（每日科举/答题玩法/状元称号）",
+    "v0.87": {
+      "topic": "奇门遁甲系统（排盘占卜/风水布局/吉凶预测）",
       "status": "completed",
-      "startedAt": "2026-03-28T06:12:00+08:00",
-      "completedAt": "2026-03-28T06:15:00+08:00",
-      "tests": "37/37 passed"
+      "startedAt": "2026-03-28T06:42:00+08:00",
+      "completedAt": "2026-03-28T06:45:00+08:00",
+      "tests": "31/31 passed"
     }
   },
-  "lastVerifiedAt": "2026-03-28T06:15:00+08:00",
+  "lastVerifiedAt": "2026-03-28T06:45:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2642,
-    "totalGameSuites": 77,
+    "totalGameTests": 2673,
+    "totalGameSuites": 78,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 2815,
-    "totalFeatures": 89
+    "totalTests": 2846,
+    "totalFeatures": 90
   }
 }
