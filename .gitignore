@@ -41,3 +41,7 @@ projects/**/.venv/
 # Clawhub/OpenClaw nested installs
 .clawhub/
 .openclaw/
+
+# Runtime state files
+data/*.json
+!data/README.md
