@@ -4,32 +4,32 @@
     "startTime": "2026-03-28T00:00:00+08:00",
     "endTime": "2026-03-28T10:00:00+08:00",
     "topic": "游戏开发",
-    "subTopic": "v0.89 帮派系统",
+    "subTopic": "v0.90 结婚系统",
     "status": "completed",
-    "lastActivity": "2026-03-28T07:45:00.000Z",
-    "continuousLearnHours": 7.75,
+    "lastActivity": "2026-03-28T08:15:00.000Z",
+    "continuousLearnHours": 8.25,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 17,
     "triggeredBy": "heartbeat"
   },
   "learningProgress": {
-    "v0.89": {
-      "topic": "帮派系统（创建帮派/帮派任务/帮派技能/帮派战）",
+    "v0.90": {
+      "topic": "结婚系统（求婚/结婚/夫妻技能/亲密度）",
       "status": "completed",
-      "startedAt": "2026-03-28T07:42:00+08:00",
-      "completedAt": "2026-03-28T07:45:00+08:00",
-      "tests": "31/31 passed"
+      "startedAt": "2026-03-28T08:12:00+08:00",
+      "completedAt": "2026-03-28T08:15:00+08:00",
+      "tests": "29/29 passed"
     }
   },
-  "lastVerifiedAt": "2026-03-28T07:45:00+08:00",
+  "lastVerifiedAt": "2026-03-28T08:15:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2738,
-    "totalGameSuites": 80,
+    "totalGameTests": 2767,
+    "totalGameSuites": 81,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 2911,
-    "totalFeatures": 92
+    "totalTests": 2940,
+    "totalFeatures": 93
   }
 }
