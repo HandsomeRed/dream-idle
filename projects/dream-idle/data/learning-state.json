@@ -4,32 +4,32 @@
     "startTime": "2026-03-28T00:00:00+08:00",
     "endTime": "2026-03-28T10:00:00+08:00",
     "topic": "游戏开发",
-    "subTopic": "v0.91 宠物进化系统",
+    "subTopic": "v0.92 法宝系统",
     "status": "completed",
-    "lastActivity": "2026-03-28T08:45:00.000Z",
-    "continuousLearnHours": 8.75,
+    "lastActivity": "2026-03-28T09:15:00.000Z",
+    "continuousLearnHours": 9.25,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 17,
     "triggeredBy": "heartbeat"
   },
   "learningProgress": {
-    "v0.91": {
-      "topic": "宠物进化系统（宠物培养/进化/技能继承/资质提升）",
+    "v0.92": {
+      "topic": "法宝系统（法宝炼制/祭炼/炼化/技能/融合）",
       "status": "completed",
-      "startedAt": "2026-03-28T08:42:00+08:00",
-      "completedAt": "2026-03-28T08:45:00+08:00",
-      "tests": "42/42 passed"
+      "startedAt": "2026-03-28T09:12:00+08:00",
+      "completedAt": "2026-03-28T09:15:00+08:00",
+      "tests": "35/35 passed"
     }
   },
-  "lastVerifiedAt": "2026-03-28T08:45:00+08:00",
+  "lastVerifiedAt": "2026-03-28T09:15:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2809,
-    "totalGameSuites": 82,
+    "totalGameTests": 2844,
+    "totalGameSuites": 83,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 2982,
-    "totalFeatures": 94
+    "totalTests": 3017,
+    "totalFeatures": 95
   }
 }
