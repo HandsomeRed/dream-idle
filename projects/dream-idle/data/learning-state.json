@@ -4,32 +4,32 @@
     "startTime": "2026-03-28T00:00:00+08:00",
     "endTime": "2026-03-28T10:00:00+08:00",
     "topic": "游戏开发",
-    "subTopic": "v0.92 法宝系统",
+    "subTopic": "v0.93 炼丹系统",
     "status": "completed",
-    "lastActivity": "2026-03-28T09:15:00.000Z",
-    "continuousLearnHours": 9.25,
+    "lastActivity": "2026-03-28T09:45:00.000Z",
+    "continuousLearnHours": 9.75,
     "breakTaken": null,
     "breakMinutes": 0,
     "day": 17,
     "triggeredBy": "heartbeat"
   },
   "learningProgress": {
-    "v0.92": {
-      "topic": "法宝系统（法宝炼制/祭炼/炼化/技能/融合）",
+    "v0.93": {
+      "topic": "炼丹系统（丹药炼制/丹方学习/丹炉升级/品质系统）",
       "status": "completed",
-      "startedAt": "2026-03-28T09:12:00+08:00",
-      "completedAt": "2026-03-28T09:15:00+08:00",
-      "tests": "35/35 passed"
+      "startedAt": "2026-03-28T09:42:00+08:00",
+      "completedAt": "2026-03-28T09:45:00+08:00",
+      "tests": "32/32 passed"
     }
   },
-  "lastVerifiedAt": "2026-03-28T09:15:00+08:00",
+  "lastVerifiedAt": "2026-03-28T09:45:00+08:00",
   "verificationMethod": "actual_test_execution",
   "stats": {
-    "totalGameTests": 2844,
-    "totalGameSuites": 83,
+    "totalGameTests": 2876,
+    "totalGameSuites": 84,
     "totalQuantTests": 173,
     "totalQuantSuites": 12,
-    "totalTests": 3017,
-    "totalFeatures": 95
+    "totalTests": 3049,
+    "totalFeatures": 96
   }
 }
