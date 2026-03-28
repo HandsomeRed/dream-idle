@@ -38,11 +38,11 @@
   "day18Started": true,
   "projects": {
     "dream-idle": {
-      "status": "ready_v0.94",
-      "version": "v0.93",
-      "nextVersion": "v0.94",
+      "status": "v0.94_completed",
+      "version": "v0.94",
+      "nextVersion": "v0.95",
       "nextFeature": "待设计",
-      "note": "v0.93 炼丹系统完成 (32 测试) - 准备 v0.94"
+      "note": "v0.94 阵法系统完成 (40 测试) - 9 大阵法/克制/位置/升级"
     },
     "stock-quant": {
       "status": "stage4_in_progress",
